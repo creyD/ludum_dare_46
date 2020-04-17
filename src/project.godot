@@ -24,6 +24,10 @@ config/name="LD46 Game"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SoundControler="*res://Autoloads/SoundControler.gd"
+
 [display]
 
 window/size/width=320
