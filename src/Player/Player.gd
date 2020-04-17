@@ -5,9 +5,9 @@ This is an example player controller script created by Paul
 """
 var velocity := Vector2.ZERO
 # This is how you export variables with ranges to the editor window
-export(int, 0, 500) var MAX_SPEED = 125
-export(int, 0, 500) var FRICTION = 200 # Speed at which the player deaccelarates
-export(int, 0, 500) var ACCELERATION = 450
+export(int, 0, 500) var MAX_SPEED := 125
+export(int, 0, 500) var FRICTION := 200 # Speed at which the player deaccelarates
+export(int, 0, 500) var ACCELERATION := 450
 
 func _physics_process(delta):
 	"""
