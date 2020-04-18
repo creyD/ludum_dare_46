@@ -1,9 +1,11 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://HurtHit_Box/Hitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overlap/Stats.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Fonts/Harmonic/Harmonic.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.15976
@@ -606,6 +608,10 @@ height = 6.72939
 radius = 4.03497
 height = 6.99104
 
+[sub_resource type="DynamicFont" id=48]
+size = 12
+font_data = ExtResource( 6 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 FRICTION = 270
@@ -674,6 +680,20 @@ collision_mask = 12
 position = Vector2( 8.43416, 0.0698299 )
 shape = SubResource( 47 )
 disabled = true
+
+[node name="Stats" parent="." instance=ExtResource( 5 )]
+max_health = 3
+
+[node name="DebugLabel" type="Label" parent="."]
+margin_left = -8.0
+margin_top = -21.0
+margin_right = 10.0
+margin_bottom = -9.0
+custom_fonts/font = SubResource( 48 )
+text = "BLa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox"]
