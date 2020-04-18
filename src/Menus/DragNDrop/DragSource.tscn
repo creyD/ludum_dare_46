@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureRect
+#CardDeck
+export var ItemID:int=0
+export var PreviewIcon:String = \"\"
+export var DeleteOnGrab:bool = false
+
+#if a drag is initiated here 
+func get_drag_data(_pos):
+	print(_pos)
+	var preview = load(PreviewIcon)
+	var ctrl = Control.new()
+	
+	var TR = TextureRect.new()
+	TR.texture = get_resized_texture(preview,self.rect_size[0],self.rect_size[1])
+	TR.rect_size= self.rect_size
+	TR.set_position(_pos*-1,false)
+	ctrl.add_child(TR)
+	set_drag_preview(ctrl)
+	
+	if DeleteOnGrab :
+		self.queue_free()
+	return ItemID
+
+#stuff can be dropped here
+#eg you picked the wrong thing up, let go and it returns to nothingness
+func can_drop_data(_pos, data):
+	return typeof(data) == TYPE_INT
+
+#do nothing if stuff is dropped here
+func drop_data(_pos, _data):
+	pass
+
+func get_resized_texture(t: Texture, width: int = 0, height: int = 0):
+	var image = t.get_data()
+	if width > 0 && height > 0:
+		image.resize(width, height)
+	var itex = ImageTexture.new()
+	itex.create_from_image(image,0)
+	return itex
+"
+
+[node name="DragSource" type="TextureRect"]
+margin_left = 8.34148
+margin_top = 147.561
+margin_right = 40.3415
+margin_bottom = 179.561
+texture = ExtResource( 1 )
+expand = true
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
