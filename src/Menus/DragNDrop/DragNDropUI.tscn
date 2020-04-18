@@ -21,3 +21,5 @@ margin_bottom = 262.124
 Item = ExtResource( 3 )
 
 [node name="DragSink" parent="." instance=ExtResource( 2 )]
+margin_left = 1.19746
+margin_right = 1.19745

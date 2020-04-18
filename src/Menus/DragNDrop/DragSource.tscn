@@ -42,10 +42,10 @@ func get_resized_texture(t: Texture, width: int = 0, height: int = 0):
 "
 
 [node name="DragSource" type="TextureRect"]
-margin_left = 8.34148
-margin_top = 147.561
-margin_right = 40.3415
-margin_bottom = 179.561
+margin_left = 10.7364
+margin_top = 227.792
+margin_right = 42.7364
+margin_bottom = 259.792
 texture = ExtResource( 1 )
 expand = true
 script = SubResource( 1 )

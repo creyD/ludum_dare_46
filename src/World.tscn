@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Menus/Startup/Startup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://Maps/Tilesets/Room/tileset_room.tres" type="TileSet" id=3]
 [ext_resource path="res://testSprites/dark.png" type="Texture" id=4]
 [ext_resource path="res://Objects/Barrel/Barrel.tscn" type="PackedScene" id=5]
@@ -9,17 +9,19 @@
 [ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/Traps/Sting.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/Rubies/Blue.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Objects/Traps/bear.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/Traps/Bear.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Heart/Heart.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/Rubies/Red.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Objects/Rubies/Green.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Objects/Traps/Flame.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/Traps/Spike.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/Slime/Slime.tscn" type="PackedScene" id=16]
 
 [node name="World" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="WallSprite" type="Sprite" parent="."]
-position = Vector2( 101.087, 144.871 )
+position = Vector2( 112.785, 148.267 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
@@ -30,27 +32,48 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -131063, 47, 0, -131062, 47, 2, -65536, 47, 4, -65535, 47, 196609, -65534, 47, 196609, -65533, 47, 196609, -65532, 47, 196609, -65531, 47, 196609, -65530, 47, 196609, -65529, 47, 6, -65528, 47, 5, -65527, 47, 196614, -65526, 47, 196613, -65525, 47, 6, -65524, 47, 5, -65523, 47, 196609, -65522, 47, 7, 0, 47, 65539, 7, 47, 131072, 8, 47, 65543, 11, 47, 131072, 12, 47, 65543, 14, 47, 196612, 15, 47, 196610, 65536, 47, 65539, 65544, 47, 196612, 65545, 47, 7, 65548, 47, 65539, 131072, 47, 262148, 131073, 47, 196610, 131081, 47, 65539, 131084, 47, 65539, 131087, 47, 3, 196608, 47, 65539, 196615, 47, 196611, 196617, 47, 131075, 196619, 47, 4, 196620, 47, 196615, 196622, 47, 4, 196623, 47, 196615, 262144, 47, 65539, 262146, 47, 3, 262155, 47, 65539, 262158, 47, 65539, 327680, 47, 262148, 327681, 47, 196609, 327682, 47, 196616, 327683, 47, 196609, 327684, 47, 196609, 327685, 47, 196609, 327686, 47, 196609, 327687, 47, 7, 327691, 47, 131075, 327694, 47, 65539, 393216, 47, 65539, 393223, 47, 196612, 393224, 47, 196610, 393230, 47, 65539, 458752, 47, 196612, 458753, 47, 196609, 458754, 47, 7, 458766, 47, 65539, 524290, 47, 196612, 524291, 47, 196609, 524292, 47, 196609, 524293, 47, 196609, 524294, 47, 196609, 524295, 47, 196609, 524296, 47, 196609, 524297, 47, 196609, 524298, 47, 196609, 524299, 47, 196609, 524300, 47, 196609, 524301, 47, 196609, 524302, 47, 196615 )
 
-[node name="Startup" parent="." instance=ExtResource( 2 )]
-visible = false
+[node name="Slime" parent="." instance=ExtResource( 16 )]
+position = Vector2( 272.823, 72.281 )
+
+[node name="Slime2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 239.993, 144.355 )
 
 [node name="YSort" type="YSort" parent="."]
 position = Vector2( 170.007, 112.118 )
 
 [node name="Barrel2" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -118.826, -74.2431 )
+position = Vector2( -124.864, -87.4505 )
 
 [node name="Barrel3" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( -119.425, -59.8735 )
 
 [node name="Barrel" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -118.865, -87.3775 )
+position = Vector2( -57.3565, -65.1137 )
+
+[node name="Barrel4" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -95.4691, -97.9434 )
+
+[node name="Barrel5" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -88.6768, -25.4916 )
+
+[node name="Barrel6" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -61.13, -36.8122 )
+
+[node name="Barrel7" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -62.6394, -90.019 )
+
+[node name="Barrel8" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -87.9221, -57.944 )
+
+[node name="Barrel9" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -81.8844, -74.1702 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 30.9156, 105.927 )
+position = Vector2( -1.15936, -79.3532 )
 scale = Vector2( 2, 2 )
 
 [node name="Banana" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( -121.577, 4.57831 )
+position = Vector2( -122.709, 34.7666 )
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 283.515, -47.7461 )
