@@ -93,7 +93,7 @@ down={
 2d_physics/layer_2="wall"
 2d_physics/layer_3="boss"
 2d_physics/layer_4="monster"
-2d_physics/layer_5="traps"
+2d_physics/layer_5="trap"
 
 [rendering]
 
