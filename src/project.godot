@@ -13,15 +13,27 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "Button",
+"class": "TitleSceenButton",
+"language": "GDScript",
+"path": "res://Menus/TitleScreen/TitleScreenButton.gd"
+}, {
+"base": "Control",
+"class": "TitleScreen",
+"language": "GDScript",
+"path": "res://Menus/TitleScreen/TitleScreen.gd"
 } ]
 _global_script_class_icons={
-"Player": ""
+"Player": "",
+"TitleSceenButton": "",
+"TitleScreen": ""
 }
 
 [application]
 
 config/name="LD46 Game"
-run/main_scene="res://World.tscn"
+run/main_scene="res://Menus/TitleScreen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -86,6 +98,12 @@ down={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
  ]
 }
+skip={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -94,6 +112,7 @@ down={
 2d_physics/layer_3="boss"
 2d_physics/layer_4="monster"
 2d_physics/layer_5="trap"
+2d_physics/layer_6="collectable"
 
 [rendering]
 

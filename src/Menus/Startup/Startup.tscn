@@ -134,3 +134,4 @@ animations = [ {
 frames = SubResource( 1 )
 centered = false
 script = ExtResource( 121 )
+[connection signal="animation_finished" from="." to="." method="_on_Startup_animation_finished"]
