@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "Button",
+"class": "TitleSceenButton",
+"language": "GDScript",
+"path": "res://Menus/TitleScreen/TitleScreenButton.gd"
+}, {
+"base": "Control",
+"class": "TitleScreen",
+"language": "GDScript",
+"path": "res://Menus/TitleScreen/TitleScreen.gd"
 } ]
 _global_script_class_icons={
-"Player": ""
+"Player": "",
+"TitleSceenButton": "",
+"TitleScreen": ""
 }
 
 [application]

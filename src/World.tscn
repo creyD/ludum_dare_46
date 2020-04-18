@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Menus/Startup/Startup.tscn" type="PackedScene" id=2]
 
 [node name="World" type="Node2D"]
 
@@ -12,5 +11,3 @@ position = Vector2( 164.844, 101.687 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PoolVector2Array( 192.287, 146.593, 265.375, 115.213, 228.831, 67.1505, 257.43, 37.3594, 218.9, 7.9655, 298.343, 3.59614, 310.26, 179.959, 11.9516, 168.837, 42.9343, 30.6067, 69.1505, 118.788, 86.628, 87.4084, 96.5583, 127.527 )
-
-[node name="Startup" parent="." instance=ExtResource( 2 )]
