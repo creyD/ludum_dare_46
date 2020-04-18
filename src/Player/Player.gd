@@ -116,8 +116,6 @@ func _on_Stats_no_health():
 	get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
 	
 
-
-
 func _on_Hitbox_area_entered(area):
 	currency += area.currency_value
 	player_stats.health = player_stats.health+area.health_value

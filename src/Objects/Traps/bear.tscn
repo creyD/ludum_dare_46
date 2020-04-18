@@ -1,11 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/Traps/bear.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Traps/Bear.gd" type="Script" id=2]
 [ext_resource path="res://testSprites/falle.png" type="Texture" id=3]
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 9.0
+
+[sub_resource type="CapsuleShape2D" id=2]
 height = 9.0
 
 [node name="Bear_trap" type="Node2D"]
@@ -22,9 +25,15 @@ collision_layer = 16
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="Hurtbox" parent="Hitbox" instance=ExtResource( 4 )]
+[node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 32
 collision_mask = 0
-[connection signal="area_entered" from="Hitbox/Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+rotation = 1.5708
+shape = SubResource( 2 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hitbox"]
+
+[editable path="Hurtbox"]

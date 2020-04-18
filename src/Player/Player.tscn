@@ -601,12 +601,12 @@ start_node = "idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
 [sub_resource type="CapsuleShape2D" id=46]
-radius = 3.36373
-height = 6.59445
+radius = 4.5
+height = 0.2
 
 [sub_resource type="CapsuleShape2D" id=47]
-radius = 3.40253
-height = 0.175497
+radius = 4.5
+height = 0.2
 
 [sub_resource type="CapsuleShape2D" id=48]
 radius = 4.03497
@@ -667,7 +667,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 0.420105, -4.84456 )
+position = Vector2( 0, -0.5 )
 shape = SubResource( 46 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
@@ -675,7 +675,7 @@ position = Vector2( 0, 0.0375252 )
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0.0781527, -0.822231 )
+position = Vector2( 0, -0.5 )
 shape = SubResource( 47 )
 
 [node name="Pivot" type="Position2D" parent="."]
@@ -710,6 +710,7 @@ max_health = 5
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hitbox"]
 
