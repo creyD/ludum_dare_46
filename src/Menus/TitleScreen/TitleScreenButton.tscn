@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Fonts/Harmonic/Harmonic24.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Menus/TitleScreen/TitleScreenButton.gd" type="Script" id=2]
+
+[node name="TitleScreenButton" type="Button"]
+margin_right = 110.0
+margin_bottom = 20.0
+flat = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+custom_fonts/font = ExtResource( 1 )
+text = "Label"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
