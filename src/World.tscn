@@ -22,19 +22,20 @@
 script = ExtResource( 2 )
 
 [node name="WallSprite" type="Sprite" parent="."]
-position = Vector2( 336, 160 )
+position = Vector2( 352, 184 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="FloorTileMap" type="TileMap" parent="."]
-position = Vector2( -16, 24 )
+position = Vector2( -16, 16 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -65537, 47, 0, -131072, 47, 1, -131071, 47, 1, -131070, 47, 1, -131069, 47, 1, -131068, 47, 1, -131067, 47, 1, -131066, 47, 1, -131065, 47, 1, -131064, 47, 1, -131063, 47, 1, -131062, 47, 1, -131061, 47, 1, -131060, 47, 1, -131059, 47, 1, -131058, 47, 1, -131057, 47, 1, -131056, 47, 2, -1, 47, 65536, -65536, 47, 65541, -65535, 47, 131073, -65534, 47, 131073, -65533, 47, 131073, -65532, 47, 131073, -65531, 47, 131073, -65530, 47, 131073, -65529, 47, 131073, -65528, 47, 131073, -65527, 47, 131073, -65526, 47, 65544, -65525, 47, 131073, -65524, 47, 131073, -65523, 47, 131073, -65522, 47, 131073, -65521, 47, 65542, -65520, 47, 65538, 65535, 47, 65536, 0, 47, 65538, 10, 47, 65539, 15, 47, 65536, 16, 47, 65538, 131071, 47, 65536, 65536, 47, 65538, 65546, 47, 65539, 65549, 47, 3, 65551, 47, 65536, 65552, 47, 65538, 196607, 47, 65536, 131072, 47, 65538, 131077, 47, 3, 131082, 47, 65539, 131085, 47, 65539, 131087, 47, 65536, 131088, 47, 65538, 262143, 47, 65536, 196608, 47, 65538, 196612, 47, 196608, 196613, 47, 262152, 196614, 47, 196610, 196618, 47, 65539, 196621, 47, 196612, 196622, 47, 196609, 196623, 47, 262150, 196624, 47, 65538, 327679, 47, 65536, 262144, 47, 65538, 262149, 47, 131075, 262154, 47, 65539, 262159, 47, 65536, 262160, 47, 65538, 393215, 47, 65536, 327680, 47, 65538, 327690, 47, 196612, 327691, 47, 196610, 327695, 47, 65536, 327696, 47, 65538, 458751, 47, 65536, 393216, 47, 65538, 393231, 47, 65536, 393232, 47, 65538, 524287, 47, 65536, 458752, 47, 131077, 458753, 47, 1, 458754, 47, 1, 458755, 47, 1, 458756, 47, 1, 458757, 47, 1, 458758, 47, 1, 458759, 47, 1, 458760, 47, 1, 458761, 47, 1, 458762, 47, 1, 458763, 47, 1, 458764, 47, 1, 458765, 47, 1, 458766, 47, 1, 458767, 47, 131078, 458768, 47, 65538, 589823, 47, 131072, 524288, 47, 131073, 524289, 47, 131073, 524290, 47, 131073, 524291, 47, 131073, 524292, 47, 131073, 524293, 47, 131073, 524294, 47, 131073, 524295, 47, 131073, 524296, 47, 131073, 524297, 47, 131073, 524298, 47, 131073, 524299, 47, 131073, 524300, 47, 131073, 524301, 47, 131073, 524302, 47, 131073, 524303, 47, 131073, 524304, 47, 131074 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="YSort" type="YSort" parent="."]
@@ -42,18 +43,17 @@ position = Vector2( 152, 120 )
 
 [node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( -107.855, -54.5179 )
-debug = true
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 296, -32 )
 scale = Vector2( 2, 2 )
+debug = true
 FRICTION = 200
 
 [node name="minion" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 88, 24 )
 scale = Vector2( 0.3, 0.3 )
 collision_layer = 8
-debug = true
 
 [node name="Bear_trap" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 68.1447, -38.5179 )
@@ -86,10 +86,10 @@ position = Vector2( -19.8553, 73.4821 )
 position = Vector2( 8.00002, -32 )
 
 [node name="Barrel5" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -40, 16 )
+position = Vector2( 8.00002, -96 )
 
 [node name="Barrel6" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -40, 16 )
+position = Vector2( -128, 16 )
 
 [node name="Barrel7" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( -56, 16 )
@@ -113,7 +113,7 @@ position = Vector2( 8.00002, -48 )
 position = Vector2( 8.00002, -64 )
 
 [node name="Barrel4" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 8.00002, -72 )
+position = Vector2( 8.00002, -80 )
 
 [node name="Banana" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( -107.855, 73.4821 )

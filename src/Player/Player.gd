@@ -24,6 +24,7 @@ enum moveState{
 	HIT
 }
 
+
 var movementState = moveState.MOVE
 
 var damage_per_second := 0.0
@@ -106,7 +107,6 @@ func roll_finished():
 
 
 func _on_Hurtbox_area_entered(area):
-	print("Hallo")
 	player_stats.health-=area.damage
 	damage_per_second = damage_per_second + area.damage
 
