@@ -4,7 +4,7 @@
 [ext_resource path="res://Menus/Startup/Startup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Menus/TitleScreen/TitleScreen.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "__INIT__"
 length = 0.1
 tracks/0/type = "value"
@@ -80,8 +80,7 @@ tracks/5/keys = {
 "values": [ 1.25 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "show_buttons"
+[sub_resource type="Animation" id=2]
 step = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("VBoxContainer/NewGameButton:anchor_left")
@@ -182,7 +181,7 @@ __meta__ = {
 }
 
 [node name="NewGameButton" parent="VBoxContainer" instance=ExtResource( 1 )]
-margin_right = 111.0
+margin_right = 166.0
 scene_to_load = "res://World.tscn"
 
 [node name="Label" parent="VBoxContainer/NewGameButton" index="0"]
@@ -190,7 +189,7 @@ text = "New Game"
 
 [node name="CreditsButton" parent="VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 24.0
-margin_right = 111.0
+margin_right = 166.0
 margin_bottom = 44.0
 scene_to_load = "res://Menus/Credits/Credits.tscn"
 
@@ -199,7 +198,7 @@ text = "Credits"
 
 [node name="QuitButton" parent="VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 48.0
-margin_right = 111.0
+margin_right = 166.0
 margin_bottom = 68.0
 quit = true
 
@@ -207,8 +206,8 @@ quit = true
 text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/__INIT__ = SubResource( 2 )
-anims/show_buttons = SubResource( 1 )
+anims/__INIT__ = SubResource( 1 )
+anims/show_buttons = SubResource( 2 )
 [connection signal="startup_finished" from="Startup" to="." method="_on_Startup_startup_finished"]
 
 [editable path="VBoxContainer/NewGameButton"]

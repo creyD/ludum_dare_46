@@ -4,18 +4,44 @@ class_name Player
 This is an example player controller script created by Paul
 """
 var velocity := Vector2.ZERO
+var rollvector := Vector2.ZERO
 # This is how you export variables with ranges to the editor window
 export(int, 0, 500) var MAX_SPEED := 125
+export(int, 0, 500) var ROLL_SPEED := 150
 export(int, 0, 500) var FRICTION := 200 # Speed at which the player deaccelarates
 export(int, 0, 500) var ACCELERATION := 450
+# Reference for the current player
+onready var animation_player := $AnimationPlayer
+onready var animation_tree := $AnimationTree
+onready var animation_state = animation_tree.get("parameters/playback")
+
+enum moveState{
+	MOVE,
+	ROLL,
+	HIT
+}
+
+var movementState = moveState.MOVE
 
 func _physics_process(delta):
-	"""
-	Run approximately every 1/60th of a second by default.
-	@param delta, so the time since lastt frame, should be pretty constant at 1/60 by default.
-	"""
-	# If a constant is applicable, use it instead of creating the object yourself
-	var input_vector := Vector2.ZERO
+	match movementState:
+		moveState.MOVE:
+			movement_move(delta)
+		moveState.ROLL:
+			movement_roll()
+		moveState.HIT:
+			movement_hit()
+	
+	move()
+
+# IMPORTANT: If you are using move_and_slide don't multiply by delta
+# Godots physics system does that internally
+# In move_and_collide(...) you have to multiply by delta.	
+func move():
+	move_and_slide(velocity)
+	
+func movement_move(delta):
+	var input_vector = Vector2.ZERO
 	# This is a clever way to handle directional input
 	# Input.get_action_strength(...) returns a value between 0 and 1 depending
 	# on how strong the controller direction is pressed
@@ -26,11 +52,35 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector == Vector2.ZERO:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		animation_state.travel("idle")
+		velocity = Vector2.ZERO
 	else:
+		rollvector = input_vector
+		animation_tree.set("parameters/idle/blend_position", input_vector)
+		animation_tree.set("parameters/hit/blend_position", input_vector)
+		animation_tree.set("parameters/roll/blend_position", input_vector)
+		animation_tree.set("parameters/run/blend_position", input_vector)
+		animation_state.travel("run")	
 		velocity = velocity.move_toward(MAX_SPEED * input_vector, ACCELERATION * delta)
+	if Input.is_action_just_pressed("roll"):
+		movementState = moveState.ROLL
+	elif Input.is_action_just_pressed("attack"):
+		movementState = moveState.HIT
 	
-	# IMPORTANT: If you are using move_and_slide don't multiply by delta
-	# Godots physics system does that internally
-	# In move_and_collide(...) you have to multiply by delta.
-	move_and_slide(velocity)
+func movement_hit():
+	velocity = Vector2.ZERO
+	animation_state.travel("hit")
+	
+func hit_finished():
+	movementState = moveState.MOVE
+	
+func movement_roll():
+	velocity = rollvector * ROLL_SPEED
+	animation_state.travel("roll")
+	
+func roll_finished():
+	movementState = moveState.MOVE
+
+
+func _on_Hurtbox_area_entered(area):
+	queue_free()
