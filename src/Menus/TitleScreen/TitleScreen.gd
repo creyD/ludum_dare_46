@@ -2,10 +2,11 @@ extends Control
 class_name TitleScreen
 
 onready var new_game_button = $"VBoxContainer/NewGameButton"
+onready var animation_player = $AnimationPlayer
 
 func _ready():
-	new_game_button.grab_focus()
-
+	animation_player.play("__INIT__")
 
 func _on_Startup_startup_finished():
-	pass # Replace with function body.
+	new_game_button.grab_focus()
+	animation_player.play("show_buttons")
