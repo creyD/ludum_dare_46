@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://Boss/Boss_template.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Menus/TitleScreen/TitleScreen.gd"
 } ]
 _global_script_class_icons={
+"Boss": "",
 "Player": "",
 "TitleSceenButton": "",
 "TitleScreen": ""
