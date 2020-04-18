@@ -1,11 +1,10 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://HurtHit_Box/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overlap/Stats.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Fonts/Harmonic/Harmonic.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.15976
@@ -601,16 +600,16 @@ start_node = "idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
 [sub_resource type="CapsuleShape2D" id=46]
-radius = 3.40253
-height = 6.72939
+radius = 3.36373
+height = 6.59445
 
 [sub_resource type="CapsuleShape2D" id=47]
+radius = 3.40253
+height = 0.175497
+
+[sub_resource type="CapsuleShape2D" id=48]
 radius = 4.03497
 height = 6.99104
-
-[sub_resource type="DynamicFont" id=48]
-size = 12
-font_data = ExtResource( 6 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -657,13 +656,22 @@ parameters/idle/blend_position = Vector2( -0.646202, 0.122222 )
 parameters/roll/blend_position = Vector2( 0.0166494, -0.387619 )
 parameters/run/blend_position = Vector2( 0.0697191, -0.967302 )
 
+[node name="Hitbox" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 0.0375252 )
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0.420105, -4.84456 )
+shape = SubResource( 46 )
+
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 0.0375252 )
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( -0.00503922, -4.92183 )
-shape = SubResource( 46 )
+position = Vector2( 0.0781527, -0.822231 )
+shape = SubResource( 47 )
 
 [node name="Pivot" type="Position2D" parent="."]
 position = Vector2( 0, -4.16248 )
@@ -678,23 +686,14 @@ collision_mask = 12
 
 [node name="CollisionShape2D" parent="Pivot/SwordHitbox" index="0"]
 position = Vector2( 8.43416, 0.0698299 )
-shape = SubResource( 47 )
+shape = SubResource( 48 )
 disabled = true
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-max_health = 3
-
-[node name="DebugLabel" type="Label" parent="."]
-margin_left = -8.0
-margin_top = -21.0
-margin_right = 10.0
-margin_bottom = -9.0
-custom_fonts/font = SubResource( 48 )
-text = "BLa"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hitbox"]
 
 [editable path="Hurtbox"]
 

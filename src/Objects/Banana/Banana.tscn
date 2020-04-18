@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Bannana.gd" type="Script" id=2]
+[ext_resource path="res://testSprites/bannane.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.54726
+height = 12.1493
+
+[node name="Banana" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1.54256, -4.73786 )
+texture = ExtResource( 3 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1.54256, -4.73786 )
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( -1.65275, 4.84804 )
+rotation = 1.5708
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

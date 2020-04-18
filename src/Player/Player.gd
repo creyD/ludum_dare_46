@@ -11,7 +11,7 @@ export(int, 0, 500) var ROLL_SPEED := 150
 export(int, 0, 500) var FRICTION := 200 # Speed at which the player deaccelarates
 export(int, 0, 500) var ACCELERATION := 450
 # Reference for the current player
-onready var debug_label := $DebugLabel
+
 onready var player_stats := $Stats
 onready var animation_player := $AnimationPlayer
 onready var animation_tree := $AnimationTree
@@ -25,12 +25,9 @@ enum moveState{
 
 var movementState = moveState.MOVE
 
-func _debug_update():
-	debug_label.text = str(player_stats.health) + "/" + str(player_stats.max_health) + " HP"
 
 
 func _physics_process(delta):
-	_debug_update()
 	match movementState:
 		moveState.MOVE:
 			movement_move(delta)
@@ -91,3 +88,7 @@ func roll_finished():
 
 func _on_Hurtbox_area_entered(area):
 	queue_free()
+
+
+func _on_Hitbox_area_entered(area):
+	pass
