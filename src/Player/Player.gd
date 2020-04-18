@@ -20,6 +20,7 @@ onready var animation_state = animation_tree.get("parameters/playback")
 
 # Variables for sound selection
 onready var walk_sounds = $Sounds/Walk
+onready var walk_sound_timer = $Sounds/WalkSoundTimer
 var _rng = RandomNumberGenerator.new()
 var is_playing_sound = false
 
@@ -133,12 +134,20 @@ func _on_Hitbox_area_entered(area):
 func _walk_sound_finished():
 	is_playing_sound = false
 
+func _walk_sound_wait_time():
+	var x = abs(velocity.length() / 100) - 1
+	return log(((x+1)/4)+2.5) / 3
+	# TODO: Rework anyone
 
 func _play_random_sound(path = walk_sounds):
-	if not is_playing_sound:
+	if walk_sound_timer.is_stopped() and not is_playing_sound:
 		var sound = path.get_children()[_rng.randi_range(0, path.get_child_count() - 1)]
 		sound.play()
 		is_playing_sound = true
+		
+		walk_sound_timer.start(_walk_sound_wait_time())
+		print(_walk_sound_wait_time())
+		
 
 
 # Overrides ready method for this entire script, checks for the finished method of each possible sound

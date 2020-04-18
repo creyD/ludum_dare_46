@@ -731,6 +731,9 @@ stream = ExtResource( 9 )
 
 [node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="Sounds/Walk"]
 stream = ExtResource( 8 )
+
+[node name="WalkSoundTimer" type="Timer" parent="Sounds"]
+one_shot = true
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
