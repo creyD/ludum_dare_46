@@ -6,13 +6,13 @@ This is an example player controller script created by Paul
 var velocity := Vector2.ZERO
 var rollvector := Vector2.ZERO
 # This is how you export variables with ranges to the editor window
-export(int, 0, 500) var MAX_SPEED := 125
 export(int, 0, 500) var ROLL_SPEED := 150
 export(int, 0, 500) var FRICTION := 200 # Speed at which the player deaccelarates
 export(int, 0, 500) var ACCELERATION := 450
 # Reference for the current player
 
 onready var player_stats := $Stats
+onready var debug_label := $DebugLabel
 onready var animation_player := $AnimationPlayer
 onready var animation_tree := $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
@@ -25,9 +25,26 @@ enum moveState{
 
 var movementState = moveState.MOVE
 
+var damage_per_second := 0.0
+var totaldamage := 0.0
 
+var currency := 0
+var experience := 0.0
+
+func _debug_update():
+	debug_label.text = str(player_stats.health) + "/" + str(player_stats.max_health) + " HP\n" + str(currency) + " €"
+	
 
 func _physics_process(delta):
+	totaldamage+=damage_per_second*delta
+	player_stats.speed+=10*delta
+	while(totaldamage>1):
+		totaldamage-=1
+		player_stats.health-=1
+	while(totaldamage<-1):
+		totaldamage+=1
+		player_stats.health+=1
+	_debug_update()
 	match movementState:
 		moveState.MOVE:
 			movement_move(delta)
@@ -65,7 +82,7 @@ func movement_move(delta):
 		animation_tree.set("parameters/roll/blend_position", input_vector)
 		animation_tree.set("parameters/run/blend_position", input_vector)
 		animation_state.travel("run")	
-		velocity = velocity.move_toward(MAX_SPEED * input_vector, ACCELERATION * delta)
+		velocity = velocity.move_toward(player_stats.speed * input_vector, ACCELERATION * delta)
 	if Input.is_action_just_pressed("roll"):
 		movementState = moveState.ROLL
 	elif Input.is_action_just_pressed("attack"):
@@ -87,8 +104,19 @@ func roll_finished():
 
 
 func _on_Hurtbox_area_entered(area):
-	queue_free()
+	player_stats.health-=area.damage
+	damage_per_second = damage_per_second + area.damage
 
+func _on_Hurtbox_area_exited(area):
+	damage_per_second = damage_per_second - area.damage
+
+
+func _on_Stats_no_health():
+	queue_free()
+	get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
+	
 
 func _on_Hitbox_area_entered(area):
-	pass
+	currency += area.currency_value
+	player_stats.health = player_stats.health+area.health_value
+	player_stats.speed -= area.slowdown_value

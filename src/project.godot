@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="LD46 Game"
-run/main_scene="res://Menus/TitleScreen/TitleScreen.tscn"
+run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
 [autoload]

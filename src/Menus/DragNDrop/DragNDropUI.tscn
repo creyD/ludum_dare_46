@@ -12,6 +12,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DragSource" parent="." instance=ExtResource( 1 )]
-
 [node name="DragSink" parent="." instance=ExtResource( 2 )]
+margin_left = 1.19746
+margin_right = 1.19745
+
+[node name="DragSource" parent="." instance=ExtResource( 1 )]
+PreviewIcon = "res://icon.png"
