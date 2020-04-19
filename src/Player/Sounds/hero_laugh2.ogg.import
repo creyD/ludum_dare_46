@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hero_laugh2.ogg-a275c70549ae553d0e85acd0735c97df.oggstr"
+
+[deps]
+
+source_file="res://Player/Sounds/hero_laugh2.ogg"
+dest_files=[ "res://.import/hero_laugh2.ogg-a275c70549ae553d0e85acd0735c97df.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
