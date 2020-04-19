@@ -158,25 +158,31 @@ tracks/5/keys = {
 [node name="TitleScreen" type="Control"]
 anchor_left = -0.00168862
 anchor_top = -0.003002
-anchor_right = 0.998311
-anchor_bottom = 0.996998
+anchor_right = 0.704
+anchor_bottom = 0.667
 margin_left = 0.810538
 margin_top = -0.18946
-margin_right = -141.189
-margin_bottom = -89.1895
+margin_right = 0.0802612
+margin_bottom = -0.0900574
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/__INIT__ = SubResource( 1 )
+anims/show_buttons = SubResource( 2 )
+
 [node name="Startup" parent="." instance=ExtResource( 2 )]
-scale = Vector2( 1.50376, 1.50079 )
+scale = Vector2( 1.50207, 1.49479 )
+animation = "start"
+speed_scale = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.619068
-anchor_top = 1.05219
-anchor_right = 0.965944
-anchor_bottom = 1.46586
+anchor_left = 1.06328
+anchor_top = 1.04447
+anchor_right = 1.41015
+anchor_bottom = 1.45814
 margin_left = 1.52588e-05
 __meta__ = {
 "_edit_group_": true,
@@ -207,11 +213,7 @@ quit = true
 
 [node name="Label" parent="VBoxContainer/QuitButton" index="0"]
 text = "Quit"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/__INIT__ = SubResource( 1 )
-anims/show_buttons = SubResource( 2 )
-[connection signal="startup_finished" from="Startup" to="." method="_on_Startup_startup_finished"]
+[connection signal="animation_finished" from="Startup" to="." method="_on_Startup_animation_finished"]
 
 [editable path="VBoxContainer/NewGameButton"]
 
