@@ -6,6 +6,10 @@ onready var animation_player = $AnimationPlayer
 
 func _ready():
 	animation_player.play("__INIT__")
+	SoundControler.pub_play_music("res://Menus/TitleScreen/title_screen_bgm.ogg", false)
+
+func _exit_tree():
+	SoundControler.pub_stop_music()
 
 func _on_Startup_startup_finished():
 	new_game_button.ignore_once = true # Pauls russian solution for ignoring the first sound click in the titlescreen
