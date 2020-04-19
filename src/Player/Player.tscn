@@ -14,9 +14,8 @@
 [ext_resource path="res://Player/PlayerStateMachine.gd" type="Script" id=15]
 [ext_resource path="res://Player/States/Roll.gd" type="Script" id=16]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 2.15976
-height = 3.85866
+[sub_resource type="CircleShape2D" id=50]
+radius = 3.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "HitDown"
@@ -629,6 +628,7 @@ script = ExtResource( 1 )
 FRICTION = 270
 
 [node name="Kind" parent="." instance=ExtResource( 7 )]
+general = 4
 kind = 1
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -640,9 +640,9 @@ hframes = 60
 frame = 12
 
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2( -0.0470657, -0.609329 )
+position = Vector2( 0.0107212, 0.0456073 )
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 50 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/HitDown = SubResource( 2 )
@@ -678,7 +678,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 0, -0.5 )
+position = Vector2( -0.0192623, 0.000833511 )
 shape = SubResource( 46 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
@@ -686,7 +686,7 @@ position = Vector2( 0, 0.0375252 )
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -0.5 )
+position = Vector2( 1.90735e-06, 0.000833988 )
 shape = SubResource( 47 )
 
 [node name="Pivot" type="Position2D" parent="."]

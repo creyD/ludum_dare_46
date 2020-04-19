@@ -56,7 +56,7 @@ func _physics_process(delta):
 	while(totaldamage < -1):
 		totaldamage+=1
 		player_stats.health+=1
-	#adjustPrio(player_stats.health, player_stats.max_health)
+	adjustPrio(player_stats.health, player_stats.max_health)
 	_debug_update()
 	if debug == true:
 		match movementState:
@@ -165,7 +165,8 @@ func movement_roll():
 
 func roll_finished():
 	movementState = moveState.IDLE
-	ExecutionState = AI_MOVE
+	ai_movement_state = STEP
+	ExecutionState = EXECUTING
 
 
 func _on_Hurtbox_area_entered(area):

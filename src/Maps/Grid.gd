@@ -8,7 +8,7 @@ var prio_grid : Array = []
 var used_grid : Array = []
 var time_passed := 0.0
 var offset
-export(float,0,42.0) var refresh_rate = 5.0
+export(float,0,42.0) var refresh_rate = 1
 
 
 func _draw_object_grid():
@@ -31,9 +31,9 @@ func _reset_grids():
 	for x in range(14):
 		for y in range(7):
 			var lulul = object_grid[x][y].back()
-			while (object_grid[x][y].back()!=Kind.FIELD) and (Kind.WALL != object_grid[x][y].back()):
+			while (object_grid[x][y].size()!=1):
 				object_grid[x][y].pop_back()
-			while (prio_grid[x][y].back()!=Kind.TERMINAL_SYMBOL):
+			while (prio_grid[x][y].size()!=1):
 				prio_grid[x][y].pop_back()
 
 func _ready():
