@@ -7,13 +7,14 @@ var elapsedTime = 0.0
 
 func _physics_process(delta):
 	elapsedTime += delta
-	if(elapsedTime>=spawnRate):
-		elapsedTime-=spawnRate
-		var Minion = load("")
-		var world = get_tree().current_scene.get_child(2)
-		var minion = Minion.instance()
-		world.add_child(minion)
-		minion.global_position = global_position
+	#if(elapsedTime>=spawnRate):
+	#	elapsedTime-=spawnRate
+	#	var Minion = load("")
+	#	var world = get_tree().current_scene.get_child(2)
+	#	#TODO minions
+	#	var minion = Minion.instance()
+	#	world.add_child(minion)
+	#	minion.global_position = global_position
 
 
 func _on_Hurtbox_area_entered(area):

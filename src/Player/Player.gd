@@ -37,6 +37,8 @@ var experience := 0.0
 func _debug_update():
 	debug_label.text = str(player_stats.health) + "/" + str(player_stats.max_health) + " HP\n" + str(currency) + " €"
 	
+func _ready():
+	grid = get_tree().current_scene.get_child(3)
 
 func _physics_process(delta):
 	totaldamage += damage_per_second*delta

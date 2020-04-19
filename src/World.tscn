@@ -12,7 +12,7 @@
 script = ExtResource( 2 )
 
 [node name="WallSprite" type="Sprite" parent="."]
-position = Vector2( 351.915, 184 )
+position = Vector2( 352, 184 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
@@ -32,18 +32,14 @@ __meta__ = {
 position = Vector2( 152, 120 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 84.2923, 24.0572 )
+position = Vector2( 176, 112 )
 scale = Vector2( 2, 2 )
-FRICTION = 200
+FRICTION = null
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 296, -16 )
 
-[node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
-
-[node name="DebugLabel" parent="YSort/Boss_template" index="6"]
-text = "Obermutti"
+[node name="Boss_template2" parent="YSort" instance=ExtResource( 17 )]
+position = Vector2( -40, 16 )
 
 [node name="Grid" parent="." instance=ExtResource( 18 )]
-
-[editable path="YSort/Boss_template"]

@@ -8,7 +8,7 @@ var prio_grid : Array = []
 var used_grid : Array = []
 var time_passed := 0.0
 var offset
-export(float,0,42.0) var refresh_rate = 1.0
+export(float,0,42.0) var refresh_rate = 5.0
 
 
 func _draw_object_grid():
@@ -61,6 +61,14 @@ func _reset_history():
 		for y in range(7):
 			used_grid[x][y] = false
 
+func countTargets(table):
+	for x in range(14):
+		for y in range(7):
+			for i in prio_grid[x][y]:
+				if i == Kind.TERMINAL_SYMBOL:
+					continue
+				table[i]+=1
+	return table
 
 func _pixel_to_grid_coords(pixel : Vector2) -> Vector2:
 	var new_coords : Vector2
@@ -79,6 +87,22 @@ func _is_in_grid(grid_coords : Vector2) -> bool:
 		return false
 	return true
 
+func get_nearest(position, kind):
+	var list = []
+	for x in range(14):
+		for y in range(7):
+			for i in prio_grid[x][y]:
+				if(i == kind):
+					list.append([x,y])
+	var dist = []
+	for field in list:
+		var tmp = sqrt(pow(position[0]-field[0],2)+pow(position[1]-field[1],2))
+		dist.append(tmp)
+	var mini = 0
+	for i in range(1, dist.size()):
+		if(dist[i]<dist[mini]):
+			mini = i
+	return list[mini]
 
 func _update_grid():
 	_reset_grids()

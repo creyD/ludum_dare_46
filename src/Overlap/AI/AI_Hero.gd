@@ -5,17 +5,11 @@ class_name Hero
 const PrioQueue = preload("prio_queue.gd") # Relative path
 const Grid = preload("res://Maps/Grid.gd")
 
+var grid
+
 enum{
 	LENGTH,
 	WAY
-}
-
-enum{
-	DAMAGE,
-	HEALING,
-	SLOW,
-	WALL,
-	FIELD
 }
 
 enum{
@@ -31,13 +25,15 @@ enum{
 
 var ExecutionState = AI_MOVE
 
-var numbers = [0,0,0,0,0,0,0,0,0]
-var prios = [7,6,5,4,3,2,0,0,4]
+var numbers = [0,0,0,0,0,0,0,0,0,0]
+var prios = [7,0,6,5,4,3,2,0,0,4]
 
 var totalPrioTurn = 0
 var executesTurn = false
 var abortProb = 0.01
 
+var targetField = [0,0]
+var targetFieldUsed = false
 #calculates  the sum of all present prios
 func calcTotalPrio():
 	var sum = 0
@@ -49,18 +45,22 @@ func calcTotalPrio():
 	return sum
 	
 #calculates the relative porio
-func calcRelPrio(index, sum):
-	return prios[index]/sum
+func calcRelPrio(index, sum) -> float:
+	if(sum==0):
+		return 0.0
+	return float(prios[index])/float(sum)
 	
 #calucaltes the prio table of all enemies[0,1)
 func calcPrioTable():
-	var table = [0,0,0,0,0,0,0,0,0]
-	var lower = 0
+	var table = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+	numbers = grid.countTargets(numbers)
+	var lower = 0.0
 	var sum = calcTotalPrio()
 	
 	var i = 0;
 	while i != Grid.Kind.TERMINAL_SYMBOL:
-		lower += calcRelPrio(i, sum)
+		if(numbers[i]!=0):
+			lower += calcRelPrio(i, sum)
 		table[i] = lower
 		i += 1
 		
@@ -77,30 +77,27 @@ func adjustPrio(currentHealth, maxHealth):
 	prios[Grid.Kind.HEART]=hearts
 
 #return the enemie which will be attacked
-func calcEnemy():
+func calcEnemyKind():
 	var table = calcPrioTable()
 	var number = randf()
 	var i = 0
-	while table[i] > number:
-		i=i+1
+	while table[i] <= number:
+		i += 1
 	return i
-
-
-func getTargetField(currentField):
-	return Grid.prio_grid[currentField.x][currentField.y]
-
 
 #returns a move
 func getMoveDescription(myPosition : Vector2, targetPositions):
-	return AStar(myPosition, targetPositions[0])
+	return AStar(myPosition, targetPositions)
 
 
 func getCost(field):
 	var cost = 0
-	for i in Grid.prio_grid[field.x][field.y]:
+	for i in grid.prio_grid[field.x][field.y]:
 			match i:
-				Grid.kind.DAMAGE : cost += prios[Grid.kind.BONFIRE] * 6
-				Grid.kind.SLOW : cost += 2
+				Grid.Kind.DAMAGE: 
+					cost += prios[Grid.kind.BONFIRE] * 6
+				Grid.Kind.SLOW: 
+					cost += 2
 	return cost
 	
 #return an heurestic of distance
@@ -136,9 +133,9 @@ func adjacent(currentPosition, can_roll = false):
 			continue
 		if(next[1]>6):
 			continue
-		if(Grid.used_grid[next[0]][next[1]]):
+		if(grid.used_grid[next[0]][next[1]]):
 			continue
-		if(Grid[next[0]][next[1]][0]!=WALL):
+		if(grid.object_grid[next[0]][next[1]][0]!=Grid.Kind.WALL):
 			adj.append([STEP, Vector2(next[0],next[1])])
 
 	if not can_roll:
@@ -153,9 +150,9 @@ func adjacent(currentPosition, can_roll = false):
 			continue
 		if(next[1]>6):
 			continue
-		if(Grid.used_grid[next[0]][next[1]]):
+		if(grid.used_grid[next[0]][next[1]]):
 			continue
-		if(Grid[next[0]][next[1]][0]!=WALL):
+		if(grid.object_grid[next[0]][next[1]][0]!=Grid.Kind.WALL):
 			adj.append([ROLL, Vector2(next[0],next[1])])
 	
 	return adj
@@ -178,7 +175,7 @@ func AStar(source, target):
 			return  [node[4], node[3]] # 4 is kind | 3 is from
 			
 		# Set flag
-		Grid.used_grid[node[2][0]][node[2][1]] = true
+		grid.used_grid[node[2][0]][node[2][1]] = true
 		var adj_list = adjacent(node[2])
 		for i in adj_list:
 			var move_cost = 0
@@ -191,27 +188,30 @@ func AStar(source, target):
 			var h_val = h(i[1], target)
 		
 			#[g+h(x), g(x), current, from, kind]
-			var new_node = [g_val+h_val, g_val,i[1], node, i[0]]
+			var new_node = [g_val+h_val, g_val,i[1], node[2], i[0]]
 			Q.insert(new_node)
 			
 	return [NOTHING, [0,0]]
 
 
 func makeMove(delta):
-	#match ExecutionState:
-	#	EXECUTING:
-	#		pass
-	#	AI_MOVE:
-	#		var field = [0.1 * prios[Grid.Kind.BONFIRE], 1]
-	#		var decision = randf()
-		##	var i = 0
-			#while field[i] > decision:
-		#		i += 1
-	##		if (i == 0):
-	#			var targetField = getTargetField(Grid.prio_grid)
-	#			run(targetField)
-	#		else:
-	#			pass
+	pass
+	if ExecutionState == AI_MOVE:
+		var currentPosition = grid._pixel_to_grid_coords(global_position)
+		var enemyKind = calcEnemyKind()
+		var targetField = grid.get_nearest(currentPosition, enemyKind)
+		var MoveAdvice = getMoveDescription(currentPosition, targetField)
+		print(MoveAdvice)
+		ExecutionState = EXECUTING
+		pass
+	elif ExecutionState == EXECUTING:
+		if(targetFieldUsed):
+			pass
+			var cur = grid._pixel_to_grid_coords(global_position)
+			var distance = sqrt(pow(cur[0]-targetField[0],2)+ pow(cur[1]-targetField[1],2))
+			if(distance<0.5):
+				targetFieldUsed = false
+				ExecutionState = AI_MOVE
 	pass
 
 

@@ -619,7 +619,10 @@ font_data = ExtResource( 6 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
+debug = null
+ROLL_SPEED = null
 FRICTION = 270
+ACCELERATION = null
 
 [node name="Kind" parent="." instance=ExtResource( 7 )]
 kind = 1
