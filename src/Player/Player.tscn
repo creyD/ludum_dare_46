@@ -14,7 +14,7 @@
 [ext_resource path="res://Player/PlayerStateMachine.gd" type="Script" id=15]
 [ext_resource path="res://Player/States/Roll.gd" type="Script" id=16]
 
-[sub_resource type="CircleShape2D" id=50]
+[sub_resource type="CircleShape2D" id=1]
 radius = 3.0
 
 [sub_resource type="Animation" id=2]
@@ -596,7 +596,7 @@ blend_mode = 1
 states/hit/node = SubResource( 22 )
 states/hit/position = Vector2( 511, 196 )
 states/idle/node = SubResource( 27 )
-states/idle/position = Vector2( 203, 196 )
+states/idle/position = Vector2( 202, 196 )
 states/roll/node = SubResource( 32 )
 states/roll/position = Vector2( 511, 90 )
 states/run/node = SubResource( 37 )
@@ -637,12 +637,12 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -18 )
 hframes = 60
-frame = 12
+frame = 7
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0107212, 0.0456073 )
 rotation = 1.5708
-shape = SubResource( 50 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/HitDown = SubResource( 2 )
@@ -670,7 +670,7 @@ parameters/playback = SubResource( 45 )
 parameters/hit/blend_position = Vector2( 0.032258, -0.777778 )
 parameters/idle/blend_position = Vector2( -0.646202, 0.122222 )
 parameters/roll/blend_position = Vector2( 0.0166494, -0.387619 )
-parameters/run/blend_position = Vector2( 0.0697191, -0.967302 )
+parameters/run/blend_position = Vector2( -0.0104058, -1.05259 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 0.0375252 )

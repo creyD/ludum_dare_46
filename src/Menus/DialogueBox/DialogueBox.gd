@@ -31,7 +31,7 @@ func set_dialogue_identifier(val):
 
 
 func update_text():
-	print(_dialogue[_dialogue_pos])
+	#print(_dialogue[_dialogue_pos])
 	label.text = _dialogue[_dialogue_pos]
 	animation_player.play("next_line")
 	yield(animation_player, "animation_finished")

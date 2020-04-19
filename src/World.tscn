@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -6,10 +6,7 @@
 [ext_resource path="res://testSprites/dark.png" type="Texture" id=4]
 [ext_resource path="res://Menus/DragNDrop/DragNDropUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=8]
-[ext_resource path="res://testSprites/bannane.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
 
@@ -36,31 +33,20 @@ __meta__ = {
 [node name="YSort" type="YSort" parent="."]
 position = Vector2( 152, 120 )
 
+[node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 264, -24 )
+
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 240, 72 )
 scale = Vector2( 2, 2 )
-ROLL_SPEED = 80
+ROLL_SPEED = 140
 FRICTION = 200
 
 [node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( -104, 40 )
+position = Vector2( -67.0889, 2.27742 )
 debug = true
 
-[node name="Bonfire" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 264, -16 )
-
-[node name="Body" parent="YSort/Bonfire" index="3"]
-disabled = true
-
-[node name="bannane" type="Sprite" parent="YSort"]
-position = Vector2( 104, -24 )
-texture = ExtResource( 5 )
-
-[node name="Boss_template" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( -67.0889, 2.27742 )
-
-[node name="Bonfire" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 214.647, -24.9932 )
+[node name="Grid" parent="." instance=ExtResource( 18 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -69,7 +55,5 @@ visible = false
 
 [node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
 ObjectParent = NodePath("../..")
-
-[node name="Grid" parent="." instance=ExtResource( 18 )]
 
 [editable path="YSort/Bonfire"]

@@ -45,7 +45,7 @@ func _debug_update():
 	debug_label.text = str(player_stats.health) + "/" + str(player_stats.max_health) + " HP\n" + str(currency) + " €"
 	
 func _ready():
-	grid = get_tree().current_scene.get_child(3)
+	grid = get_tree().current_scene.get_node("Grid")
 
 func _physics_process(delta):
 	totaldamage+=(damage_per_second - heal_per_second)*delta
@@ -171,8 +171,6 @@ func roll_finished():
 
 func _on_Hurtbox_area_entered(area):
 	player_stats.health-=area.damage
-	
-	print("enter")
 	
 	if area.damage > 0:
 		damage_per_second += area.damage
