@@ -1,10 +1,11 @@
 extends Node
 
-const Kind = preload("res://Overlap/Kind.gd") # Relative pat
+const Kind = preload("res://Overlap/Kind.gd") # Relative path
 
 
 var object_grid : Array = []
 var prio_grid : Array = []
+var used_grid : Array = []
 var time_passed := 0.0
 var offset
 export(float,0,42.0) var refresh_rate = 1.0
@@ -42,16 +43,23 @@ func _ready():
 	for x in range(14):
 		object_grid.push_back([])
 		prio_grid.push_back([])
+		used_grid.push_back([])
 		for y in range(7):
 			object_grid[x].push_back([Kind.FIELD])
 			prio_grid[x].push_back([Kind.TERMINAL_SYMBOL])
-	
-	
+			used_grid[x].push_back(false)
+
 	for tile in walls.get_used_cells():
 		if(_is_in_grid(tile)):
 			object_grid[tile.x][tile.y][0] = Kind.WALL
-	
+
 	_update_grid()
+
+
+func _reset_history():
+	for x in range(14):
+		for y in range(7):
+			used_grid[x][y] = false
 
 
 func _pixel_to_grid_coords(pixel : Vector2) -> Vector2:

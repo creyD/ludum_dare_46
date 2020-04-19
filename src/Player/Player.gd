@@ -63,7 +63,35 @@ func _physics_process(delta):
 # In move_and_collide(...) you have to multiply by delta.	
 func move():
 	move_and_slide(velocity)
-	
+
+
+func set_animation_tree_vector():
+	animation_tree.set("parameters/idle/blend_position", rollvector)
+	animation_tree.set("parameters/hit/blend_position", rollvector)
+	animation_tree.set("parameters/roll/blend_position", rollvector)
+	animation_tree.set("parameters/run/blend_position", rollvector)
+
+# API Interface for ai_hero
+func attac(direction):
+	rollvector = direction
+	set_animation_tree_vector()
+	movementState = moveState.HIT
+
+
+# API Interface for ai_hero
+func roll(direction):
+	rollvector = direction
+	set_animation_tree_vector()
+	movementState = moveState.ROLL
+
+
+# API Interface for ai_hero
+func run(direction):
+	rollvector = direction
+	set_animation_tree_vector()
+	movementState = moveState.MOVE
+
+
 func movement_move(delta):
 	var input_vector = Vector2.ZERO
 	# This is a clever way to handle directional input

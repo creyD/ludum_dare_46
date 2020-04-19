@@ -1,18 +1,7 @@
-extends Node
-const PrioQueue = preload("prio_queue.gd") # Relative pat
+extends Player
 
-enum{
-	BOSS,
-	TORCH,
-	MINION,
-	RED,
-	BLUE,
-	GREEN,
-	HEART,
-	BONFIRE,
-	BARREL,
-	TERMINAL_SYMBOL
-}
+const PrioQueue = preload("prio_queue.gd") # Relative path
+const Grid = preload("res://Maps/Grid.gd")
 
 enum{
 	LENGTH,
@@ -40,9 +29,6 @@ enum{
 
 var ExecutionState = AI_MOVE
 
-var Grid = []
-var used_Flags = []
-
 var numbers = [0,0,0,0,0,0,0,0,0]
 var prios = [7,6,5,4,3,2,0,0,4]
 
@@ -53,11 +39,11 @@ var abortProb = 0.01
 #calculates  the sum of all present prios
 func calcTotalPrio():
 	var sum = 0
-	var i = BOSS
-	while i != TERMINAL_SYMBOL:
+	var i = Grid.Kind.BOSS
+	while i != Grid.Kind.TERMINAL_SYMBOL:
 		if(numbers[i]>0):
 			sum += prios[i]
-		i=i+1
+		i += 1
 	return sum
 	
 #calculates the relative porio
@@ -71,10 +57,10 @@ func calcPrioTable():
 	var sum = calcTotalPrio()
 	
 	var i = 0;
-	while i != TERMINAL_SYMBOL:
+	while i != Grid.Kind.TERMINAL_SYMBOL:
 		lower += calcRelPrio(i, sum)
 		table[i] = lower
-		i = i+1
+		i += 1
 		
 	return table
 
@@ -82,11 +68,11 @@ func calcPrioTable():
 func adjustPrio(currentHealth, maxHealth):
 	var prioVal = 10 - (currentHealth/maxHealth)*10
 	var bonfire = prioVal
-	var hearts = prioVal -1
+	var hearts = prioVal - 1
 	if(hearts < 0):
 		hearts = 0
-	prios[BONFIRE]=bonfire
-	prios[HEART]=hearts
+	prios[Grid.Kind.BONFIRE]=bonfire
+	prios[Grid.Kind.HEART]=hearts
 
 #return the enemie which will be attacked
 func calcEnemy():
@@ -96,37 +82,28 @@ func calcEnemy():
 	while table[i] > number:
 		i=i+1
 	return i
-	
+
+
 func getTargetField(currentField):
-	return [0,0]
-	pass
-	#todo
-	
+	return Grid.prio_grid[currentField.x][currentField.y]
+
+
 #returns a move
 func getMoveDescription(myPosition : Vector2, targetPositions):
-	var way = AStar(myPosition, targetPositions[0])
+	return AStar(myPosition, targetPositions[0])
 
-	#TODO choose enemie with loest distance
-	return 0
-	
 
-func getFieldState(position):
-	#todo
-	pass
-	
 func getCost(field):
-	# var cost = 0
-	# for i in Feld[position.x][position.y]:
-	#		match i:
-	#			DAMAGE : cost += damage*prios[BONFIRE]*3
-	#			SLOW : cost += 2
-	#
-	#return cost
-	return 0
+	var cost = 0
+	for i in Grid.prio_grid[field.x][field.y]:
+			match i:
+				Grid.kind.DAMAGE : cost += prios[Grid.kind.BONFIRE] * 6
+				Grid.kind.SLOW : cost += 2
+	return cost
 	
 #return an heurestic of distance
 # curr - current position
-# targ - atarget position
+# targ - a target position
 func h(curr, target):
 	return min(abs(target[0]-curr[0]),abs(target[0]-curr[0]))		
 	
@@ -135,8 +112,8 @@ func h(curr, target):
 func g(currCost, target):
 	return currCost +  getCost(target)
 
-#returns the list of adjacent nodes	
-func adjacent(currentPosition):
+# Returns the list of adjacent nodes	
+func adjacent(currentPosition, can_roll = false):
 	var adj := []
 	#adj.append([STEP, Vector2(0,0)])
 	var p = currentPosition
@@ -157,11 +134,14 @@ func adjacent(currentPosition):
 			continue
 		if(next[1]>6):
 			continue
-		if(used_Flags[next[0]][next[1]]==true):
+		if(Grid.used_grid[next[0]][next[1]]):
 			continue
 		if(Grid[next[0]][next[1]][0]!=WALL):
 			adj.append([STEP, Vector2(next[0],next[1])])
-			
+
+	if not can_roll:
+		return adj
+
 	for next in pot_adj_roll:
 		if(next[0]<0):
 			continue
@@ -171,37 +151,36 @@ func adjacent(currentPosition):
 			continue
 		if(next[1]>6):
 			continue
-		if(used_Flags[next[0]][next[1]]==true):
+		if(Grid.used_grid[next[0]][next[1]]):
 			continue
 		if(Grid[next[0]][next[1]][0]!=WALL):
 			adj.append([ROLL, Vector2(next[0],next[1])])
 	
 	return adj
-	
-	
-			
+
+
 func AStar(source, target):
 	#swap rtarget and source, when target source istr reached, do inversxse step
 	# node layout [g+h(x), g(x), current, from, kind]
 	var tmp = source
 	source = target
 	target = tmp
-	
+
 	var Q = PrioQueue.new()
 	Q.insert([0,0, [source[0], source[1]], [source[0], source[1]], NOTHING] )
 	while !Q.empty():
 		var node = Q.delMin()
 		
-		#check if reached
-		if(node[2][0]==target[0] and node[2][1]==target[1]):
-			return  [node[4], 0]#todo map movement]
+		# Check if reached
+		if(node[2][0] == target[0] and node[2][1] == target[1]):
+			return  [node[4], node[3]] # 4 is kind | 3 is from
 			
-		#set flag
-		used_Flags[node[2][0]][node[2][1]] = true
+		# Set flag
+		Grid.used_grid[node[2][0]][node[2][1]] = true
 		var adj_list = adjacent(node[2])
 		for i in adj_list:
 			var move_cost = 0
-			if(i[0]==STEP):
+			if (i[0] == STEP):
 				move_cost = 1
 			else:
 				move_cost = 2
@@ -213,21 +192,22 @@ func AStar(source, target):
 			var new_node = [g_val+h_val, g_val,i[1], node, i[0]]
 			Q.insert(new_node)
 			
-	return [NOTHING, 0]
+	return [NOTHING, [0,0]]
+
 
 func makeMove():
 	match ExecutionState:
 		EXECUTING:
 			pass
 		AI_MOVE:
-			var field = [0.1*prios[BONFIRE], 1]
+			var field = [0.1 * prios[Grid.Kind.BONFIRE], 1]
 			var decision = randf()
 			var i = 0
 			while field[i] > decision:
-				i=i+1
-			if(i==0):
-				var targetField = getTargetField(currentField)
-				
+				i += 1
+			if (i == 0):
+				var targetField = getTargetField(Grid.prio_grid)
+				# Todo: move player
 			else:
 				pass
 	pass
