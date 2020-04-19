@@ -2,13 +2,12 @@ extends Node
 
 const Kind = preload("res://Overlap/Kind.gd") # Relative path
 
-
 var object_grid : Array = []
 var prio_grid : Array = []
 var used_grid : Array = []
 var time_passed := 0.0
 var offset
-export(float,0,42.0) var refresh_rate = 1
+export(float, 0, 42.0) var refresh_rate = 1
 
 
 func _draw_object_grid():
@@ -19,6 +18,7 @@ func _draw_object_grid():
 		print(stri)
 	print()
 
+
 func _draw_prio_grid():
 	for y in range(7):
 		var stri = ""
@@ -27,14 +27,15 @@ func _draw_prio_grid():
 		print(stri)
 	print()
 
+
 func _reset_grids():
 	for x in range(14):
 		for y in range(7):
-			var lulul = object_grid[x][y].back()
-			while (object_grid[x][y].size()!=1):
+			while (object_grid[x][y].size() != 1):
 				object_grid[x][y].pop_back()
-			while (prio_grid[x][y].size()!=1):
+			while (prio_grid[x][y].size() != 1):
 				prio_grid[x][y].pop_back()
+
 
 func _ready():
 	var walls = get_tree().current_scene.get_child(1)
@@ -61,31 +62,35 @@ func reset_history():
 		for y in range(7):
 			used_grid[x][y] = false
 
+
 func countTargets(table):
 	for x in range(14):
 		for y in range(7):
 			for i in prio_grid[x][y]:
 				if i == Kind.TERMINAL_SYMBOL:
 					continue
-				table[i]+=1
+				table[i] += 1
 	return table
+
 
 func _pixel_to_grid_coords(pixel : Vector2) -> Vector2:
 	var new_coords : Vector2
-	new_coords.x = floor((pixel.x-offset.x)/32.0)
-	new_coords.y = floor((pixel.y-offset.y)/32.0)
+	new_coords.x = floor((pixel.x-offset.x) / 32.0)
+	new_coords.y = floor((pixel.y-offset.y) / 32.0)
 	return new_coords
 
+
 func _is_in_grid(grid_coords : Vector2) -> bool:
-	if(grid_coords.x<0):
+	if(grid_coords.x < 0):
 		return false
-	if(grid_coords.x>13):
+	if(grid_coords.x > 13):
 		return false
-	if(grid_coords.y<0):
+	if(grid_coords.y < 0):
 		return false
-	if(grid_coords.y>6):
+	if(grid_coords.y > 6):
 		return false
 	return true
+
 
 func get_nearest(position, kind):
 	var list = []
@@ -93,16 +98,17 @@ func get_nearest(position, kind):
 		for y in range(7):
 			for i in prio_grid[x][y]:
 				if(i == kind):
-					list.append([x,y])
+					list.append([x, y])
 	var dist = []
 	for field in list:
-		var tmp = sqrt(pow(position[0]-field[0],2)+pow(position[1]-field[1],2))
+		var tmp = sqrt(pow(position[0] - field[0], 2) + pow(position[1] - field[1], 2))
 		dist.append(tmp)
 	var mini = 0
 	for i in range(1, dist.size()):
-		if(dist[i]<dist[mini]):
+		if(dist[i] < dist[mini]):
 			mini = i
 	return list[mini]
+
 
 func _update_grid():
 	_reset_grids()
@@ -111,7 +117,7 @@ func _update_grid():
 		var node_kind = node.get_child(0)
 		var grid_corrds = _pixel_to_grid_coords(node.global_position)
 		if (_is_in_grid(grid_corrds)):
-			if(node_kind.general!=Kind.FIELD and node_kind.general!=Kind.WALL):
+			if(node_kind.general != Kind.FIELD and node_kind.general != Kind.WALL):
 				object_grid[grid_corrds.x][grid_corrds.y].push_back(node_kind.general)
 			prio_grid[grid_corrds.x][grid_corrds.y].push_back(node_kind.kind)
 
@@ -121,4 +127,3 @@ func _physics_process(delta):
 		time_passed -= refresh_rate
 		_update_grid()
 	time_passed += delta
-

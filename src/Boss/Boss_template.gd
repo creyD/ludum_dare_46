@@ -1,8 +1,10 @@
 extends KinematicBody2D
 class_name Boss
+
 """
 This is an example player controller script created by Paul
 """
+
 var velocity := Vector2.ZERO
 # This is how you export variables with ranges to the editor window
 export(bool) var debug := false
@@ -30,16 +32,16 @@ func _debug_update():
 	
 
 func _physics_process(delta):
-	totaldamage+=damage_per_second*delta
-	player_stats.speed+=10*delta
-	while(totaldamage>1):
-		totaldamage-=1
-		player_stats.health-=1
-	while(totaldamage<-1):
-		totaldamage+=1
-		player_stats.health+=1
+	totaldamage += damage_per_second * delta
+	player_stats.speed += 10 * delta
+	while (totaldamage > 1):
+		totaldamage -= 1
+		player_stats.health -= 1
+	while (totaldamage <- 1):
+		totaldamage += 1
+		player_stats.health += 1
 	_debug_update()
-	if debug == true:
+	if debug:
 		match movementState:
 			moveState.MOVE:
 				movement_move(delta)
@@ -48,12 +50,14 @@ func _physics_process(delta):
 	
 	move()
 
+
 # IMPORTANT: If you are using move_and_slide don't multiply by delta
 # Godots physics system does that internally
 # In move_and_collide(...) you have to multiply by delta.	
 func move():
 	move_and_slide(velocity)
-	
+
+
 func movement_move(delta):
 	var input_vector = Vector2.ZERO
 	# This is a clever way to handle directional input
@@ -74,21 +78,24 @@ func movement_move(delta):
 		pass
 	elif Input.is_action_just_pressed("attack"):
 		pass
-	
+
+
 func movement_hit():
 	velocity = Vector2.ZERO
-	
+
+
 func hit_finished():
 	movementState = moveState.MOVE
+
 
 func _on_Stats_no_health():
 	queue_free()
 
 
 func _on_Hurtbox_area_entered(area):
-	player_stats.health-=area.damage
-	damage_per_second = damage_per_second + area.damage
+	player_stats.health -= area.damage
+	damage_per_second += area.damage
 
 
 func _on_Hurtbox_area_exited(area):
-	damage_per_second = damage_per_second - area.damage
+	damage_per_second -= area.damage

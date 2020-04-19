@@ -31,7 +31,6 @@ enum moveState{
 	IDLE
 }
 
-
 var movementState = moveState.MOVE
 
 var damage_per_second := 0.0
@@ -43,22 +42,24 @@ var experience := 0.0
 
 func _debug_update():
 	debug_label.text = str(player_stats.health) + "/" + str(player_stats.max_health) + " HP\n" + str(currency) + " €"
-	
+
+
 func _ready():
 	grid = get_tree().current_scene.get_node("Grid")
 
+
 func _physics_process(delta):
-	totaldamage+=(damage_per_second - heal_per_second)*delta
-	player_stats.speed+=10*delta
-	while(totaldamage>1):
+	totaldamage += (damage_per_second - heal_per_second) * delta
+	player_stats.speed += 10 * delta
+	while totaldamage > 1:
 		totaldamage -= 1
 		player_stats.health-=1
-	while(totaldamage < -1):
-		totaldamage+=1
-		player_stats.health+=1
+	while totaldamage < -1:
+		totaldamage += 1
+		player_stats.health += 1
 	adjustPrio(player_stats.health, player_stats.max_health)
 	_debug_update()
-	if debug == true:
+	if debug:
 		match movementState:
 			moveState.MOVE:
 				movement_move(delta)
@@ -80,6 +81,7 @@ func _physics_process(delta):
 		makeMove(delta)
 	move()
 	$"Effects/HealEffect".emitting = heal_per_second > 0
+
 
 # IMPORTANT: If you are using move_and_slide don't multiply by delta
 # Godots physics system does that internally
@@ -143,7 +145,8 @@ func movement_move(delta):
 func movement_hit():
 	velocity = Vector2.ZERO
 	animation_state.change_state("attack")
-	
+
+
 func hit_finished():
 	movementState = moveState.IDLE
 	ExecutionState = AI_MOVE
@@ -163,6 +166,7 @@ func movement_roll():
 	"""
 	ExecutionState = EXECUTING
 
+
 func roll_finished():
 	movementState = moveState.IDLE
 	ai_movement_state = STEP
@@ -170,15 +174,15 @@ func roll_finished():
 
 
 func _on_Hurtbox_area_entered(area):
-	player_stats.health-=area.damage
+	player_stats.health -= area.damage
 	
 	if area.damage > 0:
 		damage_per_second += area.damage
 	else:
 		heal_per_second += abs(area.damage)
 
+
 func _on_Hurtbox_area_exited(area):
-	
 	if area.damage > 0:
 		damage_per_second -= area.damage
 	else:
@@ -192,7 +196,7 @@ func _on_Stats_no_health():
 
 func _on_Hitbox_area_entered(area):
 	currency += area.currency_value
-	player_stats.health = player_stats.health+area.health_value
+	player_stats.health += area.health_value
 	player_stats.speed -= area.slowdown_value
 
 
