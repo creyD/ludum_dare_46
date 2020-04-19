@@ -1,4 +1,6 @@
-extends Player
+extends KinematicBody2D
+
+class_name Hero
 
 const PrioQueue = preload("prio_queue.gd") # Relative path
 const Grid = preload("res://Maps/Grid.gd")
@@ -195,25 +197,32 @@ func AStar(source, target):
 	return [NOTHING, [0,0]]
 
 
-func makeMove():
-	match ExecutionState:
-		EXECUTING:
-			pass
-		AI_MOVE:
-			var field = [0.1 * prios[Grid.Kind.BONFIRE], 1]
-			var decision = randf()
-			var i = 0
-			while field[i] > decision:
-				i += 1
-			if (i == 0):
-				var targetField = getTargetField(Grid.prio_grid)
-				# Todo: move player
-			else:
-				pass
+func makeMove(delta):
+	#match ExecutionState:
+	#	EXECUTING:
+	#		pass
+	#	AI_MOVE:
+	#		var field = [0.1 * prios[Grid.Kind.BONFIRE], 1]
+	#		var decision = randf()
+		##	var i = 0
+			#while field[i] > decision:
+		#		i += 1
+	##		if (i == 0):
+	#			var targetField = getTargetField(Grid.prio_grid)
+	#			run(targetField)
+	#		else:
+	#			pass
 	pass
 
 
+# API Interface for ai_hero -> methods are handled in player.gd
+func attac(direction, delta):
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func roll(direction, delta):
+	pass
+
+
+func run(direction, delta):
+	pass

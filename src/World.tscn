@@ -32,9 +32,8 @@ __meta__ = {
 position = Vector2( 152, 120 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 296, -32 )
+position = Vector2( 84.2923, 24.0572 )
 scale = Vector2( 2, 2 )
-debug = true
 FRICTION = 200
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 7 )]

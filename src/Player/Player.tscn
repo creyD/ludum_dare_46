@@ -684,7 +684,7 @@ shape = SubResource( 47 )
 
 [node name="Pivot" type="Position2D" parent="."]
 position = Vector2( 0, -4.16248 )
-rotation = 1.5708
+rotation = 3.14159
 __meta__ = {
 "_gizmo_extents_": 20.0
 }
