@@ -40,7 +40,7 @@ var targetFieldUsed = false
 var actionField = [0,0]
 var actionFieldUsed = false
 
-var threadTime = 0.8
+var threadTime = 0.4
 var threadDelta = 0.0
 #calculates  the sum of all present prios
 func calcTotalPrio():
@@ -120,7 +120,7 @@ func g_fn(currCost, target):
 	return currCost +  getCost(target)
 
 # Returns the list of adjacent nodes	
-func adjacent(currentPosition, can_roll = false):
+func adjacent(currentPosition, can_roll = true):
 	var adj := []
 	#adj.append([STEP, Vector2(0,0)])
 	var p = currentPosition
@@ -169,9 +169,8 @@ func adjacent(currentPosition, can_roll = false):
 			
 			adj.append([STEP, Vector2(next[0],next[1]),1.0])
 
-	return adj
-
-	for next in pot_adj_roll:
+	for i in range(pot_adj_roll.size()):
+		var next = pot_adj_roll[i]
 		if(next[0]<0):
 			continue
 		if(next[0]>13):
@@ -183,7 +182,48 @@ func adjacent(currentPosition, can_roll = false):
 		if(grid.used_grid[next[0]][next[1]]):
 			continue
 		if(grid.object_grid[next[0]][next[1]][0]!=Grid.Kind.WALL):
-			adj.append([ROLL, Vector2(next[0],next[1]),2.0])
+			continue
+		if(grid.object_grid[next[0]][next[1]][0]!=Grid.Kind.WALL):
+			if(i==0):
+				if(grid.object_grid[next[0]+0][next[1]+1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+1][next[1]+0][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+1][next[1]+1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+1][next[1]+2][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+2][next[1]+1][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.1])
+			if(i==1):
+				if(grid.object_grid[next[0]+0][next[1]+1][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.0])
+			if(i==2):
+				if(grid.object_grid[next[0]-0][next[1]+1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-1][next[1]+0][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-1][next[1]+1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-1][next[1]+2][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-2][next[1]+1][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.1])
+			if(i==3):
+				if(grid.object_grid[next[0]+1][next[1]+0][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.0])
+			if(i==4):
+				if(grid.object_grid[next[0]-1][next[1]+0][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.0])
+			if(i==5):
+				if(grid.object_grid[next[0]+0][next[1]-1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+1][next[1]-0][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+1][next[1]-1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+1][next[1]-2][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]+2][next[1]-1][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.1])
+			if(i==6):
+				if(grid.object_grid[next[0]+0][next[1]-1][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.0])
+			if(i==7):
+				if(grid.object_grid[next[0]-0][next[1]-1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-1][next[1]-0][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-1][next[1]-1][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-1][next[1]-2][0]!=Grid.Kind.WALL &&
+				   grid.object_grid[next[0]-2][next[1]-1][0]!=Grid.Kind.WALL):
+					adj.append([ROLL, Vector2(next[0],next[1]),2.1])
 	
 	return adj
 
