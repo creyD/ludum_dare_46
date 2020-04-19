@@ -121,6 +121,7 @@ position = Vector2( -107.855, 73.4821 )
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 96, -69.5179 )
 scale = Vector2( 2, 2 )
+debug = true
 FRICTION = 200
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 7 )]
