@@ -34,6 +34,7 @@ position = Vector2( 152, 120 )
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 176, 112 )
 scale = Vector2( 2, 2 )
+debug = true
 FRICTION = 200
 
 [node name="AnimationTree" parent="YSort/Player" index="4"]
