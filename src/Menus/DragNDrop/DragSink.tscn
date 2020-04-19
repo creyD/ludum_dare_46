@@ -1,23 +1,26 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Container
 #DropZone 
 
+
 #stuff can be dropped here
 func can_drop_data(_pos, data):
-	return typeof(data) == TYPE_INT
+	return typeof(data) == typeof(PackedScene)
 
 #what is to be done when data is dropped
-func drop_data(_pos, data):
-	print(data)
+func drop_data(_pos, data:PackedScene):
+	var child = data.instance()
+	child.position= _pos
+	get_node(get_parent().ObjectParent).add_child(child)
 "
 
 [node name="DragSink" type="Container"]
 anchor_right = 1.0
 anchor_bottom = 0.789
 margin_bottom = -0.0200043
-script = SubResource( 2 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

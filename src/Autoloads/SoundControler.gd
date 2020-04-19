@@ -1,6 +1,6 @@
 extends Node
 
-const EFFECT_LAYERS:int = 5
+const EFFECT_LAYERS:int = 20
 var _effect: Array = []
 var _music: AudioStreamPlayer
 
@@ -34,15 +34,18 @@ func pub_play_music(path:String,should_loop:bool=true)-> void:
 	_music.play()
 	_loop=should_loop
 
-func pub_play_effect(path:String,layer:int=0)-> void:
+func pub_play_effect(path:String,channel:int=0)-> void:
 	var stream = load(path)
 	#AudioServer.set_bus_mute(1, true)
-	_effect[layer].stop()
-	_effect[layer].stream = stream
-	_effect[layer].play()
+	_effect[channel].stop()
+	_effect[channel].stream = stream
+	_effect[channel].play()
 
 func pub_stop_music()-> void:
 	_music.stop()
+
+func pub_stop_effect(channel:int)-> void:
+	_effect[channel].stop()
 
 func pub_stop_effects()-> void:
 	for i in range(0,EFFECT_LAYERS):

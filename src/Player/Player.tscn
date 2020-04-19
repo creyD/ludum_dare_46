@@ -1,12 +1,18 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Player/Player.png" type="Texture" id=2]
+[ext_resource path="res://Player/player.png" type="Texture" id=2]
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/Harmonic/Harmonic.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Effects/Heal/HealEffect.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Player/States/Idle.gd" type="Script" id=12]
+[ext_resource path="res://Player/States/Run.gd" type="Script" id=13]
+[ext_resource path="res://Player/States/Attack.gd" type="Script" id=14]
+[ext_resource path="res://Player/PlayerStateMachine.gd" type="Script" id=15]
+[ext_resource path="res://Player/States/Roll.gd" type="Script" id=16]
 
 [sub_resource type="CircleShape2D" id=50]
 radius = 3.0
@@ -597,6 +603,7 @@ states/run/node = SubResource( 37 )
 states/run/position = Vector2( 511, 271 )
 transitions = [ "idle", "hit", SubResource( 38 ), "hit", "idle", SubResource( 39 ), "idle", "run", SubResource( 40 ), "run", "idle", SubResource( 41 ), "idle", "roll", SubResource( 42 ), "roll", "idle", SubResource( 43 ) ]
 start_node = "idle"
+graph_offset = Vector2( 12, 66 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
@@ -711,6 +718,28 @@ __meta__ = {
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 max_health = 5
+
+[node name="AnimationStates" type="Node" parent="."]
+script = ExtResource( 15 )
+START_STATE = NodePath("Idle")
+
+[node name="Run" type="Node" parent="AnimationStates"]
+script = ExtResource( 13 )
+SoundLibary = PoolStringArray( "res://Player/Sounds/hero_walk_1.ogg", "res://Player/Sounds/hero_walk_2.ogg", "res://Player/Sounds/hero_walk_3.ogg", "res://Player/Sounds/hero_walk_4.ogg", "res://Player/Sounds/hero_walk_5.ogg" )
+Delay = 0.25
+
+[node name="Idle" type="Node" parent="AnimationStates"]
+script = ExtResource( 12 )
+
+[node name="Attack" type="Node" parent="AnimationStates"]
+script = ExtResource( 14 )
+
+[node name="Roll" type="Node" parent="AnimationStates"]
+script = ExtResource( 16 )
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="HealEffect" parent="Effects" instance=ExtResource( 8 )]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]

@@ -19,3 +19,5 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+[connection signal="focus_entered" from="." to="." method="_on_TitleScreenButton_focus_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_TitleScreenButton_mouse_entered"]

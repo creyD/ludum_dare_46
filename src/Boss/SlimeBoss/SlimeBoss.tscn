@@ -1,0 +1,181 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Boss/SlimeBoss/SlimeBoss.gd" type="Script" id=4]
+[ext_resource path="res://Boss/SlimeBoss/Animations/move_down.png" type="Texture" id=5]
+[ext_resource path="res://Boss/SlimeBoss/Animations/move_right.png" type="Texture" id=6]
+[ext_resource path="res://Boss/SlimeBoss/States/Motion/Idle.gd" type="Script" id=7]
+[ext_resource path="res://Boss/SlimeBoss/States/Motion/Stagger.gd" type="Script" id=8]
+[ext_resource path="res://Boss/SlimeBoss/States/Motion/Wander.gd" type="Script" id=9]
+[ext_resource path="res://Boss/SlimeBoss/States/Motion/SplitUp.gd" type="Script" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 18.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 18.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 8.0
+height = 15.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "MoveDown"
+length = 2.65556
+loop = true
+step = 0.0111111
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.64444 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 237 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 24 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -20.142 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "MoveRight"
+length = 1.28333
+loop = true
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.26667 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 76 ]
+}
+
+[node name="SlimeBoss" type="KinematicBody2D"]
+position = Vector2( 168, 128 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -10, -20.142 )
+texture = ExtResource( 6 )
+vframes = 7
+hframes = 11
+frame = 40
+
+[node name="Hitbox" parent="." instance=ExtResource( 2 )]
+collision_layer = 0
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, -15 )
+shape = SubResource( 1 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -15 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.52588e-05, 0 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="DebugLabel" type="Label" parent="."]
+margin_left = -42.2456
+margin_top = -65.04
+margin_right = 42.7544
+margin_bottom = -48.04
+text = "Obermufti"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="Wander" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="SplitUp" type="Node" parent="States"]
+script = ExtResource( 10 )
+
+[node name="Stagger" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "MoveRight"
+playback_speed = 0.1
+anims/MoveDown = SubResource( 4 )
+anims/MoveRight = SubResource( 5 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="Hitbox"]
+
+[editable path="Hurtbox"]

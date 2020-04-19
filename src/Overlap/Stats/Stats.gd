@@ -9,7 +9,6 @@ onready var speed := max_speed setget set_speed
 signal no_health
 
 func set_health(value):
-	
 	if value > max_health:
 		health = max_health
 	else:
