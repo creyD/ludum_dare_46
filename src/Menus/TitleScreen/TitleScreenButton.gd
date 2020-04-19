@@ -3,15 +3,10 @@ class_name TitleSceenButton
 
 export(String, FILE, "*.tscn,*.scn") var scene_to_load = ""
 export(bool) var quit = false
-onready var sound_focus = $Sounds/FocusChange
-onready var sound_select = $Sounds/OptionSelect
 var ignore_once = false
 
 func _pressed():
-	sound_select.play()
-	
-
-func _on_OptionSelect_finished():
+	SoundControler.pub_play_effect("res://Menus/Sounds/menu_option_select.ogg",0)
 	if quit:
 		get_tree().quit()
 		return
@@ -23,7 +18,8 @@ func _on_TitleScreenButton_mouse_entered():
 	grab_focus()
 
 
+
 func _on_TitleScreenButton_focus_entered():
 	if not ignore_once:
-		sound_focus.play()
+		SoundControler.pub_play_effect("res://Menus/Sounds/menu_focus_change.ogg",0)
 	ignore_once = false
