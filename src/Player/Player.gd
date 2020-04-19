@@ -14,9 +14,7 @@ export(int, 0, 500) var ACCELERATION := 450
 
 onready var player_stats := $Stats
 onready var debug_label := $DebugLabel
-onready var animation_player := $AnimationPlayer
-onready var animation_tree := $AnimationTree
-onready var animation_state = animation_tree.get("parameters/playback")
+onready var animation_state := $AnimationStates
 
 enum moveState{
 	MOVE,
@@ -65,6 +63,7 @@ func move():
 	move_and_slide(velocity)
 	
 func movement_move(delta):
+	
 	var input_vector = Vector2.ZERO
 	# This is a clever way to handle directional input
 	# Input.get_action_strength(...) returns a value between 0 and 1 depending
@@ -76,15 +75,12 @@ func movement_move(delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector == Vector2.ZERO:
-		animation_state.travel("idle")
+		animation_state.change_state("idle")
 		velocity = Vector2.ZERO
 	else:
 		rollvector = input_vector
-		animation_tree.set("parameters/idle/blend_position", input_vector)
-		animation_tree.set("parameters/hit/blend_position", input_vector)
-		animation_tree.set("parameters/roll/blend_position", input_vector)
-		animation_tree.set("parameters/run/blend_position", input_vector)
-		animation_state.travel("run")	
+		animation_state.change_state("run")
+			
 		velocity = velocity.move_toward(player_stats.speed * input_vector, ACCELERATION * delta)
 	if Input.is_action_just_pressed("roll"):
 		movementState = moveState.ROLL
@@ -93,14 +89,14 @@ func movement_move(delta):
 	
 func movement_hit():
 	velocity = Vector2.ZERO
-	animation_state.travel("hit")
+	animation_state.change_state("attack")
 	
 func hit_finished():
 	movementState = moveState.MOVE
 	
 func movement_roll():
 	velocity = rollvector * ROLL_SPEED
-	animation_state.travel("roll")
+	animation_state.change_state("roll")
 	
 	"""
 	# Roll.gd

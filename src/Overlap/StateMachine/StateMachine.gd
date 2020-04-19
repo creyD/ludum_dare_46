@@ -11,7 +11,7 @@ var _active = false setget set_active
 
 func _ready():
 	for child in get_children():
-		child.connect("finished", self, "_change_state")
+		child.connect("finished", self, "change_state")
 		initialize(START_STATE)
 
 func initialize(start_state):
@@ -39,7 +39,7 @@ func _on_animation_finished(anim_name):
 		return
 	current_state._on_animation_finished(anim_name)
 
-func _change_state(state_name):
+func change_state(state_name):
 	if not _active:
 		return
 	current_state.exit()

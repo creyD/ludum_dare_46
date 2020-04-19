@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/Harmonic/Harmonic.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Player/States/Idle.gd" type="Script" id=7]
+[ext_resource path="res://Player/States/Attack.gd" type="Script" id=8]
+[ext_resource path="res://Player/States/Roll.gd" type="Script" id=9]
+[ext_resource path="res://Player/States/Run.gd" type="Script" id=10]
+[ext_resource path="res://Player/PlayerStateMachine.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.15976
@@ -597,6 +602,7 @@ states/run/node = SubResource( 37 )
 states/run/position = Vector2( 511, 271 )
 transitions = [ "idle", "hit", SubResource( 38 ), "hit", "idle", SubResource( 39 ), "idle", "run", SubResource( 40 ), "run", "idle", SubResource( 41 ), "idle", "roll", SubResource( 42 ), "roll", "idle", SubResource( 43 ) ]
 start_node = "idle"
+graph_offset = Vector2( 12, 66 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
@@ -708,7 +714,21 @@ __meta__ = {
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 max_health = 5
 
-[node name="States" type="Node" parent="."]
+[node name="AnimationStates" type="Node" parent="."]
+script = ExtResource( 11 )
+START_STATE = NodePath("Idle")
+
+[node name="Run" type="Node" parent="AnimationStates"]
+script = ExtResource( 10 )
+
+[node name="Idle" type="Node" parent="AnimationStates"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="AnimationStates"]
+script = ExtResource( 8 )
+
+[node name="Roll" type="Node" parent="AnimationStates"]
+script = ExtResource( 9 )
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
