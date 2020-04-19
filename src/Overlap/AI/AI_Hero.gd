@@ -24,9 +24,10 @@ enum{
 }
 
 var ExecutionState = AI_MOVE
+var movmentState = NOTHING
 
 var numbers = [0,0,0,0,0,0,0,0,0,0]
-var prios = [7,0,6,5,4,3,2,0,0,4]
+var prios = [7,0,6,5,4,3,2,1,1,4]
 
 var totalPrioTurn = 0
 var executesTurn = false
@@ -68,7 +69,7 @@ func calcPrioTable():
 
 #updates heart and bonfire prio
 func adjustPrio(currentHealth, maxHealth):
-	var prioVal = 10 - (currentHealth/maxHealth)*10
+	var prioVal = 1000 - (float(currentHealth)/float(maxHealth))*1000
 	var bonfire = prioVal
 	var hearts = prioVal - 1
 	if(hearts < 0):
@@ -81,7 +82,7 @@ func calcEnemyKind():
 	var table = calcPrioTable()
 	var number = randf()
 	var i = 0
-	while table[i] <= number:
+	while i!=Grid.Kind.TERMINAL_SYMBOL and table[i] <= number:
 		i += 1
 	return i
 
@@ -95,7 +96,7 @@ func getCost(field):
 	for i in grid.prio_grid[field.x][field.y]:
 			match i:
 				Grid.Kind.DAMAGE: 
-					cost += prios[Grid.kind.BONFIRE] * 6
+					cost += prios[Grid.Kind.BONFIRE] * 6
 				Grid.Kind.SLOW: 
 					cost += 2
 	return cost
@@ -193,25 +194,41 @@ func AStar(source, target):
 			
 	return [NOTHING, [0,0]]
 
-
 func makeMove(delta):
-	pass
 	if ExecutionState == AI_MOVE:
 		var currentPosition = grid._pixel_to_grid_coords(global_position)
 		var enemyKind = calcEnemyKind()
-		var targetField = grid.get_nearest(currentPosition, enemyKind)
-		var MoveAdvice = getMoveDescription(currentPosition, targetField)
-		print(MoveAdvice)
+		if(enemyKind==Grid.Kind.TERMINAL_SYMBOL):
+			return
+		var target = grid.get_nearest(currentPosition, enemyKind)
+		var MoveAdvice = getMoveDescription(currentPosition, target)
+		target = MoveAdvice[1]
+		if(MoveAdvice[0]==STEP):
+			run(Vector2(target[0]-currentPosition[0], target[1]-currentPosition[1]), delta*10)
+			targetField = target
+			targetFieldUsed = true
+			movmentState = STEP
+		elif(MoveAdvice[0]==ROLL):
+			roll(Vector2(target[0]-currentPosition[0], target[1]-currentPosition[1]), delta*10)
+			targetFieldUsed = true
+			targetField = target 
 		ExecutionState = EXECUTING
-		pass
+		grid.reset_history()
 	elif ExecutionState == EXECUTING:
 		if(targetFieldUsed):
-			pass
 			var cur = grid._pixel_to_grid_coords(global_position)
 			var distance = sqrt(pow(cur[0]-targetField[0],2)+ pow(cur[1]-targetField[1],2))
-			if(distance<0.5):
+			if(distance<0.01):
 				targetFieldUsed = false
 				ExecutionState = AI_MOVE
+			else:
+				var currentPosition = grid._pixel_to_grid_coords(global_position)
+				if(movmentState==STEP):
+					run(Vector2(targetField[0]-currentPosition[0], targetField[1]-currentPosition[1]), delta*10)
+				elif(movmentState==ROLL):
+					roll(Vector2(targetField[0]-currentPosition[0], targetField[1]-currentPosition[1]), delta*10)
+		else:
+			ExecutionState = AI_MOVE
 	pass
 
 

@@ -49,6 +49,7 @@ func _physics_process(delta):
 	while(totaldamage < -1):
 		totaldamage+=1
 		player_stats.health+=1
+	adjustPrio(player_stats.health, player_stats.max_health)
 	_debug_update()
 	if debug == true:
 		match movementState:
@@ -169,7 +170,7 @@ func _on_Hurtbox_area_exited(area):
 
 func _on_Stats_no_health():
 	queue_free()
-	get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
+	#get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
 	
 
 func _on_Hitbox_area_entered(area):

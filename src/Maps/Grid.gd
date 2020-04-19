@@ -56,7 +56,7 @@ func _ready():
 	_update_grid()
 
 
-func _reset_history():
+func reset_history():
 	for x in range(14):
 		for y in range(7):
 			used_grid[x][y] = false
