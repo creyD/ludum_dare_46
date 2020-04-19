@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Boss/SlimeBoss/SlimeBossStateMachine.gd" type="Script" id=4]
 [ext_resource path="res://Boss/SlimeBoss/Animations/move_down.png" type="Texture" id=5]
 [ext_resource path="res://Boss/SlimeBoss/Animations/move_right.png" type="Texture" id=6]
 [ext_resource path="res://Boss/SlimeBoss/States/Motion/Idle.gd" type="Script" id=7]
@@ -10,6 +11,9 @@
 [ext_resource path="res://Boss/SlimeBoss/States/Motion/Wander.gd" type="Script" id=9]
 [ext_resource path="res://Boss/SlimeBoss/States/Motion/SplitUp.gd" type="Script" id=10]
 [ext_resource path="res://Boss/SlimeBoss/Animations/move_up.png" type="Texture" id=11]
+[ext_resource path="res://Boss/SlimeBoss/States/Motion/JumpTeleport.gd" type="Script" id=12]
+[ext_resource path="res://Boss/SlimeBoss/States/Motion/Dead.gd" type="Script" id=13]
+[ext_resource path="res://Boss/SlimeBoss/States/Motion/Pursue.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.0
@@ -19,12 +23,14 @@ height = 18.0
 radius = 18.0
 height = 18.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=3]
+radius = 150.0
+
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 8.0
 height = 15.0
 
-[sub_resource type="Animation" id=4]
-resource_name = "MoveDown"
+[sub_resource type="Animation" id=5]
 length = 2.66666
 loop = true
 step = 0.0111111
@@ -102,7 +108,6 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-resource_name = "MoveLeft"
 length = 1.28333
 loop = true
 step = 0.0166667
@@ -179,8 +184,7 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "MoveRight"
+[sub_resource type="Animation" id=7]
 length = 1.28333
 loop = true
 step = 0.0166667
@@ -257,8 +261,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "MoveUp"
+[sub_resource type="Animation" id=8]
 length = 1.28333
 loop = true
 step = 0.0166667
@@ -324,9 +327,14 @@ tracks/4/keys = {
 }
 
 [node name="SlimeBoss" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
+STATES_COLLECTION = NodePath("States")
+START_STATE = NodePath("States/Idle")
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -20 )
@@ -337,7 +345,7 @@ frame = 227
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
 visible = false
-collision_layer = 0
+collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, -15 )
@@ -351,10 +359,16 @@ collision_mask = 0
 position = Vector2( 0, -15 )
 shape = SubResource( 2 )
 
+[node name="HeroCloseZone" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeroCloseZone"]
+shape = SubResource( 3 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.52588e-05, 0 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="DebugLabel" type="Label" parent="."]
 margin_left = -42.2456
@@ -382,12 +396,22 @@ script = ExtResource( 10 )
 [node name="Stagger" type="Node" parent="States"]
 script = ExtResource( 8 )
 
+[node name="JumpTeleport" type="Node" parent="States"]
+script = ExtResource( 12 )
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource( 13 )
+
+[node name="Pursue" type="Node" parent="States"]
+script = ExtResource( 14 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "MoveRight"
-anims/MoveDown = SubResource( 4 )
+anims/MoveDown = SubResource( 5 )
 anims/MoveLeft = SubResource( 6 )
-anims/MoveRight = SubResource( 5 )
-anims/MoveUp = SubResource( 7 )
+anims/MoveRight = SubResource( 7 )
+anims/MoveUp = SubResource( 8 )
+[connection signal="area_entered" from="HeroCloseZone" to="States/Idle" method="hero_close"]
 
 [editable path="Hitbox"]
 
