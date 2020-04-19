@@ -24,6 +24,8 @@ var _rng = RandomNumberGenerator.new()
 var is_playing_sound = false
 
 
+export(String, FILE, "*.tscn,*.scn") var title_scene = ""
+
 enum moveState{
 	MOVE,
 	ROLL,
@@ -34,6 +36,7 @@ enum moveState{
 var movementState = moveState.MOVE
 
 var damage_per_second := 0.0
+var heal_per_second := 0.0
 var totaldamage := 0.0
 
 var currency := 0
@@ -44,7 +47,7 @@ func _debug_update():
 	
 
 func _physics_process(delta):
-	totaldamage+=damage_per_second*delta
+	totaldamage+=(damage_per_second - heal_per_second)*delta
 	player_stats.speed+=10*delta
 	while(totaldamage>1):
 		totaldamage-=1
@@ -62,6 +65,8 @@ func _physics_process(delta):
 			moveState.HIT:
 				movement_hit()
 	
+	print(heal_per_second)
+	$"Effects/HealEffect".emitting = heal_per_second > 0.0
 	move()
 
 # IMPORTANT: If you are using move_and_slide don't multiply by delta
@@ -122,18 +127,30 @@ func roll_finished():
 
 func _on_Hurtbox_area_entered(area):
 	player_stats.health-=area.damage
-	damage_per_second = damage_per_second + area.damage
+	
+	print("enter")
+	
+	if area.damage > 0:
+		damage_per_second += area.damage
+	else:
+		heal_per_second += abs(area.damage)
 
 func _on_Hurtbox_area_exited(area):
-	damage_per_second = damage_per_second - area.damage
+	
+	if area.damage > 0:
+		damage_per_second -= area.damage
+	else:
+		heal_per_second -= abs(area.damage)
 
 
 func _on_Stats_no_health():
 	queue_free()
-	get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
+	get_tree().change_scene(title_scene)
 	
 
 func _on_Hitbox_area_entered(area):
 	currency += area.currency_value
 	player_stats.health = player_stats.health+area.health_value
 	player_stats.speed -= area.slowdown_value
+	
+	

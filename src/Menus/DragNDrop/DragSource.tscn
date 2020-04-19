@@ -5,18 +5,15 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends TextureRect
 #CardDeck
-export var ItemID:int=0
-export var PreviewIcon:String = \"\"
+export var Item:PackedScene
+export var PreviewIcon:Texture 
 export var DeleteOnGrab:bool = false
 
 #if a drag is initiated here 
 func get_drag_data(_pos):
-	print(_pos)
-	var preview = load(PreviewIcon)
 	var ctrl = Control.new()
-	
 	var TR = TextureRect.new()
-	TR.texture = get_resized_texture(preview,self.rect_size[0],self.rect_size[1])
+	TR.texture = get_resized_texture(PreviewIcon,self.rect_size[0],self.rect_size[1])
 	TR.rect_size= self.rect_size
 	TR.set_position(_pos*-1,false)
 	ctrl.add_child(TR)
@@ -24,12 +21,12 @@ func get_drag_data(_pos):
 	
 	if DeleteOnGrab :
 		self.queue_free()
-	return ItemID
+	return Item
 
 #stuff can be dropped here
 #eg you picked the wrong thing up, let go and it returns to nothingness
 func can_drop_data(_pos, data):
-	return typeof(data) == TYPE_INT
+	return typeof(data) == typeof(PackedScene)
 
 #do nothing if stuff is dropped here
 func drop_data(_pos, _data):
@@ -55,3 +52,4 @@ script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+PreviewIcon = ExtResource( 1 )

@@ -24,8 +24,8 @@ script = ExtResource( 2 )
 scene_to_load = "res://Menus/TitleScreen/TitleScreen.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 320.0
-margin_bottom = 180.0
+margin_right = 1024.0
+margin_bottom = 1024.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -42,6 +42,8 @@ DerAnonymos
 https://www.youtube.com/c/DerAnonymosLP
 https://twitch.tv/deranonymos
 https://www.instagram.com/deranonymos/
+
+Rougebluemulan
 
 Katsuhira
 https://www.youtube.com/c/Katsuhira
