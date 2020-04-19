@@ -56,28 +56,30 @@ func _physics_process(delta):
 	while(totaldamage < -1):
 		totaldamage+=1
 		player_stats.health+=1
-	adjustPrio(player_stats.health, player_stats.max_health)
+	#adjustPrio(player_stats.health, player_stats.max_health)
 	_debug_update()
 	if debug == true:
 		match movementState:
 			moveState.MOVE:
 				movement_move(delta)
+			moveState.IDLE:
+				movement_move(delta)
 			moveState.ROLL:
 				movement_roll()
 			moveState.HIT:
 				movement_hit()
-	
-	elif movementState == moveState.ROLL:
-		movement_roll()
-	elif movementState == moveState.HIT:
-		movement_hit()
-	elif movementState == moveState.IDLE:
-		movement_idle()
 	else:
-		movement_run(Vector2(0,0), delta)
-	$"Effects/HealEffect".emitting = heal_per_second > 0
-	makeMove(delta)
+		if movementState == moveState.ROLL:
+			movement_roll()
+		elif movementState == moveState.HIT:
+			movement_hit()
+		elif movementState == moveState.IDLE:
+			movement_idle()
+		else:
+			movement_run(Vector2(0,0), delta)
+		makeMove(delta)
 	move()
+	$"Effects/HealEffect".emitting = heal_per_second > 0
 
 # IMPORTANT: If you are using move_and_slide don't multiply by delta
 # Godots physics system does that internally
