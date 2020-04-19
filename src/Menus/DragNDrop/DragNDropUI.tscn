@@ -7,19 +7,14 @@
 [ext_resource path="res://Objects/Traps/Bear/bear.jpg" type="Texture" id=5]
 [ext_resource path="res://Objects/Traps/bear.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Traps/Bear/Animation/0012.png" type="Texture" id=7]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Control
-
-export var ObjectParent:NodePath
-"
+[ext_resource path="res://Menus/DragNDrop/DragNDropUI.gd" type="Script" id=8]
 
 [node name="DragNDropUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -0.37735
 margin_right = -0.37735
-script = SubResource( 1 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

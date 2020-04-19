@@ -36,7 +36,7 @@
 [ext_resource path="res://Objects/Traps/Bear/Animation/0009.png" type="Texture" id=35]
 [ext_resource path="res://Objects/Traps/Bear/Animation/0012.png" type="Texture" id=36]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 7 ), ExtResource( 28 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 29 ), ExtResource( 24 ), ExtResource( 15 ), ExtResource( 35 ), ExtResource( 13 ), ExtResource( 22 ) ],
 "loop": false,
@@ -54,7 +54,7 @@ animations = [ {
 "speed": 60.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=5]
 height = 9.0
 
 [sub_resource type="CapsuleShape2D" id=3]
@@ -68,15 +68,14 @@ kind = 10
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -7.62939e-06, 0 )
-frames = SubResource( 1 )
-animation = "used"
+frames = SubResource( 4 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 16
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 collision_layer = 32

@@ -2,45 +2,7 @@
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Card/card.png" type="Texture" id=2]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends TextureRect
-#CardDeck
-export var Item:PackedScene
-export var PreviewIcon:Texture 
-export var DeleteOnGrab:bool = false
-
-#if a drag is initiated here 
-func get_drag_data(_pos):
-	var ctrl = Control.new()
-	var TR = TextureRect.new()
-	TR.texture = get_resized_texture(PreviewIcon,self.rect_size[0],self.rect_size[1])
-	TR.rect_size= self.rect_size
-	TR.set_position(_pos*-1,false)
-	ctrl.add_child(TR)
-	set_drag_preview(ctrl)
-	
-	if DeleteOnGrab :
-		self.queue_free()
-	return Item
-
-#stuff can be dropped here
-#eg you picked the wrong thing up, let go and it returns to nothingness
-func can_drop_data(_pos, data):
-	return typeof(data) == typeof(PackedScene)
-
-#do nothing if stuff is dropped here
-func drop_data(_pos, _data):
-	pass
-
-func get_resized_texture(t: Texture, width: int = 0, height: int = 0):
-	var image = t.get_data()
-	if width > 0 && height > 0:
-		image.resize(width, height)
-	var itex = ImageTexture.new()
-	itex.create_from_image(image,0)
-	return itex
-"
+[ext_resource path="res://Menus/DragNDrop/DragSource.gd" type="Script" id=3]
 
 [node name="DragSource" type="TextureRect"]
 margin_left = 10.7364
@@ -49,11 +11,10 @@ margin_right = 42.7364
 margin_bottom = 259.792
 texture = ExtResource( 1 )
 expand = true
-script = SubResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-PreviewIcon = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 16.0791, 16.0117 )

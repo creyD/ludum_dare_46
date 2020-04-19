@@ -31,20 +31,19 @@ __meta__ = {
 }
 
 [node name="YSort" type="YSort" parent="."]
-position = Vector2( 152, 120 )
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 264, -24 )
+position = Vector2( 406.635, 139.865 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 240, 72 )
+position = Vector2( 342.83, 130.381 )
 scale = Vector2( 2, 2 )
 debug = true
 ROLL_SPEED = 140
 FRICTION = 200
 
 [node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( -67.0889, 2.27742 )
+position = Vector2( 71.566, 94.4929 )
 debug = true
 
 [node name="Grid" parent="." instance=ExtResource( 18 )]
@@ -57,6 +56,6 @@ visible = false
 [node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
 margin_top = -0.735092
 margin_bottom = -0.735107
-ObjectParent = NodePath("../..")
+ObjectParent = NodePath("../../YSort")
 
 [editable path="YSort/Bonfire"]
