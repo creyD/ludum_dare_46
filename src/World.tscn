@@ -1,41 +1,32 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://Maps/Tilesets/Room/tileset_room.tres" type="TileSet" id=3]
 [ext_resource path="res://testSprites/dark.png" type="Texture" id=4]
-[ext_resource path="res://Objects/Traps/Bear.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/Banana/Banana.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Traps/Sting.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Objects/Rubies/Blue.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Objects/Barrel/Barrel.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Objects/Heart/Heart.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Objects/Rubies/Red.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Objects/Rubies/Green.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Objects/Traps/Flame.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Objects/Traps/Spike.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Objects/Slime/Slime.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Boss/SlimeBoss/SlimeBoss.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Menus/DragNDrop/DragNDropUI.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Menus/DragNDrop/DragNDropUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="WallSprite" type="Sprite" parent="."]
-position = Vector2( 357.587, 175.62 )
+position = Vector2( 355.382, 175.62 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="FloorTileMap" type="TileMap" parent="."]
-position = Vector2( -16, 16 )
+position = Vector2( 16, 16 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -65537, 47, 0, -131072, 47, 1, -131071, 47, 1, -131070, 47, 1, -131069, 47, 1, -131068, 47, 1, -131067, 47, 1, -131066, 47, 1, -131065, 47, 1, -131064, 47, 1, -131063, 47, 1, -131062, 47, 1, -131061, 47, 1, -131060, 47, 1, -131059, 47, 1, -131058, 47, 1, -131057, 47, 1, -131056, 47, 2, -1, 47, 65536, -65536, 47, 65541, -65535, 47, 131073, -65534, 47, 131073, -65533, 47, 131073, -65532, 47, 131073, -65531, 47, 131073, -65530, 47, 131073, -65529, 47, 131073, -65528, 47, 131073, -65527, 47, 131073, -65526, 47, 65544, -65525, 47, 131073, -65524, 47, 131073, -65523, 47, 131073, -65522, 47, 131073, -65521, 47, 65542, -65520, 47, 65538, 65535, 47, 65536, 0, 47, 65538, 10, 47, 65539, 15, 47, 65536, 16, 47, 65538, 131071, 47, 65536, 65536, 47, 65538, 65546, 47, 65539, 65549, 47, 3, 65551, 47, 65536, 65552, 47, 65538, 196607, 47, 65536, 131072, 47, 65538, 131077, 47, 3, 131082, 47, 65539, 131085, 47, 65539, 131087, 47, 65536, 131088, 47, 65538, 262143, 47, 65536, 196608, 47, 65538, 196612, 47, 196608, 196613, 47, 262152, 196614, 47, 196610, 196618, 47, 65539, 196621, 47, 196612, 196622, 47, 196609, 196623, 47, 262150, 196624, 47, 65538, 327679, 47, 65536, 262144, 47, 65538, 262149, 47, 131075, 262154, 47, 65539, 262159, 47, 65536, 262160, 47, 65538, 393215, 47, 65536, 327680, 47, 65538, 327690, 47, 196612, 327691, 47, 196610, 327695, 47, 65536, 327696, 47, 65538, 458751, 47, 65536, 393216, 47, 65538, 393231, 47, 65536, 393232, 47, 65538, 524287, 47, 65536, 458752, 47, 131077, 458753, 47, 1, 458754, 47, 1, 458755, 47, 1, 458756, 47, 1, 458757, 47, 1, 458758, 47, 1, 458759, 47, 1, 458760, 47, 1, 458761, 47, 1, 458762, 47, 1, 458763, 47, 1, 458764, 47, 1, 458765, 47, 1, 458766, 47, 1, 458767, 47, 131078, 458768, 47, 65538, 589823, 47, 131072, 524288, 47, 131073, 524289, 47, 131073, 524290, 47, 131073, 524291, 47, 131073, 524292, 47, 131073, 524293, 47, 131073, 524294, 47, 131073, 524295, 47, 131073, 524296, 47, 131073, 524297, 47, 131073, 524298, 47, 131073, 524299, 47, 131073, 524300, 47, 131073, 524301, 47, 131073, 524302, 47, 131073, 524303, 47, 131073, 524304, 47, 131074 )
+tile_data = PoolIntArray( -1, 47, 4, -65536, 47, 196609, -65535, 47, 196609, -65534, 47, 196609, -65533, 47, 196609, -65532, 47, 196609, -65531, 47, 196609, -65530, 47, 196609, -65529, 47, 196609, -65528, 47, 196609, -65527, 47, 196609, -65526, 47, 196609, -65525, 47, 196609, -65524, 47, 196609, -65523, 47, 196609, -65522, 47, 7, 65535, 47, 65539, 14, 47, 65539, 131071, 47, 65539, 65545, 47, 4, 65546, 47, 196609, 65547, 47, 196610, 65550, 47, 65539, 196607, 47, 65539, 131081, 47, 65539, 131086, 47, 65539, 262143, 47, 65539, 196617, 47, 196612, 196618, 47, 196609, 196619, 47, 7, 196622, 47, 65539, 327679, 47, 65539, 262155, 47, 65539, 262158, 47, 65539, 393215, 47, 65539, 327689, 47, 196608, 327690, 47, 196609, 327691, 47, 196615, 327694, 47, 65539, 458751, 47, 65539, 393230, 47, 65539, 524287, 47, 196612, 458752, 47, 196609, 458753, 47, 196609, 458754, 47, 196609, 458755, 47, 196609, 458756, 47, 196609, 458757, 47, 196609, 458758, 47, 196609, 458759, 47, 196609, 458760, 47, 196609, 458761, 47, 196609, 458762, 47, 196609, 458763, 47, 196609, 458764, 47, 196609, 458765, 47, 196609, 458766, 47, 196615 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -44,98 +35,29 @@ __meta__ = {
 [node name="YSort" type="YSort" parent="."]
 position = Vector2( 152, 120 )
 
-[node name="SlimeBoss" parent="YSort" instance=ExtResource( 18 )]
-position = Vector2( 88, 75.4221 )
-
-[node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( -107.855, -54.5179 )
-
-[node name="minion" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( 88, 24 )
-scale = Vector2( 0.3, 0.3 )
-collision_layer = 8
-
-[node name="Bear_trap" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 68.1447, -38.5179 )
-
-[node name="Slime" parent="YSort" instance=ExtResource( 16 )]
-position = Vector2( 68.1447, 57.4821 )
-
-[node name="Flame" parent="YSort" instance=ExtResource( 14 )]
-position = Vector2( 124.145, 65.4821 )
-
-[node name="Spike" parent="YSort" instance=ExtResource( 15 )]
-position = Vector2( 272, 88 )
-
-[node name="Sting" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 132.145, 17.4821 )
-
-[node name="Heart" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( -43.8553, 65.4821 )
-
-[node name="Blue" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( -3.8553, 81.4821 )
-
-[node name="Red" parent="YSort" instance=ExtResource( 12 )]
-position = Vector2( -51.8553, 41.4821 )
-
-[node name="Green" parent="YSort" instance=ExtResource( 13 )]
-position = Vector2( -19.8553, 73.4821 )
-
-[node name="Barrel" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 8.00002, -32 )
-
-[node name="Barrel5" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 8.00002, -96 )
-
-[node name="Barrel6" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -128, 16 )
-
-[node name="Barrel7" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -56, 16 )
-
-[node name="Barrel8" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -72, 16 )
-
-[node name="Barrel9" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -88, 16 )
-
-[node name="Barrel10" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -104, 16 )
-
-[node name="Barrel11" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -120, 16 )
-
-[node name="Barrel2" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 8.00002, -48 )
-
-[node name="Barrel3" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 8.00002, -64 )
-
-[node name="Barrel4" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 8.00002, -80 )
-
-[node name="Banana" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( -107.855, 73.4821 )
-
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 96, -69.5179 )
+position = Vector2( 176, 112 )
 scale = Vector2( 2, 2 )
 debug = true
 FRICTION = 200
 
-[node name="Bonfire" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 296, -16 )
+[node name="AnimationTree" parent="YSort/Player" index="4"]
+parameters/playback = SubResource( 1 )
+
+[node name="Boss_template" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( -67.0889, 2.27742 )
+
+[node name="Bonfire" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 214.647, -24.9932 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 20 )]
+[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource( 6 )]
+visible = false
+
+[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
 ObjectParent = NodePath("../..")
 
-[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource( 19 )]
-anchor_bottom = 0.0
-margin_bottom = 31.0
+[node name="Grid" parent="." instance=ExtResource( 18 )]
 
-[editable path="YSort/minion"]
-
-[editable path="YSort/minion/Hurtbox"]
+[editable path="YSort/Player"]
