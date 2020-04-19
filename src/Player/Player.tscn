@@ -707,6 +707,8 @@ __meta__ = {
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 max_health = 5
+
+[node name="States" type="Node" parent="."]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]

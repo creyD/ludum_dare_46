@@ -27,8 +27,6 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 hframes = 60
 
-[node name="Stats" parent="." instance=ExtResource( 3 )]
-
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 0
 
@@ -58,9 +56,11 @@ text = "Obermufti"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hitbox"]
 
