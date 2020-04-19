@@ -6,7 +6,7 @@ var RedDrop = 0.2
 var Heart = 0.2
 
 func offset_vec():
-	var offset = 20
+	var offset = 16
 	return Vector2((randf()-0.5)*offset, (randf()-0.5)*offset)
 
 func _on_Hurtbox_area_entered(area):

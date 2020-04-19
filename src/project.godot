@@ -147,6 +147,7 @@ attack={
 2d_physics/layer_4="monster"
 2d_physics/layer_5="trap"
 2d_physics/layer_6="collectable"
+2d_physics/layer_7="Bonfire"
 
 [rendering]
 

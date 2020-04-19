@@ -624,6 +624,7 @@ size = 12
 font_data = ExtResource( 6 )
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 1.1, 1.1 )
 script = ExtResource( 1 )
 FRICTION = 270
 
@@ -637,7 +638,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -18 )
 hframes = 60
-frame = 9
+frame = 12
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0107212, 0.0456073 )
@@ -698,7 +699,7 @@ __meta__ = {
 
 [node name="SwordHitbox" parent="Pivot" instance=ExtResource( 4 )]
 collision_layer = 0
-collision_mask = 12
+collision_mask = 76
 
 [node name="CollisionShape2D" parent="Pivot/SwordHitbox" index="0"]
 position = Vector2( 8.43416, 0.0698299 )

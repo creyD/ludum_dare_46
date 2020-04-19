@@ -149,7 +149,8 @@ func movement_hit():
 
 func hit_finished():
 	movementState = moveState.IDLE
-	ExecutionState = AI_MOVE
+	ai_movement_state = STEP
+	ExecutionState = EXECUTING
 
 
 func movement_roll():
@@ -207,4 +208,4 @@ func movement_run(direction, delta):
 func movement_idle():
 	movementState = moveState.IDLE
 	velocity = Vector2.ZERO
-	animation_state.change_scene("idle")
+	animation_state.change_state("idle")

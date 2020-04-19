@@ -99,6 +99,8 @@ func get_nearest(position, kind):
 			for i in prio_grid[x][y]:
 				if(i == kind):
 					list.append([x, y])
+	if list.size() == 0:
+		return[-1,-1]
 	var dist = []
 	for field in list:
 		var tmp = sqrt(pow(position[0] - field[0], 2) + pow(position[1] - field[1], 2))
