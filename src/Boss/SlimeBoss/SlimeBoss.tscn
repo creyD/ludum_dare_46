@@ -4,7 +4,7 @@
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Boss/SlimeBoss/SlimeBoss.gd" type="Script" id=4]
-[ext_resource path="res://Boss/SlimeBoss/Animations/move_down_angry.png" type="Texture" id=5]
+[ext_resource path="res://Boss/SlimeBoss/Animations/move_down.png" type="Texture" id=5]
 [ext_resource path="res://Boss/SlimeBoss/States/Motion/Idle.gd" type="Script" id=7]
 [ext_resource path="res://Boss/SlimeBoss/States/Motion/Stagger.gd" type="Script" id=8]
 [ext_resource path="res://Boss/SlimeBoss/States/Motion/Wander.gd" type="Script" id=9]
@@ -45,11 +45,9 @@ script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.13451, -20.1418 )
-scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 vframes = 10
 hframes = 24
-frame = 65
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 0
@@ -98,6 +96,7 @@ script = ExtResource( 10 )
 script = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "MoveDown"
 anims/MoveDown = SubResource( 4 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
