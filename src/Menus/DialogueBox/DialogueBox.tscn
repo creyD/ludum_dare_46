@@ -65,11 +65,7 @@ anims/next_line = SubResource( 2 )
 script = ExtResource( 4 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -240.0
-margin_top = 235.0
-margin_right = 240.0
+margin_right = 480.0
 margin_bottom = 31.0
 __meta__ = {
 "_edit_use_anchors_": false

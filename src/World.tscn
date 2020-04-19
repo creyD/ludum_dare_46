@@ -127,22 +127,25 @@ FRICTION = 200
 [node name="Bonfire" parent="." instance=ExtResource( 7 )]
 position = Vector2( 448, 104 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 20 )]
+ObjectParent = NodePath("../..")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchor_right = 1.002
+anchor_bottom = 0.068
+margin_top = 9.0
+margin_right = 0.0399475
+margin_bottom = 44.64
 use_top_left = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogueBox" parent="CenterContainer" instance=ExtResource( 19 )]
+[node name="DialogueBox" parent="CanvasLayer/CenterContainer" instance=ExtResource( 19 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 20 )]
-ObjectParent = NodePath("../..")
 
 [editable path="YSort/minion"]
 
