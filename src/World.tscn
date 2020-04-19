@@ -137,6 +137,12 @@ __meta__ = {
 [node name="DialogueBox" parent="CenterContainer" instance=ExtResource( 19 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 19 )]
+margin_left = 0.0
+margin_right = 0.0
+ObjectParent = NodePath("../..")
 
 [editable path="YSort/minion"]
 
