@@ -15,9 +15,8 @@ height = 18.0
 radius = 18.0
 height = 18.0
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 8.0
-height = 15.0
+[sub_resource type="CircleShape2D" id=3]
+radius = 12.5
 
 [node name="Boss_template" type="KinematicBody2D"]
 script = ExtResource( 4 )
