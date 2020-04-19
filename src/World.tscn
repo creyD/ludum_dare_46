@@ -92,19 +92,19 @@ position = Vector2( 8.00002, -96 )
 position = Vector2( -128, 16 )
 
 [node name="Barrel7" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -56, 16 )
+position = Vector2( -48, 16 )
 
 [node name="Barrel8" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -72, 16 )
+position = Vector2( -64, 16 )
 
 [node name="Barrel9" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -88, 16 )
+position = Vector2( -80, 16 )
 
 [node name="Barrel10" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -104, 16 )
+position = Vector2( -96, 16 )
 
 [node name="Barrel11" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( -120, 16 )
+position = Vector2( -112, 16 )
 
 [node name="Barrel2" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 8.00002, -48 )
