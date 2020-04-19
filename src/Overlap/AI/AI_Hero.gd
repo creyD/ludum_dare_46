@@ -32,6 +32,13 @@ enum{
 	NOTHING
 }
 
+enum{
+	EXECUTING,
+	AI_MOVE
+}
+
+var ExecutionState = AI_MOVE
+
 var Grid = []
 var used_Flags = []
 
@@ -81,13 +88,18 @@ func adjustPrio(currentHealth, maxHealth):
 	prios[HEART]=hearts
 
 #return the enemie which will be attacked
-func calcEnemie():
+func calcEnemy():
 	var table = calcPrioTable()
 	var number = randf()
-	var i = TERMINAL_SYMBOL-1
+	var i = 0
 	while table[i] > number:
-		i=i-1
+		i=i+1
 	return i
+	
+func getTargetField(currentField):
+	return [0,0]
+	pass
+	#todo
 	
 #returns a move
 func getMoveDescription(myPosition : Vector2, targetPositions):
@@ -98,9 +110,10 @@ func getMoveDescription(myPosition : Vector2, targetPositions):
 	
 
 func getFieldState(position):
+	#todo
 	pass
 	
-func getCost(position):
+func getCost(field):
 	# var cost = 0
 	# for i in Feld[position.x][position.y]:
 	#		match i:
@@ -113,13 +126,13 @@ func getCost(position):
 #return an heurestic of distance
 # curr - current position
 # targ - atarget position
-func h(curr, targ):
+func h(curr, target):
 	return min(abs(target[0]-curr[0]),abs(target[0]-curr[0]))		
 	
 # currCost - currentCost
-# position - position of the field to move to
-func g(currCost, position):
-	return curr +  getCost(position)
+# target - position of the field to move to
+func g(currCost, target):
+	return currCost +  getCost(target)
 
 #returns the list of adjacent nodes	
 func adjacent(currentPosition):
@@ -174,7 +187,7 @@ func AStar(source, target):
 	target = tmp
 	
 	var Q = PrioQueue.new()
-	Q.insert([0,0, [source[0], source[1]]])
+	Q.insert([0,0, [source[0], source[1]], [source[0], source[1]], NOTHING] )
 	while !Q.empty():
 		var node = Q.delMin()
 		
@@ -183,23 +196,40 @@ func AStar(source, target):
 			return  [node[4], 0]#todo map movement]
 			
 		#set flag
-		used_Flags[current[0]][current[1]] = true
+		used_Flags[node[2][0]][node[2][1]] = true
 		var adj_list = adjacent(node[2])
-		for i in adj_ist:
+		for i in adj_list:
 			var move_cost = 0
 			if(i[0]==STEP):
 				move_cost = 1
 			else:
-				rmove_cost = 2
+				move_cost = 2
+			
+			var g_val = g(node[1]+move_cost, i[1])
+			var h_val = h(i[1], target)
 		
-		
-	
+			#[g+h(x), g(x), current, from, kind]
+			var new_node = [g_val+h_val, g_val,i[1], node, i[0]]
+			Q.insert(new_node)
+			
 	return [NOTHING, 0]
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	
-	
+func makeMove():
+	match ExecutionState:
+		EXECUTING:
+			pass
+		AI_MOVE:
+			var field = [0.1*prios[BONFIRE], 1]
+			var decision = randf()
+			var i = 0
+			while field[i] > decision:
+				i=i+1
+			if(i==0):
+				var targetField = getTargetField(currentField)
+				
+			else:
+				pass
+	pass
 
 
 
