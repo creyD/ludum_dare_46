@@ -10,12 +10,48 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://Boss/Boss_template.gd"
+}, {
+"base": "Control",
+"class": "DialougeBox",
+"language": "GDScript",
+"path": "res://Menus/DialogueBox/DialogueBox.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Hero",
+"language": "GDScript",
+"path": "res://Overlap/AI/AI_Hero.gd"
+}, {
+"base": "Hero",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "SlimeBoss",
+"language": "GDScript",
+"path": "res://Boss/SlimeBoss/SlimeBoss.gd"
+}, {
+"base": "Button",
+"class": "TitleSceenButton",
+"language": "GDScript",
+"path": "res://Menus/TitleScreen/TitleScreenButton.gd"
+}, {
+"base": "Control",
+"class": "TitleScreen",
+"language": "GDScript",
+"path": "res://Menus/TitleScreen/TitleScreen.gd"
 } ]
 _global_script_class_icons={
-"Player": ""
+"Boss": "",
+"DialougeBox": "",
+"Hero": "",
+"Player": "",
+"SlimeBoss": "",
+"TitleSceenButton": "",
+"TitleScreen": ""
 }
 
 [application]
@@ -24,10 +60,14 @@ config/name="LD46 Game"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SoundControler="*res://Autoloads/SoundControler.gd"
+
 [display]
 
-window/size/width=320
-window/size/height=180
+window/size/width=480
+window/size/height=270
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
@@ -82,6 +122,31 @@ down={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
  ]
 }
+skip={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+roll={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="wall"
+2d_physics/layer_3="boss"
+2d_physics/layer_4="monster"
+2d_physics/layer_5="trap"
+2d_physics/layer_6="collectable"
 
 [rendering]
 

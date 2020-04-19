@@ -1,0 +1,222 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Menus/TitleScreen/TitleScreenButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Menus/Startup/Startup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Menus/TitleScreen/TitleScreen.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "__INIT__"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/NewGameButton:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.25 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/NewGameButton:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.25 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/CreditsButton:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.25 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/CreditsButton:anchor_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.25 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("VBoxContainer/QuitButton:anchor_left")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.25 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VBoxContainer/QuitButton:anchor_right")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.25 ]
+}
+
+[sub_resource type="Animation" id=2]
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/NewGameButton:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ 1.25, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/NewGameButton:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ 1.25, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/CreditsButton:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ 1.25, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/CreditsButton:anchor_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ 1.25, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("VBoxContainer/QuitButton:anchor_left")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ 1.25, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VBoxContainer/QuitButton:anchor_right")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ 1.25, 0.0 ]
+}
+
+[node name="TitleScreen" type="Control"]
+anchor_left = -0.00168862
+anchor_top = -0.003002
+anchor_right = 0.704
+anchor_bottom = 0.667
+margin_left = 0.810538
+margin_top = -0.18946
+margin_right = 0.0802612
+margin_bottom = -0.0900574
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/__INIT__ = SubResource( 1 )
+anims/show_buttons = SubResource( 2 )
+
+[node name="Startup" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 1.50207, 1.49479 )
+animation = "start"
+speed_scale = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.06328
+anchor_top = 1.04447
+anchor_right = 1.41015
+anchor_bottom = 1.45814
+margin_left = 1.52588e-05
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="NewGameButton" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 117.0
+scene_to_load = "res://World.tscn"
+
+[node name="Label" parent="VBoxContainer/NewGameButton" index="0"]
+text = "New Game"
+
+[node name="CreditsButton" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 24.0
+margin_right = 117.0
+margin_bottom = 44.0
+scene_to_load = "res://Menus/Credits/Credits.tscn"
+
+[node name="Label" parent="VBoxContainer/CreditsButton" index="0"]
+text = "Credits"
+
+[node name="QuitButton" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 48.0
+margin_right = 117.0
+margin_bottom = 68.0
+quit = true
+
+[node name="Label" parent="VBoxContainer/QuitButton" index="0"]
+text = "Quit"
+[connection signal="animation_finished" from="Startup" to="." method="_on_Startup_animation_finished"]
+
+[editable path="VBoxContainer/NewGameButton"]
+
+[editable path="VBoxContainer/CreditsButton"]
+
+[editable path="VBoxContainer/QuitButton"]

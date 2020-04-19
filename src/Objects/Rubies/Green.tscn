@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Rubies/Rubies.gd" type="Script" id=2]
+[ext_resource path="res://testSprites/green_Rubi.png" type="Texture" id=3]
+[ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.43707
+height = 2.89399
+
+[node name="Green" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Kind" parent="." instance=ExtResource( 4 )]
+general = 1
+kind = 6
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.22036, -4.18694 )
+texture = ExtResource( 3 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1.54256, -4.73786 )
+collision_layer = 32
+collision_mask = 0
+currency_value = 1
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( -1.54256, 4.73785 )
+rotation = 1.5708
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

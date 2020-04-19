@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Menus/Credits/Credits.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "scroll"
+length = 25.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 24.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 200.0, -600 ]
+}
+
+[node name="Credits" type="Node2D"]
+script = ExtResource( 2 )
+scene_to_load = "res://Menus/TitleScreen/TitleScreen.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 1024.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 10.0
+margin_top = -436.145
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "---- Team ----
+DerAnonymos
+https://www.youtube.com/c/DerAnonymosLP
+https://twitch.tv/deranonymos
+https://www.instagram.com/deranonymos/
+
+Rougebluemulan
+
+Katsuhira
+https://www.youtube.com/c/Katsuhira
+https://twitter.com/nKatsuhira
+
+Sonaion
+
+Mienek
+
+Streamfire
+https://twitter.com/_streamfire_
+
+YellowKamel
+https://www.youtube.com/channel/UCgF6E6Hk4cNQBGDmcAEp5CA
+
+creyD
+
+---- Help ----
+Dave Loyd, Crawl
+https://twitter.com/DuzzOnDrums
+https://www.powerhoof.com/
+
+HeartBeast
+https://www.youtube.com/user/uheartbeast
+https://www.heartgamedev.com
+
+---- Fonts ----
+Harmonic by Monkopus
+https://monkopus.itch.io/
+https://twitter.com/monkopus
+https://www.instagram.com/monkopusgames/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "scroll"
+anims/scroll = SubResource( 1 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

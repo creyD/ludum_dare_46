@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=2]
+[ext_resource path="res://testSprites/flame.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 6.36237
+
+[node name="Flame" type="Node2D"]
+
+[node name="Kind" parent="." instance=ExtResource( 2 )]
+kind = 10
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.44072, -6.06005 )
+texture = ExtResource( 3 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 1 )]
+collision_layer = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[editable path="Hitbox"]

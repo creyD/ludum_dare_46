@@ -1,13 +1,59 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World.gd" type="Script" id=2]
+[ext_resource path="res://Maps/Tilesets/Room/tileset_room.tres" type="TileSet" id=3]
+[ext_resource path="res://testSprites/dark.png" type="Texture" id=4]
+[ext_resource path="res://Menus/DragNDrop/DragNDropUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
 
 [node name="World" type="Node2D"]
+script = ExtResource( 2 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 164.844, 101.687 )
+[node name="WallSprite" type="Sprite" parent="."]
+position = Vector2( 355.382, 175.62 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1280, 720 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="FloorTileMap" type="TileMap" parent="."]
+position = Vector2( 16, 16 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -131059, 47, 0, -131058, 47, 2, -1, 47, 4, -65536, 47, 196609, -65535, 47, 196609, -65534, 47, 196609, -65533, 47, 196609, -65532, 47, 196609, -65531, 47, 196609, -65530, 47, 8, -65529, 47, 196609, -65528, 47, 8, -65527, 47, 196609, -65526, 47, 196609, -65525, 47, 196609, -65524, 47, 196609, -65523, 47, 196614, -65522, 47, 196618, -65521, 47, 196610, 65535, 47, 65539, 6, 47, 131075, 8, 47, 131075, 14, 47, 65539, 131071, 47, 65539, 65541, 47, 196611, 65550, 47, 65539, 196607, 47, 65539, 131075, 47, 196608, 131076, 47, 196610, 131086, 47, 65539, 262143, 47, 65539, 196614, 47, 196611, 196622, 47, 65539, 327679, 47, 65539, 262147, 47, 196611, 262149, 47, 196611, 262158, 47, 65539, 393215, 47, 65539, 327684, 47, 196611, 327688, 47, 196611, 327694, 47, 65539, 458751, 47, 65539, 393221, 47, 3, 393225, 47, 3, 393230, 47, 65539, 524287, 47, 196612, 458752, 47, 196609, 458753, 47, 196609, 458754, 47, 196609, 458755, 47, 196609, 458756, 47, 196609, 458757, 47, 196616, 458758, 47, 196609, 458759, 47, 196609, 458760, 47, 196609, 458761, 47, 196616, 458762, 47, 196609, 458763, 47, 196609, 458764, 47, 196609, 458765, 47, 196609, 458766, 47, 196615 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( 192.287, 146.593, 265.375, 115.213, 228.831, 67.1505, 257.43, 37.3594, 218.9, 7.9655, 298.343, 3.59614, 310.26, 179.959, 11.9516, 168.837, 42.9343, 30.6067, 69.1505, 118.788, 86.628, 87.4084, 96.5583, 127.527 )
+[node name="YSort" type="YSort" parent="."]
+position = Vector2( 152, 120 )
+
+[node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 264, -24 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 240, 72 )
+scale = Vector2( 2, 2 )
+ROLL_SPEED = 140
+FRICTION = 200
+
+[node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
+position = Vector2( -67.0889, 2.27742 )
+debug = true
+
+[node name="Grid" parent="." instance=ExtResource( 18 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource( 6 )]
+visible = false
+
+[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
+ObjectParent = NodePath("../..")
+
+[editable path="YSort/Bonfire"]
