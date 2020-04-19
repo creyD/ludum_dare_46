@@ -21,7 +21,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 48
+frame = 24
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.454902 )
