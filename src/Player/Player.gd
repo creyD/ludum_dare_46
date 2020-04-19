@@ -203,4 +203,4 @@ func movement_run(direction, delta):
 func movement_idle():
 	movementState = moveState.IDLE
 	velocity = Vector2.ZERO
-	animation_state.travel("idle")
+	animation_state.change_scene("idle")
