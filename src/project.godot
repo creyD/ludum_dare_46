@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://Menus/DialogueBox/DialogueBox.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Hero",
+"language": "GDScript",
+"path": "res://Overlap/AI/AI_Hero.gd"
+}, {
+"base": "Hero",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
@@ -42,6 +47,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Boss": "",
 "DialougeBox": "",
+"Hero": "",
 "Player": "",
 "SlimeBoss": "",
 "TitleSceenButton": "",
