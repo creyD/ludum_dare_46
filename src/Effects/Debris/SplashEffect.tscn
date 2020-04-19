@@ -21,7 +21,6 @@ tracks/0/keys = {
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 3
-frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "__INIT__"

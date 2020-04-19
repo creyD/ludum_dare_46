@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/player.png" type="Texture" id=2]
@@ -6,13 +6,13 @@
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/Harmonic/Harmonic.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Effects/Heal/HealEffect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Effects/Heal/HealEffect.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Player/States/Idle.gd" type="Script" id=12]
 [ext_resource path="res://Player/States/Run.gd" type="Script" id=13]
 [ext_resource path="res://Player/States/Attack.gd" type="Script" id=14]
 [ext_resource path="res://Player/PlayerStateMachine.gd" type="Script" id=15]
 [ext_resource path="res://Player/States/Roll.gd" type="Script" id=16]
-[ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.15976
@@ -626,11 +626,8 @@ font_data = ExtResource( 6 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
-debug = null
-ROLL_SPEED = null
 FRICTION = 270
 title_scene = "res://Menus/TitleScreen/TitleScreen.tscn"
-ACCELERATION = null
 
 [node name="Kind" parent="." instance=ExtResource( 7 )]
 kind = 1
@@ -743,7 +740,7 @@ script = ExtResource( 16 )
 
 [node name="Effects" type="Node2D" parent="."]
 
-[node name="HealEffect" parent="Effects" instance=ExtResource( 7 )]
+[node name="HealEffect" parent="Effects" instance=ExtResource( 8 )]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]

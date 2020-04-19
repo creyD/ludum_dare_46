@@ -66,7 +66,6 @@ func _physics_process(delta):
 			moveState.HIT:
 				movement_hit()
 	
-	$"Effects/HealEffect".emitting = heal_per_second > 0
 	elif movementState == moveState.ROLL:
 		movement_roll()
 	elif movementState == moveState.HIT:
@@ -75,6 +74,7 @@ func _physics_process(delta):
 		movement_idle()
 	else:
 		movement_run(Vector2(0,0), delta)
+	$"Effects/HealEffect".emitting = heal_per_second > 0
 	makeMove(delta)
 	move()
 
@@ -85,18 +85,10 @@ func move():
 	move_and_slide(velocity)
 
 
-func set_animation_tree_vector():
-	animation_tree.set("parameters/idle/blend_position", rollvector)
-	animation_tree.set("parameters/hit/blend_position", rollvector)
-	animation_tree.set("parameters/roll/blend_position", rollvector)
-	animation_tree.set("parameters/run/blend_position", rollvector)
-
-
 # API Interface for ai_hero
 func attac(direction, delta):
 	direction = direction.normalized()
 	rollvector = direction
-	set_animation_tree_vector()
 	movementState = moveState.HIT
 
 
@@ -104,7 +96,6 @@ func attac(direction, delta):
 func roll(direction, delta):
 	direction = direction.normalized()
 	rollvector = direction
-	set_animation_tree_vector()
 	movementState = moveState.ROLL
 
 
@@ -112,14 +103,13 @@ func roll(direction, delta):
 func run(direction, delta):
 	direction = direction.normalized()
 	rollvector = direction
-	set_animation_tree_vector()
 	movementState = moveState.MOVE
 	velocity = velocity.move_toward(player_stats.speed * rollvector, ACCELERATION * delta)
 	
 	if direction == Vector2.ZERO:
-		animation_state.travel("idle")
+		animation_state.change_state("idle")
 	else:
-		animation_state.travel("run")
+		animation_state.change_state("run")
 
 
 func movement_move(delta):
@@ -139,7 +129,6 @@ func movement_move(delta):
 		velocity = Vector2.ZERO
 	else:
 		rollvector = input_vector
-		set_animation_tree_vector()
 		animation_state.change_state("run")	
 		velocity = velocity.move_toward(player_stats.speed * input_vector, ACCELERATION * delta)
 	if Input.is_action_just_pressed("roll"):
