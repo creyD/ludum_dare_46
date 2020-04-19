@@ -1,130 +1,59 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://Maps/Tilesets/Room/tileset_room.tres" type="TileSet" id=3]
 [ext_resource path="res://testSprites/dark.png" type="Texture" id=4]
-[ext_resource path="res://Objects/Barrel/Barrel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/Banana/Banana.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Traps/Sting.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Objects/Rubies/Blue.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Objects/Traps/Bear.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Objects/Heart/Heart.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Objects/Rubies/Red.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Objects/Rubies/Green.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Objects/Traps/Flame.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Objects/Traps/Spike.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Objects/Slime/Slime.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Menus/DragNDrop/DragNDropUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="WallSprite" type="Sprite" parent="."]
-position = Vector2( 112.785, 148.267 )
+position = Vector2( 355.382, 175.62 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="FloorTileMap" type="TileMap" parent="."]
+position = Vector2( 16, 16 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -131063, 47, 0, -131062, 47, 2, -65536, 47, 4, -65535, 47, 196609, -65534, 47, 196609, -65533, 47, 196609, -65532, 47, 196609, -65531, 47, 196609, -65530, 47, 196609, -65529, 47, 6, -65528, 47, 5, -65527, 47, 196614, -65526, 47, 196613, -65525, 47, 6, -65524, 47, 5, -65523, 47, 196609, -65522, 47, 7, 0, 47, 65539, 7, 47, 131072, 8, 47, 65543, 11, 47, 131072, 12, 47, 65543, 14, 47, 196612, 15, 47, 196610, 65536, 47, 65539, 65544, 47, 196612, 65545, 47, 7, 65548, 47, 65539, 131072, 47, 262148, 131073, 47, 196610, 131081, 47, 65539, 131084, 47, 65539, 131087, 47, 3, 196608, 47, 65539, 196615, 47, 196611, 196617, 47, 131075, 196619, 47, 4, 196620, 47, 196615, 196622, 47, 4, 196623, 47, 196615, 262144, 47, 65539, 262146, 47, 3, 262155, 47, 65539, 262158, 47, 65539, 327680, 47, 262148, 327681, 47, 196609, 327682, 47, 196616, 327683, 47, 196609, 327684, 47, 196609, 327685, 47, 196609, 327686, 47, 196609, 327687, 47, 7, 327691, 47, 131075, 327694, 47, 65539, 393216, 47, 65539, 393223, 47, 196612, 393224, 47, 196610, 393230, 47, 65539, 458752, 47, 196612, 458753, 47, 196609, 458754, 47, 7, 458766, 47, 65539, 524290, 47, 196612, 524291, 47, 196609, 524292, 47, 196609, 524293, 47, 196609, 524294, 47, 196609, 524295, 47, 196609, 524296, 47, 196609, 524297, 47, 196609, 524298, 47, 196609, 524299, 47, 196609, 524300, 47, 196609, 524301, 47, 196609, 524302, 47, 196615 )
-
-[node name="Slime" parent="." instance=ExtResource( 16 )]
-position = Vector2( 272.823, 72.281 )
-
-[node name="Slime2" parent="." instance=ExtResource( 16 )]
-position = Vector2( 239.993, 144.355 )
+tile_data = PoolIntArray( -131059, 47, 0, -131058, 47, 2, -1, 47, 4, -65536, 47, 196609, -65535, 47, 196609, -65534, 47, 196609, -65533, 47, 196609, -65532, 47, 196609, -65531, 47, 196609, -65530, 47, 8, -65529, 47, 196609, -65528, 47, 8, -65527, 47, 196609, -65526, 47, 196609, -65525, 47, 196609, -65524, 47, 196609, -65523, 47, 196614, -65522, 47, 196618, -65521, 47, 196610, 65535, 47, 65539, 6, 47, 131075, 8, 47, 131075, 14, 47, 65539, 131071, 47, 65539, 65541, 47, 196611, 65550, 47, 65539, 196607, 47, 65539, 131075, 47, 196608, 131076, 47, 196610, 131086, 47, 65539, 262143, 47, 65539, 196614, 47, 196611, 196622, 47, 65539, 327679, 47, 65539, 262147, 47, 196611, 262149, 47, 196611, 262158, 47, 65539, 393215, 47, 65539, 327684, 47, 196611, 327688, 47, 196611, 327694, 47, 65539, 458751, 47, 65539, 393221, 47, 3, 393225, 47, 3, 393230, 47, 65539, 524287, 47, 196612, 458752, 47, 196609, 458753, 47, 196609, 458754, 47, 196609, 458755, 47, 196609, 458756, 47, 196609, 458757, 47, 196616, 458758, 47, 196609, 458759, 47, 196609, 458760, 47, 196609, 458761, 47, 196616, 458762, 47, 196609, 458763, 47, 196609, 458764, 47, 196609, 458765, 47, 196609, 458766, 47, 196615 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="YSort" type="YSort" parent="."]
-position = Vector2( 170.007, 112.118 )
+position = Vector2( 152, 120 )
 
-[node name="Barrel2" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -124.864, -87.4505 )
-
-[node name="Barrel3" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -119.425, -59.8735 )
-
-[node name="Barrel" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -57.3565, -65.1137 )
-
-[node name="Barrel4" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -95.4691, -97.9434 )
-
-[node name="Barrel5" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -88.6768, -25.4916 )
-
-[node name="Barrel6" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -61.13, -36.8122 )
-
-[node name="Barrel7" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -62.6394, -90.019 )
-
-[node name="Barrel8" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -87.9221, -57.944 )
-
-[node name="Barrel9" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -81.8844, -74.1702 )
+[node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 264, -24 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( -1.15936, -79.3532 )
+position = Vector2( 240, 72 )
 scale = Vector2( 2, 2 )
+ROLL_SPEED = 140
+FRICTION = 200
 
-[node name="Banana" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( -122.709, 34.7666 )
+[node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
+position = Vector2( -67.0889, 2.27742 )
+debug = true
 
-[node name="Bonfire" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 283.515, -47.7461 )
+[node name="Grid" parent="." instance=ExtResource( 18 )]
 
-[node name="Sting" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 68.6066, -28.1109 )
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Sting2" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 68.6066, -18.9158 )
+[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource( 6 )]
+visible = false
 
-[node name="Sting3" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 108.936, 2.03768 )
+[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
+ObjectParent = NodePath("../..")
 
-[node name="Sting4" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 92.0694, 1.87637 )
-
-[node name="Sting5" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 101.981, 2.46786 )
-
-[node name="Flame2" parent="YSort" instance=ExtResource( 14 )]
-position = Vector2( -31.1322, 103.722 )
-
-[node name="Bear_trap" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 197.579, -28.4036 )
-
-[node name="Flame" parent="YSort" instance=ExtResource( 14 )]
-position = Vector2( -30.7141, 88.6697 )
-
-[node name="Spike" parent="YSort" instance=ExtResource( 15 )]
-position = Vector2( 225.593, 102.049 )
-
-[node name="Red" parent="YSort" instance=ExtResource( 12 )]
-position = Vector2( -128.136, 91.1784 )
-
-[node name="Green" parent="YSort" instance=ExtResource( 13 )]
-position = Vector2( -105.975, 105.394 )
-
-[node name="Blue" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( -89.2507, 105.394 )
-
-[node name="Green2" parent="YSort" instance=ExtResource( 13 )]
-position = Vector2( -95.5225, 89.5059 )
-
-[node name="Green3" parent="YSort" instance=ExtResource( 13 )]
-position = Vector2( -127.718, 103.722 )
-
-[node name="Green4" parent="YSort" instance=ExtResource( 13 )]
-position = Vector2( -116.428, 91.5965 )
-
-[node name="Heart" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 201.342, -60.5988 )
-
-[node name="Blue2" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 66.0861, -56.9466 )
+[editable path="YSort/Bonfire"]

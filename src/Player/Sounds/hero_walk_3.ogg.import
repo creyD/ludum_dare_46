@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hero_walk_3.ogg-814c846ca66fb1f14e78fa6b00b87e97.oggstr"
+
+[deps]
+
+source_file="res://Player/Sounds/hero_walk_3.ogg"
+dest_files=[ "res://.import/hero_walk_3.ogg-814c846ca66fb1f14e78fa6b00b87e97.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

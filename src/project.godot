@@ -10,9 +10,29 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://Boss/Boss_template.gd"
+}, {
+"base": "Control",
+"class": "DialougeBox",
+"language": "GDScript",
+"path": "res://Menus/DialogueBox/DialogueBox.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Hero",
+"language": "GDScript",
+"path": "res://Overlap/AI/AI_Hero.gd"
+}, {
+"base": "Hero",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "SlimeBoss",
+"language": "GDScript",
+"path": "res://Boss/SlimeBoss/SlimeBoss.gd"
 }, {
 "base": "Button",
 "class": "TitleSceenButton",
@@ -25,7 +45,11 @@ _global_script_classes=[ {
 "path": "res://Menus/TitleScreen/TitleScreen.gd"
 } ]
 _global_script_class_icons={
+"Boss": "",
+"DialougeBox": "",
+"Hero": "",
 "Player": "",
+"SlimeBoss": "",
 "TitleSceenButton": "",
 "TitleScreen": ""
 }
