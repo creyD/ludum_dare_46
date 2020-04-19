@@ -9,10 +9,15 @@ script/source = "extends Container
 func can_drop_data(_pos, data):
 	return typeof(data) == typeof(PackedScene)
 
+
+func get_nearest_grid_pos(position):
+	return Vector2(floor(position.x / 32.0) * 32, floor(position.y / 32.0) * 32)
+	
+
 #what is to be done when data is dropped
 func drop_data(_pos, data:PackedScene):
 	var child = data.instance()
-	child.position= _pos
+	child.position = get_nearest_grid_pos(_pos)
 	get_node(get_parent().ObjectParent).add_child(child)
 "
 
