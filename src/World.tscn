@@ -48,12 +48,6 @@ position = Vector2( 88, 75.4221 )
 [node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( -107.855, -54.5179 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 296, -32 )
-scale = Vector2( 2, 2 )
-debug = true
-FRICTION = 200
-
 [node name="minion" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 88, 24 )
 scale = Vector2( 0.3, 0.3 )
@@ -121,6 +115,12 @@ position = Vector2( 8.00002, -80 )
 
 [node name="Banana" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( -107.855, 73.4821 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 96, -69.5179 )
+scale = Vector2( 2, 2 )
+debug = true
+FRICTION = 200
 
 [node name="Bonfire" parent="." instance=ExtResource( 7 )]
 position = Vector2( 448, 104 )

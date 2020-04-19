@@ -18,8 +18,6 @@ onready var debug_label := $DebugLabel
 onready var animation_state := $AnimationStates
 
 # Variables for sound selection
-onready var walk_sounds = $Sounds/Walk
-onready var walk_sound_timer = $Sounds/WalkSoundTimer
 var _rng = RandomNumberGenerator.new()
 var is_playing_sound = false
 
@@ -65,8 +63,7 @@ func _physics_process(delta):
 			moveState.HIT:
 				movement_hit()
 	
-	print(heal_per_second)
-	$"Effects/HealEffect".emitting = heal_per_second > 0.0
+	$"Effects/HealEffect".emitting = heal_per_second > 0
 	move()
 
 # IMPORTANT: If you are using move_and_slide don't multiply by delta
