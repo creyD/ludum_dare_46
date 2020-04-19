@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/menu_focus_change.ogg-b255a32b3968213712292d0ecbc5df1e.oggstr"
+
+[deps]
+
+source_file="res://Menus/Sounds/menu_focus_change.ogg"
+dest_files=[ "res://.import/menu_focus_change.ogg-b255a32b3968213712292d0ecbc5df1e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

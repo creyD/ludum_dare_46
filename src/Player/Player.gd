@@ -5,16 +5,24 @@ This is an example player controller script created by Paul
 """
 var velocity := Vector2.ZERO
 var rollvector := Vector2.ZERO
+
 # This is how you export variables with ranges to the editor window
 export(bool) var debug := false
 export(int, 0, 500) var ROLL_SPEED := 150
 export(int, 0, 500) var FRICTION := 200 # Speed at which the player deaccelarates
 export(int, 0, 500) var ACCELERATION := 450
-# Reference for the current player
 
+# Reference for the current player
 onready var player_stats := $Stats
 onready var debug_label := $DebugLabel
 onready var animation_state := $AnimationStates
+
+# Variables for sound selection
+onready var walk_sounds = $Sounds/Walk
+onready var walk_sound_timer = $Sounds/WalkSoundTimer
+var _rng = RandomNumberGenerator.new()
+var is_playing_sound = false
+
 
 enum moveState{
 	MOVE,
@@ -82,6 +90,7 @@ func movement_move(delta):
 		animation_state.change_state("run")
 			
 		velocity = velocity.move_toward(player_stats.speed * input_vector, ACCELERATION * delta)
+		_play_random_sound(walk_sounds)
 	if Input.is_action_just_pressed("roll"):
 		movementState = moveState.ROLL
 	elif Input.is_action_just_pressed("attack"):
@@ -129,3 +138,28 @@ func _on_Hitbox_area_entered(area):
 	currency += area.currency_value
 	player_stats.health = player_stats.health+area.health_value
 	player_stats.speed -= area.slowdown_value
+
+
+func _walk_sound_finished():
+	is_playing_sound = false
+
+func _walk_sound_wait_time():
+	var x = abs(velocity.length() / 100) - 1
+	return log(((x+1)/4)+2.5) / 3
+	# TODO: Rework anyone
+
+func _play_random_sound(path = walk_sounds):
+	if walk_sound_timer.is_stopped() and not is_playing_sound:
+		var sound = path.get_children()[_rng.randi_range(0, path.get_child_count() - 1)]
+		sound.play()
+		is_playing_sound = true
+		
+		walk_sound_timer.start(_walk_sound_wait_time())
+		print(_walk_sound_wait_time())
+		
+
+
+# Overrides ready method for this entire script, checks for the finished method of each possible sound
+func _ready():
+	for child in walk_sounds.get_children():
+		child.connect("finished", self, "_walk_sound_finished")
