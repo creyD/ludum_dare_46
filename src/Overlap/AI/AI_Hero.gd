@@ -21,6 +21,7 @@ enum{
 
 enum{
 	DAMAGE,
+	HEALING,
 	SLOW,
 	WALL,
 	FIELD

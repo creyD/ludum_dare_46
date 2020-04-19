@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/Harmonic/Harmonic.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.15976
@@ -619,6 +620,9 @@ font_data = ExtResource( 6 )
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 FRICTION = 270
+
+[node name="Kind" parent="." instance=ExtResource( 7 )]
+kind = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.273621, 3.88423 )

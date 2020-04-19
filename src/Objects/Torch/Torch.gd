@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Node2D
 
 export(int, 1, 5) var lifePoints = 3
 export(int, 1, 30) var spawnRate = 5
