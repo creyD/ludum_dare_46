@@ -187,6 +187,8 @@ __meta__ = {
 }
 
 [node name="NewGameButton" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 1.25
+anchor_right = 1.25
 margin_right = 117.0
 scene_to_load = "res://World.tscn"
 
@@ -194,6 +196,8 @@ scene_to_load = "res://World.tscn"
 text = "New Game"
 
 [node name="CreditsButton" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 1.25
+anchor_right = 1.25
 margin_top = 24.0
 margin_right = 117.0
 margin_bottom = 44.0
@@ -203,6 +207,8 @@ scene_to_load = "res://Menus/Credits/Credits.tscn"
 text = "Credits"
 
 [node name="QuitButton" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 1.25
+anchor_right = 1.25
 margin_top = 48.0
 margin_right = 117.0
 margin_bottom = 68.0
@@ -210,6 +216,7 @@ quit = true
 
 [node name="Label" parent="VBoxContainer/QuitButton" index="0"]
 text = "Quit"
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="VBoxContainer/NewGameButton"]
 
