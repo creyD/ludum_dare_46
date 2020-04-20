@@ -631,8 +631,11 @@ font_data = ExtResource( 6 )
 ]]
 collision_mask = 14
 script = ExtResource( 1 )
+debug = null
 ROLL_SPEED = 120
 FRICTION = 270
+ACCELERATION = null
+title_scene = null
 
 [node name="Kind" parent="." instance=ExtResource( 7 )]
 general = 4

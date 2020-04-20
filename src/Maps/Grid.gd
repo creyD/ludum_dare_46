@@ -193,11 +193,11 @@ func _update_grid():
 				for val in object_grid[neighboor.x][neighboor.y]:
 					match val:
 						Kind.DAMAGE:
-							scale += 16
-						Kind.HEALING:
-							scale -= 8
-						Kind.SLOW:
 							scale += 8
+						Kind.HEALING:
+							scale -= 4
+						Kind.SLOW:
+							scale += 4
 			if(scale<0):
 				scale = 0
 			aStar_node.set_point_weight_scale(index, scale)

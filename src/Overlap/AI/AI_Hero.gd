@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 class_name Hero
 
-const PrioQueue = preload("prio_queue.gd") # Relative path
 const Grid = preload("res://Maps/Grid.gd")
 
 var grid
