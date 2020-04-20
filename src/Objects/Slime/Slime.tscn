@@ -11,9 +11,10 @@ extents = Vector2( 16, 16 )
 
 [node name="Kind" parent="." instance=ExtResource( 3 )]
 general = 2
-kind = 2
+kind = 10
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 1.90735e-06 )
 texture = ExtResource( 1 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]

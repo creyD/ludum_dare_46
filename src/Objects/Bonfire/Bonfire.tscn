@@ -30,7 +30,7 @@ texture = ExtResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1.54256, -4.73786 )
-collision_layer = 8
+collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]

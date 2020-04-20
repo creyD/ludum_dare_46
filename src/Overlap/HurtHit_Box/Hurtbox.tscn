@@ -2,7 +2,9 @@
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.gd" type="Script" id=1]
 
-[node name="Hurtbox" type="Area2D"]
+[node name="Hurtbox" type="Area2D" groups=[
+"hurtbox",
+]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -24,15 +24,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Overlap/AI/AI_Hero.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Minion",
+"language": "GDScript",
+"path": "res://Overlap/AI/AI_Minion.gd"
+}, {
 "base": "Hero",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "SlimeBoss",
-"language": "GDScript",
-"path": "res://Boss/SlimeBoss/SlimeBoss.gd"
 }, {
 "base": "Button",
 "class": "TitleSceenButton",
@@ -48,8 +48,8 @@ _global_script_class_icons={
 "Boss": "",
 "DialougeBox": "",
 "Hero": "",
+"Minion": "",
 "Player": "",
-"SlimeBoss": "",
 "TitleSceenButton": "",
 "TitleScreen": ""
 }
@@ -63,6 +63,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SoundControler="*res://Autoloads/SoundControler.gd"
+Steering="*res://Autoloads/Steering.gd"
 
 [display]
 
@@ -147,6 +148,8 @@ attack={
 2d_physics/layer_4="monster"
 2d_physics/layer_5="trap"
 2d_physics/layer_6="collectable"
+2d_physics/layer_7="Bonfire"
+2d_physics/layer_8="SwordRange"
 
 [rendering]
 

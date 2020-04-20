@@ -161,9 +161,9 @@ anchor_top = -0.003002
 anchor_right = 0.704
 anchor_bottom = 0.667
 margin_left = 0.810538
-margin_top = -0.18946
+margin_top = 0.81054
 margin_right = 0.0802612
-margin_bottom = -0.0900574
+margin_bottom = 0.909943
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -174,7 +174,7 @@ anims/__INIT__ = SubResource( 1 )
 anims/show_buttons = SubResource( 2 )
 
 [node name="Startup" parent="." instance=ExtResource( 2 )]
-scale = Vector2( 1.50207, 1.49479 )
+scale = Vector2( 1.5, 1.5 )
 animation = "start"
 speed_scale = 1.0
 
