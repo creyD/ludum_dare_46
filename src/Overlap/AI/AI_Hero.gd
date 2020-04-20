@@ -33,8 +33,14 @@ var actionFieldUsed = false
 
 var areaRefList = []
 
-var threadTime = 0.6
+var threadTime = 0.4
 var threadDelta = 0.0
+
+var hitDelta = 0.0
+var hitTreshhold = 0.1
+
+var aiDelta = 0.0
+var aiTreshhold = 0.4
 
 #calculates  the sum of all present prios
 func calcTotalPrio():
@@ -70,7 +76,7 @@ func calcPrioTable():
 #14+7 0.999
 #updates heart and bonfire prio
 func adjustPrio(currentHealth, maxHealth):
-	var prioVal = 10.0 - (float(currentHealth)/float(maxHealth))*10.0
+	var prioVal = 20.0 - (float(currentHealth)/float(maxHealth))*20.0
 	var bonfire = prioVal + 1
 	var hearts = prioVal 
 	if(hearts < 0):
@@ -106,6 +112,7 @@ func getCost(field):
 # curr - current position
 # targ - a target position
 func h_fn(curr, target):
+	var h = min(target[0]-curr[0],target[1]-curr[1])
 	return 0	
 	
 # currCost - currentCost
@@ -143,21 +150,25 @@ func adjacent(currentPosition, can_roll = true):
 			continue	
 		if(grid.object_grid[next[0]][next[1]][0]!=Grid.Kind.WALL):
 			if(i==0):
+				continue
 				if(grid.object_grid[pot_adj_step[1][0]][pot_adj_step[1][1]][0]!=Grid.Kind.WALL &&
 				   grid.object_grid[pot_adj_step[3][0]][pot_adj_step[3][1]][0]!=Grid.Kind.WALL):
 					adj.append([STEP, Vector2(next[0],next[1]),1.1])
 				continue
 			if(i==2):
+				continue
 				if(grid.object_grid[pot_adj_step[1][0]][pot_adj_step[1][1]][0]!=Grid.Kind.WALL &&
 				   grid.object_grid[pot_adj_step[4][0]][pot_adj_step[4][1]][0]!=Grid.Kind.WALL):
 					adj.append([STEP, Vector2(next[0],next[1]),1.1])
 				continue
 			if(i==5):
+				continue
 				if(grid.object_grid[pot_adj_step[3][0]][pot_adj_step[3][1]][0]!=Grid.Kind.WALL &&
 				   grid.object_grid[pot_adj_step[6][0]][pot_adj_step[6][1]][0]!=Grid.Kind.WALL):
 					adj.append([STEP, Vector2(next[0],next[1]),1.1])
 				continue
 			if(i==7):
+				continue
 				if(grid.object_grid[pot_adj_step[4][0]][pot_adj_step[4][1]][0]!=Grid.Kind.WALL &&
 				   grid.object_grid[pot_adj_step[6][0]][pot_adj_step[6][1]][0]!=Grid.Kind.WALL):
 					adj.append([STEP, Vector2(next[0],next[1]),1.1])
@@ -267,11 +278,15 @@ func hit_or_miss(target, current, delta):
 
 func movement_decider_ai(target, kindOfStep, delta):
 	var currentPosition = grid._pixel_to_grid_coords(global_position)
-	var currentPixel = global_position
-	var hitPixelTarget = is_hittable()
 	
-	if hitPixelTarget!=null:
-		hit_or_miss(hitPixelTarget, currentPixel, delta*4)
+	if hitDelta >= hitTreshhold && randf() <0.5:
+		hitDelta -= hitTreshhold
+		var currentPixel = global_position
+		var hitPixelTarget = is_hittable()
+		
+		if hitPixelTarget!=null:
+			hit_or_miss(hitPixelTarget, currentPixel, delta*4)
+			return
 
 	else:
 		if(kindOfStep==STEP):
@@ -288,12 +303,15 @@ func movement_decider_ai(target, kindOfStep, delta):
 
 
 func movement_execution(delta):
-	var currentPixel = global_position
-	var hitPixelTarget = is_hittable()
 	
-	if hitPixelTarget!=null:
-		hit_or_miss(hitPixelTarget, currentPixel, delta*4)
-		return
+	if hitDelta >= hitTreshhold && randf() <0.5:
+		hitDelta -= hitTreshhold
+		var currentPixel = global_position
+		var hitPixelTarget = is_hittable()
+		
+		if hitPixelTarget!=null:
+			hit_or_miss(hitPixelTarget, currentPixel, delta*4)
+			return
 	
 	if(targetFieldUsed):
 		var cur = grid._pixel_to_grid_coords(global_position)
@@ -320,16 +338,19 @@ func reset_exeution_state(delta):
 
 
 					
-func makeMove(delta):	
-	if ExecutionState == AI_MOVE:
-		threadDelta = 0
-		var MoveAdvice = movement_calulcaotr()
-		if(MoveAdvice==null):
-			return
-		var target = MoveAdvice[1]
-		movement_decider_ai(target, MoveAdvice[0], delta)		
+func makeMove(delta):
+	hitDelta += delta
+	aiDelta+=delta
+	if(aiDelta>aiTreshhold):
+		if ExecutionState == AI_MOVE:
+			threadDelta = 0
+			var MoveAdvice = movement_calulcaotr()
+			if(MoveAdvice==null):
+				return
+			var target = MoveAdvice[1]
+			movement_decider_ai(target, MoveAdvice[0], delta)		
 		
-	elif ExecutionState == EXECUTING:
+	if ExecutionState == EXECUTING:
 		movement_execution(delta)
 		reset_exeution_state(delta)
 		

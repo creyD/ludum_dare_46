@@ -21,7 +21,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 20
+frame = 41
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 visible = false
@@ -40,7 +40,7 @@ __meta__ = {
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 265.543, -16 )
+position = Vector2( 448, 32 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 344, 125.768 )

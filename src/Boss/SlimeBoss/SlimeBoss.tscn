@@ -20,7 +20,7 @@ radius = 18.0
 height = 18.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 18.0
+radius = 20.0
 height = 18.0
 
 [sub_resource type="CircleShape2D" id=3]
@@ -448,7 +448,7 @@ states/move/position = Vector2( 143, 70 )
 
 [node name="SlimeBoss" type="KinematicBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 131
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
@@ -491,9 +491,11 @@ collision_layer = 4
 position = Vector2( 0, -15 )
 shape = SubResource( 1 )
 
-[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+[node name="Hurtbox" parent="." groups=[
+"HittableByPlayer",
+] instance=ExtResource( 1 )]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 128
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -15 )
