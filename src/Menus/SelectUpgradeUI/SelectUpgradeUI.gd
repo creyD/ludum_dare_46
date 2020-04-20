@@ -16,6 +16,7 @@ func _ready():
 func starting():
 	shownCards = []
 	if (showCards):
+		$Button.hide()
 		randcards[0] = randi() % DrNDrPre.cards.EMPTY
 		while(DrNDr.usedCards[0]==randcards[0] or
 			 DrNDr.usedCards[1]==randcards[0] or
@@ -39,7 +40,6 @@ func starting():
 			 DrNDr.usedCards[3]==randcards[2] or
 			 DrNDr.usedCards[4]==randcards[2]):
 			randcards[2] = randi() % DrNDrPre.cards.EMPTY
-	
 
 		for i in range(3):
 			match randcards[i]:
@@ -57,8 +57,8 @@ func starting():
 					shownCards.append(load("res://Objects/Traps/Flame/FlameCard.tscn").instance())
 				DrNDrPre.cards.SPIKE:
 					shownCards.append(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
-				#DrNDrPre.cards.SLIME:
-					#shownCards.append(load("res://Objects/Slime/SlimeCard.tscn").instance())
+				DrNDrPre.cards.SLIME:
+					shownCards.append(load("res://Objects/Slime/SlimeCard.tscn").instance())
 		for i in range(3):
 			$Cards.add_child(shownCards[i])
 		shownCards[0].set_begin (cardPositions[0])

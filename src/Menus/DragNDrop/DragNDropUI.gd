@@ -1,7 +1,7 @@
 extends Control
 
 var usedCards = [cards.BARREL,cards.BEAR,cards.EMPTY,cards.EMPTY,cards.EMPTY]
-var cardPositions = [Vector2(10,223), Vector2(60,223), Vector2(110,223), Vector2(160,223), Vector2(210, 223)]
+var cardPositions = [Vector2(10,223), Vector2(65,223), Vector2(120,223), Vector2(175,223), Vector2(230, 223)]
 
 enum cards {
 	BANANA,
@@ -11,6 +11,7 @@ enum cards {
 	BEAR,
 	FLAME,
 	SPIKE,
+	SLIME,
 	EMPTY
 }
 
@@ -25,7 +26,6 @@ func update_cards():
 		index += 1
 	var newchild = []
 	for card in range(index):
-		
 		match usedCards[card]:
 			cards.BANANA:
 				newchild.append(load("res://Objects/Banana/BananaCard.tscn").instance())
@@ -41,8 +41,8 @@ func update_cards():
 				newchild.append(load("res://Objects/Traps/Flame/FlameCard.tscn").instance())
 			cards.SPIKE:
 				newchild.append(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
-			#cards.SLIME:
-				#newchild=(load("res://Objects/Slime/SlimeCard.tscn").instance())
+			cards.SLIME:
+				newchild.append(load("res://Objects/Slime/SlimeCard.tscn").instance())
 	for i in range(index):
 		$CardsDisplay.add_child(newchild[i])
 		

@@ -5,9 +5,9 @@
 [ext_resource path="res://Objects/Card/level1.png" type="Texture" id=3]
 [ext_resource path="res://Objects/Card/level0.png" type="Texture" id=4]
 [ext_resource path="res://Objects/Card/card.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Barriere/Barriere.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Barriere/wall_icon.png" type="Texture" id=7]
-[ext_resource path="res://Objects/Barriere/wall_set.png" type="Texture" id=8]
+[ext_resource path="res://Objects/Slime/Slime.tscn" type="PackedScene" id=6]
+[ext_resource path="res://testSprites/slime.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Slime/slime_icon.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,22 +27,22 @@ animations = [ {
 "speed": 60.0
 } ]
 
-[node name="GenericCard3" type="TextureRect"]
-margin_left = 124.812
-margin_top = 220.859
-margin_right = 156.812
-margin_bottom = 252.859
-texture = ExtResource( 7 )
+[node name="SlimeCard" type="TextureRect"]
+margin_left = 124.0
+margin_top = 220.0
+margin_right = 156.0
+margin_bottom = 252.0
+texture = ExtResource( 8 )
 expand = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 Item = ExtResource( 6 )
-PreviewIcon = ExtResource( 8 )
+PreviewIcon = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 15.729, 15.7929 )
+position = Vector2( 15.729, 15.793 )
 z_index = -1
 texture = ExtResource( 5 )
 
