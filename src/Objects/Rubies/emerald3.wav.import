@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/emerald3.wav-e58c6f1da5e6e50b4a361287d9b58f80.sample"
+
+[deps]
+
+source_file="res://Objects/Rubies/emerald3.wav"
+dest_files=[ "res://.import/emerald3.wav-e58c6f1da5e6e50b4a361287d9b58f80.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
