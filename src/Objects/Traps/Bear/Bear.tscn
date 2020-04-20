@@ -80,6 +80,7 @@ shape = SubResource( 2 )
 [node name="Hurtbox" parent="." instance=ExtResource( 35 )]
 collision_layer = 32
 collision_mask = 0
+slowdown_value = 300
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 rotation = 1.5708

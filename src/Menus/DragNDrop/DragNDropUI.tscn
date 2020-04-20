@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Objects/Traps/Spike/SpikeCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/DragNDrop/DragSink.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Objects/Banana/BananaCard.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Traps/Flame/FlameCard.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/Traps/Bear/BearCard.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/Barriere/BarrierCard.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Barrel/BarrelCard.tscn" type="PackedScene" id=6]
@@ -17,8 +17,6 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="GenericCard1" parent="." instance=ExtResource( 3 )]
 
 [node name="GenericCard2" parent="." instance=ExtResource( 4 )]
 
@@ -38,3 +36,9 @@ margin_left = 236.922
 margin_top = 221.453
 margin_right = 268.922
 margin_bottom = 253.453
+
+[node name="FlameCard" parent="." instance=ExtResource( 3 )]
+margin_left = 12.6684
+margin_top = 221.458
+margin_right = 44.6684
+margin_bottom = 253.458

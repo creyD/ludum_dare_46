@@ -93,5 +93,6 @@ collision_layer = 16
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( -0.157784, -0.157772 )
 shape = SubResource( 2 )
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 
 [editable path="Hitbox"]
