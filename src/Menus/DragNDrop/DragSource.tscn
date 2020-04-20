@@ -1,8 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Card/card.png" type="Texture" id=2]
 [ext_resource path="res://Menus/DragNDrop/DragSource.gd" type="Script" id=3]
+[ext_resource path="res://Objects/Card/level0.png" type="Texture" id=4]
+[ext_resource path="res://Objects/Card/level2.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Card/level1.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "lvl0",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "lvl2",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "lvl1",
+"speed": 60.0
+} ]
 
 [node name="DragSource" type="TextureRect"]
 margin_left = 10.7364
@@ -17,6 +38,11 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 16.0791, 16.0117 )
+position = Vector2( 15.729, 15.7929 )
 z_index = -1
 texture = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 33.1035, 40.3068 )
+frames = SubResource( 1 )
+animation = "lvl0"
