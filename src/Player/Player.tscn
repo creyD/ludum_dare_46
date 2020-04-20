@@ -617,10 +617,10 @@ height = 0.2
 
 [sub_resource type="CapsuleShape2D" id=48]
 radius = 4.03497
-height = 6.99104
+height = 9.42006
 
 [sub_resource type="CircleShape2D" id=51]
-radius = 14.7132
+radius = 13.3924
 
 [sub_resource type="DynamicFont" id=50]
 size = 12
@@ -629,6 +629,7 @@ font_data = ExtResource( 6 )
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.1, 1.1 )
 script = ExtResource( 1 )
+ROLL_SPEED = 120
 FRICTION = 270
 
 [node name="Kind" parent="." instance=ExtResource( 7 )]

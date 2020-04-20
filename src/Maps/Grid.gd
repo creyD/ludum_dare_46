@@ -7,7 +7,7 @@ var prio_grid : Array = []
 var used_grid : Array = []
 var time_passed := 0.0
 var offset
-export(float, 0, 42.0) var refresh_rate = 1
+export(float, 0, 42.0) var refresh_rate = 0.0
 
 
 func _draw_object_grid():

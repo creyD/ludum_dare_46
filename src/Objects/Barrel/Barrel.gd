@@ -1,9 +1,9 @@
 extends StaticBody2D
 
 export(int,1,10) var health = 1
-var GreenDrop = 0.5
-var BlueDrop = 0.4
-var RedDrop = 0.2
+var GreenDrop = 0.4
+var BlueDrop = 0.5
+var RedDrop = 0.8
 var Heart = 0.2
 
 func offset_vec():

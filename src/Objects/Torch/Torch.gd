@@ -1,7 +1,7 @@
 extends Node2D
 
 export(int, 1, 5) var lifePoints = 3
-export(int, 1, 30) var spawnRate = 5.0
+export(float, 0, 30) var spawnRate = 5.0
 var Minion = load("res://Boss/Minion.tscn")
 
 var elapsedTime = 0.0
