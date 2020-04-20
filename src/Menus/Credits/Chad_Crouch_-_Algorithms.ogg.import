@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Chad_Crouch_-_Algorithms.ogg-0b5876f6436c5da97190209
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

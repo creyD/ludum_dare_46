@@ -11,5 +11,5 @@ dest_files=[ "res://.import/menu_slider3.ogg-a3cde724c66919d1cabbaa1ccadfedf2.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
