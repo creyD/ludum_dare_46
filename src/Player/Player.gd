@@ -150,24 +150,13 @@ func movement_hit():
 func hit_finished():
 	grid._update_grid()
 	movementState = moveState.IDLE
-	ai_movement_state = STEP
-	ExecutionState = EXECUTING
+	ExecutionState = AI_MOVE
 	actionFieldUsed = false
 
 
 func movement_roll():
 	velocity = rollvector * ROLL_SPEED
 	animation_state.change_state("roll")
-	
-	"""
-	# Roll.gd
-	func enter():
-		owner.animation_state.travel("roll")
-	
-	func update():
-		owner.velocity = rollvector * ROLL_SPEED
-	"""
-	ExecutionState = EXECUTING
 
 
 func roll_finished():
