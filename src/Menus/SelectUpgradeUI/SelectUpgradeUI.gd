@@ -55,9 +55,9 @@ func starting():
 				shownCards.append(load("res://Objects/Slime/SlimeCard.tscn").instance())
 	for i in range(3):
 		$Cards.add_child(shownCards[i])
-	shownCards[0].rect_position = [100,150]
-	shownCards[1].rect_position = Vector2(200,150)
-	shownCards[2].rect_position = Vector2(300,150)
+	shownCards[0].set_begin ( Vector2(100,150))
+	shownCards[1].set_begin (  Vector2(200,150))
+	shownCards[2].set_begin ( Vector2(300,150))
 	
 	
 func _on_Button_pressed():
