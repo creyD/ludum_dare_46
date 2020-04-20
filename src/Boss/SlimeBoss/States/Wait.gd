@@ -1,7 +1,6 @@
-extends "res://Overlap/StateMachine/State.gd"
+extends "res://Boss/SlimeBoss/States/BossState.gd"
 
 func enter():
-	owner.get_node('AnimationPlayer').play('idle')
 	$Timer.start()
 
 func update(delta):
