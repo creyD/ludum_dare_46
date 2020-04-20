@@ -210,7 +210,6 @@ quit = true
 
 [node name="Label" parent="VBoxContainer/QuitButton" index="0"]
 text = "Quit"
-[connection signal="animation_finished" from="Startup" to="." method="_on_Startup_animation_finished"]
 
 [editable path="VBoxContainer/NewGameButton"]
 

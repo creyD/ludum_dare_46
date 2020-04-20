@@ -3,8 +3,7 @@ class_name TitleScreen
 
 signal startup_finished
 
-export(int) var startup_finish_frame = 65
-export(int) var loop_frame = 80
+export(int) var startup_finish_frame = 538
 
 onready var new_game_button = $VBoxContainer/NewGameButton
 onready var animation_player = $AnimationPlayer
@@ -18,10 +17,11 @@ func _ready():
 	SoundControler.pub_play_music("res://Menus/Sounds/menu_theme.ogg", false)
 
 func _process(_delta):
-	if Input.is_action_just_pressed("skip"):
-		startup.frame = startup_finish_frame
+	if not finished_once and Input.is_action_just_pressed("skip"):
+		startup.animation = "loop"
+		startup.frame = 0
 	
-	if startup.frame > startup_finish_frame:
+	if startup.animation == "loop":
 		if not finished_once:
 			emit_signal("startup_finished")
 			new_game_button.ignore_once = true # Pauls russian solution for ignoring the first sound click in the titlescreen
@@ -31,7 +31,3 @@ func _process(_delta):
 
 func _exit_tree():
 	SoundControler.pub_stop_music()
-
-func _on_Startup_animation_finished():
-	startup.play("loop")
-
