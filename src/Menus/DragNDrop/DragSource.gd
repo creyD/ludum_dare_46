@@ -1,5 +1,6 @@
 extends TextureRect
 # CardDeck
+var canNotPlace = false
 export var Item:PackedScene
 export var PreviewIcon:Texture 
 export var DeleteOnGrab:bool = false
@@ -8,6 +9,8 @@ var card_level = 0
 
 #if a drag is initiated here 
 func get_drag_data(_pos):
+	if (canNotPlace):
+		return null
 	var ctrl = Control.new()
 	var TR = TextureRect.new()
 	TR.texture = get_resized_texture(PreviewIcon, self.rect_size[0], self.rect_size[1])

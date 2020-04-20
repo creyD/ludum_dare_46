@@ -1,49 +1,55 @@
 extends Control
 
 var usedCards = [cards.BARREL,cards.BEAR,cards.EMPTY,cards.EMPTY,cards.EMPTY]
-onready var HBox = $HBoxContainer
+var cardPositions = [Vector2(10,223), Vector2(65,223), Vector2(120,223), Vector2(175,223), Vector2(230, 223)]
 
 enum cards {
 	BANANA,
 	BARRIERE,
 	BARREL,
-	SLIME,
 	TORCH,
 	BEAR,
 	FLAME,
 	SPIKE,
+	SLIME,
 	EMPTY
 }
 
 func _ready():
 	update_cards()
-	pass
 
 export var ObjectParent:NodePath
 
 func update_cards():
-	for child in HBox.get_children():
-		child.queue_free()
-	
-	for card in usedCards:
-		var newchild
-		match card:
+	var index = 0
+	while index < 5 and usedCards[index] != cards.EMPTY:
+		index += 1
+	var newchild = []
+	for card in range(index):
+		match usedCards[card]:
 			cards.BANANA:
-				newchild=load("res://Objects/Banana/BananaCard.tscn").instance()
+				newchild.append(load("res://Objects/Banana/BananaCard.tscn").instance())
 			cards.BARRIERE:
-				newchild=(load("res://Objects/Barriere/BarrierCard.tscn").instance())
+				newchild.append(load("res://Objects/Barriere/BarrierCard.tscn").instance())
 			cards.BARREL:
-				newchild=(load("res://Objects/Barrel/BarrelCard.tscn").instance())
+				newchild.append(load("res://Objects/Barrel/BarrelCard.tscn").instance())
 			cards.TORCH:
-				newchild=(load("res://Objects/Torch/TorchCard.tscn").instance())
+				newchild.append(load("res://Objects/Torch/TorchCard.tscn").instance())
 			cards.BEAR:
-				newchild=(load("res://Objects/Traps/Bear/BearCard.tscn").instance())
+				newchild.append(load("res://Objects/Traps/Bear/BearCard.tscn").instance())
 			cards.FLAME:
-				newchild=(load("res://Objects/Traps/Flame/FlameCard.tscn").instance())
+				newchild.append(load("res://Objects/Traps/Flame/FlameCard.tscn").instance())
 			cards.SPIKE:
-				newchild=(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
+				newchild.append(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
 			cards.SLIME:
-				newchild=(load("res://Objects/Slime/SlimeCard.tscn").instance())
-		if(newchild!=null):
-			HBox.add_child(newchild)
+				newchild.append(load("res://Objects/Slime/SlimeCard.tscn").instance())
+	for i in range(index):
+		$CardsDisplay.add_child(newchild[i])
+		
+	for i in range(index):
+		newchild[i].set_begin(cardPositions[i])
 
+
+	for i in range(index):
+		newchild[i].margin_bottom = newchild[i].margin_top+32
+		newchild[i].margin_right = newchild[i].margin_left+32
