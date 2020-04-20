@@ -21,26 +21,23 @@
 [ext_resource path="res://Boss/SlimeBoss/States/ReturnToCenter.gd" type="Script" id=19]
 [ext_resource path="res://Boss/SlimeBoss/States/Stomp.gd" type="Script" id=20]
 
-[sub_resource type="CircleShape2D" id=15]
+[sub_resource type="CircleShape2D" id=1]
 radius = 60.0
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 18.0
-height = 18.0
+[sub_resource type="CircleShape2D" id=17]
+radius = 16.0312
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 18.0
-height = 18.0
+[sub_resource type="CircleShape2D" id=16]
+radius = 24.0208
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 150.0
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 8.0
 height = 32.0
 
-[sub_resource type="Animation" id=5]
-resource_name = "ChargeDown"
+[sub_resource type="Animation" id=6]
 length = 0.45
 step = 0.025
 tracks/0/type = "value"
@@ -116,8 +113,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "ChargeLeft"
+[sub_resource type="Animation" id=7]
 length = 0.45
 step = 0.025
 tracks/0/type = "value"
@@ -193,8 +189,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "ChargeRight"
+[sub_resource type="Animation" id=8]
 length = 0.45
 step = 0.025
 tracks/0/type = "value"
@@ -270,8 +265,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "ChargeUp"
+[sub_resource type="Animation" id=9]
 length = 0.45
 step = 0.025
 tracks/0/type = "value"
@@ -347,8 +341,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "Charging"
+[sub_resource type="Animation" id=10]
 length = 1.9
 step = 0.025
 tracks/0/type = "value"
@@ -424,7 +417,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 1.9
 step = 0.025
 tracks/0/type = "value"
@@ -500,7 +493,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 2.66666
 step = 0.0111111
 tracks/0/type = "value"
@@ -576,7 +569,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 1.28333
 step = 0.0166667
 tracks/0/type = "value"
@@ -652,7 +645,7 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 1.28333
 step = 0.0166667
 tracks/0/type = "value"
@@ -728,7 +721,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 1.28333
 step = 0.0166667
 tracks/0/type = "value"
@@ -806,7 +799,7 @@ tracks/5/keys = {
 
 [node name="SlimeBoss" type="KinematicBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
@@ -879,7 +872,7 @@ hframes = 11
 [node name="StompHitbox" parent="." instance=ExtResource( 2 )]
 
 [node name="CollisionShape2D" parent="StompHitbox" index="0"]
-shape = SubResource( 15 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
@@ -887,7 +880,7 @@ collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, -15 )
-shape = SubResource( 1 )
+shape = SubResource( 17 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
 collision_layer = 4
@@ -895,19 +888,19 @@ collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -15 )
-shape = SubResource( 2 )
+shape = SubResource( 16 )
 
 [node name="HeroCloseZone" type="Area2D" parent="."]
 collision_layer = 0
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeroCloseZone"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.52588e-05, 0 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="DebugLabel" type="Label" parent="."]
 visible = false
@@ -922,16 +915,16 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "MoveRight"
-anims/ChargeDown = SubResource( 5 )
-anims/ChargeLeft = SubResource( 6 )
-anims/ChargeRight = SubResource( 7 )
-anims/ChargeUp = SubResource( 8 )
-anims/Charging = SubResource( 9 )
-anims/FightStart = SubResource( 10 )
-anims/MoveDown = SubResource( 11 )
-anims/MoveLeft = SubResource( 12 )
-anims/MoveRight = SubResource( 13 )
-anims/MoveUp = SubResource( 14 )
+anims/ChargeDown = SubResource( 6 )
+anims/ChargeLeft = SubResource( 7 )
+anims/ChargeRight = SubResource( 8 )
+anims/ChargeUp = SubResource( 9 )
+anims/Charging = SubResource( 10 )
+anims/FightStart = SubResource( 11 )
+anims/MoveDown = SubResource( 12 )
+anims/MoveLeft = SubResource( 13 )
+anims/MoveRight = SubResource( 14 )
+anims/MoveUp = SubResource( 15 )
 [connection signal="health_changed" from="Stats" to="." method="_on_Stats_health_changed"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

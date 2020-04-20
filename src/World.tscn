@@ -23,7 +23,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 5
+frame = 40
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 visible = false
