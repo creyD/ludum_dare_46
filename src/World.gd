@@ -3,7 +3,7 @@ extends Node2D
 export(int) var WinRounds= 10
 export(PackedScene) var HeroTemplate
 export(Vector2) var InitialSpawnPoint=Vector2(344,125)
-export(Rect2) var SpawnBoxRange=Rect2(20,20,450,180)
+export(Rect2) var SpawnBoxRange=Rect2(40,40,450,180)
 export(float) var MinDistanceToBoss=100.0
 
 

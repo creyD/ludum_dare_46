@@ -294,6 +294,7 @@ __meta__ = {
 }
 
 [node name="BossStateDisplay" type="Panel" parent="CanvasLayer/DebugLabel"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -80.0
