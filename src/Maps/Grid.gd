@@ -172,7 +172,7 @@ func _update_grid():
 		var node_kind = node.get_node("Kind")
 		var grid_corrds = _pixel_to_grid_coords(node.global_position)
 		if (is_in_coord(grid_corrds)):
-			if(node_kind.general != Kind.FIELD and node_kind.general != Kind.WALL):
+			if(node_kind.general != Kind.FIELD): #and node_kind.general != Kind.WALL):
 				object_grid[grid_corrds.x][grid_corrds.y].push_back(node_kind.general)
 			prio_grid[grid_corrds.x][grid_corrds.y].push_back(node_kind.kind)
 	
