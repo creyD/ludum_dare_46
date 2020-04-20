@@ -56,7 +56,7 @@ func _on_Stats_health_changed(new_health):
 	elif _phase == PHASES.PHASE_TWO and new_health == 1:
 		_change_phase(PHASES.PHASE_THREE)
 	elif _phase == PHASES.PHASE_THREE and new_health < 1:
-		queue_free()
+		go_to_next_state($States/Die)
 
 
 func go_to_next_state(state_override=null):
@@ -98,6 +98,10 @@ func _decide_on_next_state():
 		return $States/FightStart
 	if state_active == $States/FightStart:
 		return $States/ChargeSequence
+	# Death
+	if state_active == $States/Die:
+		queue_free()
+		# return $States/Dead
 	
 	if _phase == PHASES.PHASE_ONE:
 		if angry_phases_done < 1:
@@ -170,11 +174,7 @@ func _decide_on_next_state():
 			if state_active == $States/ChargeSequence:
 				return $States/Stomp
 
-#	# Death
-#	if state_active == $States/Die:
-#		queue_free()
-#		return $States/Dead
-#
+	
 
 
 
