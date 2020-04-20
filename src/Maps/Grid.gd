@@ -38,7 +38,7 @@ func _reset_grids():
 
 
 func _ready():
-	var walls = get_tree().current_scene.get_child(1)
+	var walls = get_tree().current_scene.get_node("../FloorTileMap")
 	offset = walls.global_position
 	#todo put in grid_lul
 	for x in range(14):
@@ -117,9 +117,9 @@ func get_nearest(position, kind):
 
 func _update_grid():
 	_reset_grids()
-	var world = get_tree().current_scene.get_child(2)
+	var world = get_tree().current_scene.get_node("../YSort")
 	for node in world.get_children():
-		var node_kind = node.get_child(0)
+		var node_kind = node.get_node("Kind")
 		var grid_corrds = _pixel_to_grid_coords(node.global_position)
 		if (_is_in_grid(grid_corrds)):
 			if(node_kind.general != Kind.FIELD and node_kind.general != Kind.WALL):

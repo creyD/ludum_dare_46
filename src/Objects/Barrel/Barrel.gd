@@ -21,7 +21,7 @@ func _on_Hurtbox_area_entered(area):
 	var Hearts = load("res://Objects/Heart/Heart.tscn")
 	
 	#index of ysort
-	var world = get_tree().current_scene.get_child(2)
+	var world = get_tree().current_scene.get_node("YSort")
 	if(randf()<GreenDrop):
 		var green = GreenRubies.instance()
 		world.add_child(green)
