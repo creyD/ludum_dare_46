@@ -34,6 +34,7 @@ func hero_has_died():
 	var point = determine_spawnpoint()
 	spawn_new_hero(point.x,point.y)
 	$CanvasLayer/SelectUpgradeUI.show()
+	$CanvasLayer/SelectUpgradeUI.starting()
 
 
 func spawn_new_hero(x:float,y:float):
