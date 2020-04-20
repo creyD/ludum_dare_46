@@ -51,27 +51,28 @@ func _on_Stats_no_health():
 	go_to_next_state($States/Die)
 
 func _on_Stats_health_changed(new_health):
-	assert(new_health > -1)
-	assert(new_health < $Stats.max_health)
-	
 	if _phase == PHASES.PHASE_ONE and new_health == 2:
 		_change_phase(PHASES.PHASE_TWO)
-	if _phase == PHASES.PHASE_TWO and new_health == 1:
+	elif _phase == PHASES.PHASE_TWO and new_health == 1:
 		_change_phase(PHASES.PHASE_THREE)
+	elif _phase == PHASES.PHASE_THREE and new_health < 1:
+		queue_free()
 
 
 func go_to_next_state(state_override=null):
 	if state_active:
 		state_active.exit()
-		
 	if state_override != null:
 		state_active = state_override
 	else:
 		state_active = _decide_on_next_state()
+
 	emit_signal("state_changed", state_active.name)
+
 	state_active.enter()
 
 func _change_phase(new_phase):
+	set_invincible(true)
 	var phase_name = ""
 	match new_phase:
 		PHASES.PHASE_ONE:
@@ -96,7 +97,6 @@ func _decide_on_next_state():
 		set_invincible(true)
 		return $States/FightStart
 	if state_active == $States/FightStart:
-		set_invincible(false)
 		return $States/ChargeSequence
 	
 	if _phase == PHASES.PHASE_ONE:
@@ -129,6 +129,7 @@ func _decide_on_next_state():
 				if state_active == $States/Stomp:
 					sequence_cycles += 1
 					return $States/ChargeSequence
+				return $States/ChargeSequence
 			else:
 				angry_phases_done = 2
 				sequence_cycles = 0
@@ -153,6 +154,7 @@ func _decide_on_next_state():
 				if state_active == $States/Stomp:
 					sequence_cycles += 1
 					return $States/ChargeSequence
+				return $States/ChargeSequence
 			else:
 				angry_phases_done = 3
 				sequence_cycles = 0
@@ -173,51 +175,7 @@ func _decide_on_next_state():
 #		queue_free()
 #		return $States/Dead
 #
-#	# PHASE ONE
-#	if _phase == PHASES.PHASE_ONE:
-#		if state_active == $States/RoamSequence:
-#			sequence_cycles += 1
-#			if sequence_cycles < 2:
-#				return $States/RoamSequence
-#			else:
-#				sequence_cycles = 0
-#				return $States/Stomp
-#		if state_active == $States/Stomp:
-#			return $States/RoamSequence
-#
-#	# PHASE TWO
-#	elif _phase == PHASES.PHASE_TWO:
-#		if state_active == $States/RoamSequence:
-#			return $States/Stomp
-#		if state_active == $States/Stomp:
-#			if sequence_cycles < 2:
-#				sequence_cycles += 1
-#				return $States/Stomp
-#			else:
-#				sequence_cycles = 0
-#				return $States/ChargeSequence
-#		if state_active == $States/ChargeSequence:
-#			return $States/RoamSequence
-#
-#
-#	# PHASE THREE
-#	elif _phase == PHASES.PHASE_THREE:
-#		if state_active == $States/RoamSequence:
-#			return $States/Stomp
-#		if state_active == $States/Stomp:
-#			if sequence_cycles < 2:
-#				sequence_cycles += 1
-#				return $States/Stomp
-#			else:
-#				sequence_cycles = 0
-#				return $States/ChargeSequence
-#		if state_active == $States/ChargeSequence:
-#			if sequence_cycles < 2:
-#				sequence_cycles += 1
-#				return $States/ChargeSequence
-#			else:
-#				sequence_cycles = 0
-#				return $States/Stomp
+
 
 
 func set_invincible(value):
