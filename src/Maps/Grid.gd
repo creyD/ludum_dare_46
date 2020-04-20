@@ -7,7 +7,7 @@ var prio_grid : Array = []
 var used_grid : Array = []
 var time_passed := 0.0
 var offset
-export(float, 0, 42.0) var refresh_rate = 1
+export(float, 0, 42.0) var refresh_rate = 0.0
 
 
 func _draw_object_grid():
@@ -38,6 +38,7 @@ func _reset_grids():
 
 
 func _ready():
+
 	var walls = get_tree().current_scene.get_node("FloorTileMap")
 	offset = walls.global_position
 	#todo put in grid_lul
@@ -64,6 +65,9 @@ func reset_history():
 
 
 func countTargets(table):
+	for i in range(table.size()):
+		table[i]=0
+	
 	for x in range(14):
 		for y in range(7):
 			for i in prio_grid[x][y]:
@@ -99,6 +103,8 @@ func get_nearest(position, kind):
 			for i in prio_grid[x][y]:
 				if(i == kind):
 					list.append([x, y])
+	if list.size() == 0:
+		return[-1,-1]
 	var dist = []
 	for field in list:
 		var tmp = sqrt(pow(position[0] - field[0], 2) + pow(position[1] - field[1], 2))
@@ -112,9 +118,9 @@ func get_nearest(position, kind):
 
 func _update_grid():
 	_reset_grids()
-	var world = get_tree().current_scene.get_child(2)
+	var world = get_tree().current_scene.get_node("../YSort")
 	for node in world.get_children():
-		var node_kind = node.get_child(0)
+		var node_kind = node.get_node("Kind")
 		var grid_corrds = _pixel_to_grid_coords(node.global_position)
 		if (_is_in_grid(grid_corrds)):
 			if(node_kind.general != Kind.FIELD and node_kind.general != Kind.WALL):

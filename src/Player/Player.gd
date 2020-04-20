@@ -4,7 +4,7 @@ class_name Player
 This is an example player controller script created by Paul
 """
 var velocity := Vector2.ZERO
-var rollvector := Vector2.ZERO
+var rollvector := Vector2(-1,0)
 
 # This is how you export variables with ranges to the editor window
 export(bool) var debug := false
@@ -77,7 +77,7 @@ func _physics_process(delta):
 		elif movementState == moveState.IDLE:
 			movement_idle()
 		else:
-			movement_run(Vector2(0,0), delta)
+			movement_run(Vector2.ZERO, delta)
 		makeMove(delta)
 	move()
 	$"Effects/HealEffect".emitting = heal_per_second > 0
@@ -148,8 +148,11 @@ func movement_hit():
 
 
 func hit_finished():
+	grid._update_grid()
 	movementState = moveState.IDLE
-	ExecutionState = AI_MOVE
+	ai_movement_state = STEP
+	ExecutionState = EXECUTING
+	actionFieldUsed = false
 
 
 func movement_roll():
@@ -174,21 +177,23 @@ func roll_finished():
 
 
 func _on_Hurtbox_area_entered(area):
-	if area.is_in_group("hitbox"):
-		player_stats.health -= area.damage
-		
-		if area.damage > 0:
-			damage_per_second += area.damage
-		else:
-			heal_per_second += abs(area.damage)
+	player_stats.health -= area.damage
+	
+	if area.damage > 0:
+		damage_per_second += area.damage
+		pass
+	else:
+		heal_per_second += abs(area.damage)
+		pass
 
 
 func _on_Hurtbox_area_exited(area):
-	if area.is_in_group("hitbox"):
-		if area.damage > 0:
-			damage_per_second -= area.damage
-		else:
-			heal_per_second -= abs(area.damage)
+	if area.damage > 0:
+		damage_per_second -= area.damage
+		pass
+	else:
+		heal_per_second -= abs(area.damage)
+		pass
 
 
 func _on_Stats_no_health():
@@ -209,4 +214,14 @@ func movement_run(direction, delta):
 func movement_idle():
 	movementState = moveState.IDLE
 	velocity = Vector2.ZERO
-	animation_state.change_scene("idle")
+	animation_state.change_state("idle")
+
+
+func _on_SwordRange_area_entered(area):
+	if(area.is_in_group("HittableByPlayer")):
+		areaRefList.push_back(area.get_instance_id())
+
+
+func _on_SwordRange_area_exited(area):
+	if(area.is_in_group("HittableByPlayer")):
+		areaRefList.erase(area.get_instance_id())
