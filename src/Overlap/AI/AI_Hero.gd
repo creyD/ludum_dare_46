@@ -103,17 +103,18 @@ func getCost(field):
 	for i in grid.object_grid[field.x][field.y]:
 			match i:
 				Grid.Kind.DAMAGE: 
-					cost += 100
+					cost += 15
 				Grid.Kind.SLOW: 
-					cost += 1	
+					cost += 4
 	return cost
 	
 #return an heurestic of distance
 # curr - current position
 # targ - a target position
 func h_fn(curr, target):
+	return 0
 	var h = min(target[0]-curr[0],target[1]-curr[1])
-	return 0	
+	return h	
 	
 # currCost - currentCost
 # target - position of the field to move to
