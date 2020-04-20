@@ -1,7 +1,7 @@
 extends Control
 
 var usedCards = [cards.BARREL,cards.BEAR,cards.EMPTY,cards.EMPTY,cards.EMPTY]
-var cardPositions = [Vector2(0,150), Vector2(50,150), Vector2(100,150), Vector2(150,150), Vector2(200, 150)]
+var cardPositions = [Vector2(10,223), Vector2(60,223), Vector2(110,223), Vector2(160,223), Vector2(210, 223)]
 
 enum cards {
 	BANANA,
@@ -23,9 +23,9 @@ func update_cards():
 	var index = 0
 	while index < 5 and usedCards[index] != cards.EMPTY:
 		index += 1
-
-	for card in range(index + 1):
-		var newchild = []
+	var newchild = []
+	for card in range(index):
+		
 		match usedCards[card]:
 			cards.BANANA:
 				newchild.append(load("res://Objects/Banana/BananaCard.tscn").instance())
@@ -43,13 +43,13 @@ func update_cards():
 				newchild.append(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
 			#cards.SLIME:
 				#newchild=(load("res://Objects/Slime/SlimeCard.tscn").instance())
-	for i in range(index + 1):
-		$CardsDisplay.add_child(shownCards[i])
-	shownCards[0].set_begin (cardPositions[0])
-	shownCards[1].set_begin (cardPositions[1])
-	shownCards[2].set_begin (cardPositions[2])
+	for i in range(index):
+		$CardsDisplay.add_child(newchild[i])
+		
+	for i in range(index):
+		newchild[i].set_begin(cardPositions[i])
 
-	for i in range(index + 1):
-		shownCards[i].canNotPlace = true
-		shownCards[i].margin_bottom = shownCards[i].margin_top+32
-		shownCards[i].margin_right = shownCards[i].margin_left+32
+
+	for i in range(index):
+		newchild[i].margin_bottom = newchild[i].margin_top+32
+		newchild[i].margin_right = newchild[i].margin_left+32

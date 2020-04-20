@@ -14,6 +14,7 @@ func _ready():
 	
 
 func starting():
+	shownCards = []
 	if (showCards):
 		randcards[0] = randi() % DrNDrPre.cards.EMPTY
 		while(DrNDr.usedCards[0]==randcards[0] or
@@ -39,7 +40,7 @@ func starting():
 			 DrNDr.usedCards[4]==randcards[2]):
 			randcards[2] = randi() % DrNDrPre.cards.EMPTY
 	
-		print(randcards)
+
 		for i in range(3):
 			match randcards[i]:
 				DrNDrPre.cards.BANANA:
@@ -76,10 +77,10 @@ func starting():
 func _input(event):
 	if((event is InputEventMouseButton) && allowChoosCards):
 		for card in range(3):
-			if(event.global_position[0] >= cardPositions[card][0] &&
-				event.global_position[0] >= cardPositions[card][0]+32 &&
-				event.global_position[1] >= cardPositions[card][1] &&
-				event.global_position[1] >= cardPositions[card][1]+32):
+			if(event.position[0] >= cardPositions[card][0] &&
+				event.position[0] <= cardPositions[card][0]+32 &&
+				event.position[1] >= cardPositions[card][1] &&
+				event.position[1] <= cardPositions[card][1]+32):
 					for i in range(5):
 						if (DrNDr.usedCards[i] == DrNDrPre.cards.EMPTY):
 							DrNDr.usedCards[i] = randcards[card]
@@ -90,6 +91,7 @@ func _input(event):
 								showCards = false
 							for j in range(3):
 								shownCards[j].queue_free()
+							DrNDr.update_cards()
 							return
 
 
