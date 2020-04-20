@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Boss/SlimeBoss/Animations/move_down_angry.png" type="Texture" id=10]
 [ext_resource path="res://Boss/SlimeBoss/Animations/move_up.png" type="Texture" id=11]
 [ext_resource path="res://Boss/SlimeBoss/States/Roam/MoveToRandomPosition.gd" type="Script" id=12]
+[ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Boss/SlimeBoss/HeroCloseZone.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.0
@@ -452,6 +454,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="Kind" parent="." instance=ExtResource( 13 )]
+
 [node name="Stats" parent="." instance=ExtResource( 3 )]
 max_health = 3
 
@@ -497,6 +501,7 @@ shape = SubResource( 2 )
 
 [node name="HeroCloseZone" type="Area2D" parent="."]
 collision_layer = 0
+script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeroCloseZone"]
 shape = SubResource( 3 )

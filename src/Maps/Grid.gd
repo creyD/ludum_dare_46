@@ -118,7 +118,7 @@ func get_nearest(position, kind):
 
 func _update_grid():
 	_reset_grids()
-	var world = get_tree().current_scene.get_node("../YSort")
+	var world = get_tree().current_scene.get_node("YSort")
 	for node in world.get_children():
 		var node_kind = node.get_node("Kind")
 		var grid_corrds = _pixel_to_grid_coords(node.global_position)
