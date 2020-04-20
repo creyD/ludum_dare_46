@@ -7,7 +7,6 @@ enum cards {
 	BANANA,
 	BARRIERE,
 	BARREL,
-	SLIME,
 	TORCH,
 	BEAR,
 	FLAME,
@@ -42,8 +41,8 @@ func update_cards():
 				newchild=(load("res://Objects/Traps/Flame/FlameCard.tscn").instance())
 			cards.SPIKE:
 				newchild=(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
-			cards.SLIME:
-				newchild=(load("res://Objects/Slime/SlimeCard.tscn").instance())
+			#cards.SLIME:
+				#newchild=(load("res://Objects/Slime/SlimeCard.tscn").instance())
 		if(newchild!=null):
 			HBox.add_child(newchild)
 
