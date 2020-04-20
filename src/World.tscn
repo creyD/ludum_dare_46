@@ -23,7 +23,7 @@ HeroTemplate = ExtResource( 1 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
 pause_mode = 1
-frame = 49
+frame = 36
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 pause_mode = 1
