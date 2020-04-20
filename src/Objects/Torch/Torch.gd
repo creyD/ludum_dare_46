@@ -25,3 +25,12 @@ func _on_Hurtbox_area_entered(area):
 	if(lifePoints<=0):
 		queue_free()
 	pass
+
+
+func _sound_finished():
+	SoundControler.pub_play_effect("res://Objects/Torch/Torch.wav",4)
+
+func _ready():
+	SoundControler.pub_play_effect("res://Objects/Torch/Torch.wav",4)
+	SoundControler._effect[4].volume_db = -20
+	SoundControler._effect[4].connect("finished",self,"_sound_finished")

@@ -699,7 +699,7 @@ shape = SubResource( 47 )
 
 [node name="Pivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 3.14159
+rotation = 1.5708
 __meta__ = {
 "_gizmo_extents_": 20.0
 }
@@ -756,6 +756,7 @@ script = ExtResource( 14 )
 
 [node name="Roll" type="Node" parent="AnimationStates"]
 script = ExtResource( 16 )
+SoundLibary = PoolStringArray( "res://Player/Sounds/roll4.wav", "res://Player/Sounds/roll5.wav", "res://Player/Sounds/roll6.wav" )
 
 [node name="Effects" type="Node2D" parent="."]
 

@@ -11,6 +11,7 @@ height = 3.0
 
 [node name="Heart" type="Node2D"]
 script = ExtResource( 2 )
+SoundLibary = PoolStringArray( "res://Objects/Heart/Sounds/Heart2.wav", "res://Objects/Heart/Sounds/Heart3.wav", "res://Objects/Heart/Sounds/Heart4.wav", "res://Objects/Heart/Sounds/Heart5.wav", "res://Objects/Heart/Sounds/Heart.wav" )
 
 [node name="Kind" parent="." instance=ExtResource( 4 )]
 general = 1

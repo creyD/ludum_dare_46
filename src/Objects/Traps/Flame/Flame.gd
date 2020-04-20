@@ -6,6 +6,7 @@ var timer = Timer.new()
 
 func on_timer_timeout():
 	timer.stop()
+	SoundControler.pub_stop_effect(4)
 	queue_free()
 
 func _ready():
@@ -14,6 +15,9 @@ func _ready():
 	timer.connect("timeout", self, "on_timer_timeout")
 	timer.set_wait_time(burning_time)
 	timer.start()
+	SoundControler.pub_play_effect("res://Objects/Traps/Flame/Fire.wav",5)
+	SoundControler._effect[5].volume_db = -20
+	SoundControler._effect[5].connect("finished",self,"_sound_finished")
 	
 
 
@@ -21,4 +25,9 @@ func _ready():
 func _on_Hitbox_body_entered(body):
 	if(body.get_name() == "Player"):
 		body.velocity*=-3
+		
+		
+func _sound_finished():
+	SoundControler.pub_play_effect("res://Objects/Traps/Flame/Fire.wav",5)
+
 
