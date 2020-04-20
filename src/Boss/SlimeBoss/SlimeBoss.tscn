@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Effects/Charge/ChargeEffect.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Boss/SlimeBoss/States/ReturnToCenter.gd" type="Script" id=19]
 [ext_resource path="res://Boss/SlimeBoss/States/Stomp.gd" type="Script" id=20]
+[ext_resource path="res://Effects/Stomp/StompEffect.tscn" type="PackedScene" id=21]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 60.0
@@ -813,6 +814,9 @@ __meta__ = {
 position = Vector2( 0, -8 )
 emitting = false
 
+[node name="StompEffect" parent="Effects" instance=ExtResource( 21 )]
+visible = false
+
 [node name="Stats" parent="." instance=ExtResource( 3 )]
 max_health = 3
 
@@ -925,6 +929,7 @@ anims/MoveDown = SubResource( 12 )
 anims/MoveLeft = SubResource( 13 )
 anims/MoveRight = SubResource( 14 )
 anims/MoveUp = SubResource( 15 )
+[connection signal="animation_finished" from="Effects/StompEffect" to="States/Stomp" method="_on_StompEffect_animation_finished"]
 [connection signal="health_changed" from="Stats" to="." method="_on_Stats_health_changed"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

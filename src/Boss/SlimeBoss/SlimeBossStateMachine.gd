@@ -144,6 +144,30 @@ func _decide_on_next_state():
 			if state_active == $States/ChargeSequence:
 				return $States/Stomp
 	
+	if _phase == PHASES.PHASE_THREE:
+		if angry_phases_done < 2:
+			set_invincible(true)
+			if sequence_cycles < 6:
+				if state_active == $States/ChargeSequence:
+					return $States/Stomp
+				if state_active == $States/Stomp:
+					sequence_cycles += 1
+					return $States/ChargeSequence
+			else:
+				angry_phases_done = 2
+				sequence_cycles = 0
+				return $States/ReturnToCenter
+		else:
+			if state_active == $States/ReturnToCenter:
+				return $States/Stomp # TODO: Maybe Stomp.
+			if state_active == $States/Stomp:
+				set_invincible(false)
+				return $States/RoamSequence
+			if state_active == $States/RoamSequence:
+				return $States/ChargeSequence
+			if state_active == $States/ChargeSequence:
+				return $States/Stomp
+	
 #	# Death
 #	if state_active == $States/Die:
 #		queue_free()
