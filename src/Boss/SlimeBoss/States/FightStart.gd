@@ -1,7 +1,4 @@
-extends "res://Overlap/StateMachine/State.gd"
-
-onready var animation_player = owner.get_node("AnimationPlayer")
-onready var animation_tree = owner.get_node("AnimationTree")
+extends "BossState.gd"
 
 func enter():
 	animation_tree.active = false

@@ -477,11 +477,11 @@ one_shot = true
 script = ExtResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -28 )
-texture = ExtResource( 5 )
-vframes = 10
-hframes = 24
-frame = 2
+position = Vector2( -5, -28 )
+texture = ExtResource( 6 )
+vframes = 7
+hframes = 11
+frame = 50
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
 visible = false
