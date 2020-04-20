@@ -1,24 +1,82 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/Banana/Bannana.gd" type="Script" id=2]
-[ext_resource path="res://testSprites/bannane.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Banana/Banana.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Banana/animation.png" type="Texture" id=3]
 [ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 40, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 80, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 120, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 160, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 200, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 240, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 280, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 320, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 360, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 400, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 440, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 480, 0, 40, 40 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": false,
+"name": "place",
+"speed": 60.0
+} ]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.54726
 height = 12.1493
 
-[node name="Banana" type="Node2D"]
+[node name="Banana" type="AnimatedSprite"]
+frames = SubResource( 15 )
+animation = "place"
 script = ExtResource( 2 )
 
 [node name="Kind" parent="." instance=ExtResource( 4 )]
 general = 2
 kind = 10
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1.54256, -4.73786 )
-texture = ExtResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1.54256, -4.73786 )

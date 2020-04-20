@@ -1,4 +1,5 @@
-[gd_scene load_steps=16 format=2]
+
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -6,13 +7,13 @@
 [ext_resource path="res://testSprites/dark.png" type="Texture" id=4]
 [ext_resource path="res://Menus/DragNDrop/DragNDropUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Torch/Torch.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Barrel/Barrel.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Boss/Minion.tscn" type="PackedScene" id=9]
+
+[ext_resource path="res://Maps/Background/Background.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Boss/SlimeBoss/SlimeBoss.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Debug/BossStateDisplay.gd" type="Script" id=9]
 [ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Objects/Slime/Slime.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Objects/Traps/Sting.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=11]
+
 [ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
@@ -26,67 +27,39 @@ texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
+[node name="Background" parent="." instance=ExtResource( 7 )]
+frame = 49
+
 [node name="FloorTileMap" type="TileMap" parent="."]
+visible = false
 position = Vector2( 16, 16 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 2
+collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -131059, 47, 0, -131058, 47, 2, -1, 47, 4, -65536, 47, 196609, -65535, 47, 196609, -65534, 47, 196609, -65533, 47, 196609, -65532, 47, 196609, -65531, 47, 196609, -65530, 47, 8, -65529, 47, 196609, -65528, 47, 8, -65527, 47, 196609, -65526, 47, 196609, -65525, 47, 196609, -65524, 47, 196609, -65523, 47, 196614, -65522, 47, 196618, -65521, 47, 196610, 65535, 47, 65539, 6, 47, 131075, 8, 47, 131075, 14, 47, 65539, 131071, 47, 65539, 65541, 47, 196611, 65550, 47, 65539, 196607, 47, 65539, 131075, 47, 196608, 131076, 47, 196610, 131086, 47, 65539, 262143, 47, 65539, 196614, 47, 196611, 196622, 47, 65539, 327679, 47, 65539, 262147, 47, 196611, 262149, 47, 196611, 262158, 47, 65539, 393215, 47, 65539, 327684, 47, 196611, 327694, 47, 65539, 458751, 47, 65539, 393221, 47, 3, 393230, 47, 65539, 524287, 47, 196612, 458752, 47, 196609, 458753, 47, 196609, 458754, 47, 196609, 458755, 47, 196609, 458756, 47, 196609, 458757, 47, 196616, 458758, 47, 196609, 458759, 47, 196609, 458760, 47, 196609, 458761, 47, 196609, 458762, 47, 196609, 458763, 47, 196609, 458764, 47, 196609, 458765, 47, 196609, 458766, 47, 196615 )
+
+tile_data = PoolIntArray( -1, -1610612689, 4, -65536, -1610612689, 196609, -65535, -1610612689, 196609, -65534, -1610612689, 196609, -65533, -1610612689, 196609, -65532, -1610612689, 196609, -65531, -1610612689, 196609, -65530, -1610612689, 196609, -65529, -1610612689, 196609, -65528, -1610612689, 196609, -65527, -1610612689, 196609, -65526, -1610612689, 196609, -65525, -1610612689, 196609, -65524, -1610612689, 196609, -65523, -1610612689, 196610, -65522, -1610612720, 131073, 65535, -1610612689, 65539, 14, -1610612689, 3, 131071, 47, 65539, 65550, -1610612689, 65539, 196607, 47, 65539, 131086, -1610612689, 65539, 262143, 47, 65539, 196622, -1610612689, 65539, 327679, 47, 65539, 262158, -1610612689, 65539, 393215, 47, 65539, 327694, -1610612689, 65539, 458751, -1610612689, 131076, 393216, -1610612689, 1, 393217, -1610612689, 1, 393218, -1610612689, 1, 393219, -1610612689, 1, 393220, -1610612689, 1, 393221, -1610612689, 1, 393222, -1610612689, 1, 393223, -1610612689, 1, 393224, -1610612689, 1, 393225, -1610612689, 1, 393226, -1610612689, 1, 393227, -1610612689, 1, 393228, -1610612689, 1, 393229, -1610612689, 1, 393230, -1610612689, 131079, 524287, -1610612689, 131072, 458752, 47, 131073, 458753, 47, 131073, 458754, 47, 131073, 458755, 47, 131073, 458756, 47, 131073, 458757, 47, 131073, 458758, 47, 131073, 458759, 47, 131073, 458760, 47, 131073, 458761, 47, 131073, 458762, 47, 131073, 458763, 47, 131073, 458764, 47, 131073, 458765, 47, 131073, 458766, -1610612689, 131074 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="YSort" type="YSort" parent="."]
-position = Vector2( 152, 120 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 136, 112 )
-scale = Vector2( 2, 2 )
-FRICTION = 200
-
-[node name="AnimationTree" parent="YSort/Player" index="4"]
-parameters/playback = SubResource( 1 )
-
-[node name="Stats" parent="YSort/Player" index="9"]
-max_health = 20
-
-[node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( -56, 8 )
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 288, 104 )
+position = Vector2( 265.543, -16 )
 
-[node name="Barrel" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 40, 8 )
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 344, 125.768 )
+scale = Vector2( 2, 2 )
+debug = true
+ROLL_SPEED = 140
+FRICTION = 200
 
-[node name="Torch" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( -112, -72 )
-spawnRate = 2.039
-
-[node name="Minion" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 240, -40 )
-
-[node name="Minion2" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 96, -80 )
-
-[node name="Slime" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 104, 104 )
-
-[node name="Slime2" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 168, 104 )
-
-[node name="Slime3" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 136, 72 )
-
-[node name="Slime4" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 168, 72 )
-
-[node name="Slime5" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 104, 72 )
-
-[node name="Sting" parent="YSort" instance=ExtResource( 12 )]
-position = Vector2( 136, 48 )
+[node name="SlimeBoss" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 104, 80 )
 
 [node name="Grid" parent="." instance=ExtResource( 18 )]
 
@@ -96,10 +69,4 @@ position = Vector2( 136, 48 )
 visible = false
 
 [node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
-margin_left = 0.0
-margin_right = 0.0
-ObjectParent = NodePath("../..")
 
-[editable path="YSort/Player"]
-
-[editable path="YSort/Bonfire"]
