@@ -249,6 +249,7 @@ playing = false
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 pause_mode = 1
+visible = false
 position = Vector2( 16, 16 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
