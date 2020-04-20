@@ -31,7 +31,6 @@ func _on_state_active_finished():
 
 func go_to_next_state_in_sequence():
 	state_active.exit()
-	
 	var new_state_index = (state_active.get_index() + 1) % get_child_count()
 	if new_state_index == 0:
 		emit_signal('finished')
