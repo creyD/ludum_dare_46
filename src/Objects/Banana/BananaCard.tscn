@@ -16,14 +16,14 @@ animations = [ {
 "name": "lvl0",
 "speed": 60.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": false,
-"name": "lvl1",
-"speed": 60.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
 "name": "lvl2",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "lvl1",
 "speed": 60.0
 } ]
 
