@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -9,10 +9,10 @@
 [ext_resource path="res://Maps/Background/Background.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Boss/SlimeBoss/SlimeBoss.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=9]
-[ext_resource path="res://Boss/Minion.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Debug/BossStateDisplay.gd" type="Script" id=11]
 [ext_resource path="res://Maps/Tilesets/Edge/tileset_edge.png" type="Texture" id=12]
+[ext_resource path="res://Boss/Minion.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -242,7 +242,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 0
+frame = 12
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 visible = false
@@ -275,12 +275,14 @@ position = Vector2( 432, 168 )
 scale = Vector2( 2, 2 )
 debug = true
 ROLL_SPEED = 140
-FRICTION = null
+FRICTION = 200
+ACCELERATION = 450
+title_scene = ""
 
 [node name="SlimeBoss" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 240, 120 )
 
-[node name="Minion" parent="YSort" instance=ExtResource( 9 )]
+[node name="Minion" parent="YSort" instance=ExtResource( 13 )]
 position = Vector2( 24, 184 )
 
 [node name="Grid" parent="." instance=ExtResource( 18 )]
@@ -291,7 +293,6 @@ position = Vector2( 24, 184 )
 visible = false
 
 [node name="DebugLabel" type="Control" parent="CanvasLayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
