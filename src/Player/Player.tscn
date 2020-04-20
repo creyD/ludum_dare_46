@@ -623,7 +623,10 @@ height = 6.99104
 size = 12
 font_data = ExtResource( 6 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"hero",
+]]
+collision_mask = 14
 script = ExtResource( 1 )
 FRICTION = 270
 
@@ -637,7 +640,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -18 )
 hframes = 60
-frame = 9
+frame = 12
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0107212, 0.0456073 )
@@ -740,6 +743,7 @@ script = ExtResource( 16 )
 [node name="Effects" type="Node2D" parent="."]
 
 [node name="HealEffect" parent="Effects" instance=ExtResource( 8 )]
+emitting = false
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]

@@ -38,7 +38,7 @@ func _reset_grids():
 
 
 func _ready():
-	var walls = get_tree().current_scene.get_child(1)
+	var walls = get_tree().current_scene.get_node("FloorTileMap")
 	offset = walls.global_position
 	#todo put in grid_lul
 	for x in range(14):

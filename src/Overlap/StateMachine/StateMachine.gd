@@ -2,6 +2,7 @@ extends Node
 
 signal state_changed(current_state)
 
+export(NodePath) var STATES_COLLECTION = "."
 export(NodePath) var START_STATE
 var states_map = {}
 
@@ -9,10 +10,11 @@ var states_stack = []
 var current_state = null
 var _active = false setget set_active
 
+
 func _ready():
-	for child in get_children():
+	for child in get_node(STATES_COLLECTION).get_children():
 		child.connect("finished", self, "change_state")
-		initialize(START_STATE)
+	initialize(START_STATE)
 
 func initialize(start_state):
 	set_active(true)
