@@ -736,7 +736,7 @@ __meta__ = {
 }
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-max_health = 5
+max_health = 20
 
 [node name="AnimationStates" type="Node" parent="."]
 script = ExtResource( 15 )
