@@ -9,6 +9,7 @@
 [ext_resource path="res://Maps/Background/Background.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Boss/SlimeBoss/SlimeBoss.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Boss/Minion.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Debug/BossStateDisplay.gd" type="Script" id=11]
 [ext_resource path="res://Maps/Tilesets/Edge/tileset_edge.png" type="Texture" id=12]
@@ -241,7 +242,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 32
+frame = 0
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 visible = false
@@ -267,17 +268,20 @@ tile_data = PoolIntArray( -1, 5, 0, -65536, 3, 0, -65535, 3, 0, -65534, 3, 0, -6
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 265.543, -16 )
+position = Vector2( 448, 32 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 432, 168 )
 scale = Vector2( 2, 2 )
 debug = true
 ROLL_SPEED = 140
-FRICTION = 200
+FRICTION = null
 
 [node name="SlimeBoss" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 240, 120 )
+
+[node name="Minion" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 24, 184 )
 
 [node name="Grid" parent="." instance=ExtResource( 18 )]
 

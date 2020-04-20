@@ -2,10 +2,10 @@ extends KinematicBody2D
 
 class_name Minion
 
-const PrioQueue = preload("prio_queue.gd") # Relative path
 const Grid = preload("res://Maps/Grid.gd")
 
 var grid
+var lock = Mutex.new()
 
 enum{
 	STEP,
@@ -21,8 +21,7 @@ var ExecutionState = AI_MOVE
 var ai_movement_state = NOTHING
 
 var numbers = [0,0,0,0,0,0,0,0,0,0]
-var prios = [0,6,0,0,0,0,0,0,4,0]
-
+var prios = [0,7,0,0,0,0,0,0,3,0]
 
 var targetFieldCur = [0,0]
 var targetFieldUsed = false
@@ -30,8 +29,16 @@ var targetFieldUsed = false
 var actionKind = Grid.Kind.TERMINAL_SYMBOL
 var actionFieldUsed = false
 
+var areaRefList = []
+
 var threadTime = 0.4
 var threadDelta = 0.0
+
+var hitDelta = 0.0
+var hitTreshhold = 0.1
+
+var aiDelta = 0.0
+var aiTreshhold = 0.4
 
 #calculates  the sum of all present prios
 func calcTotalPrio():
@@ -64,11 +71,6 @@ func calcPrioTable():
 		i += 1
 		
 	return table
-	
-#14+7 0.999
-#updates heart and bonfire prio
-func adjustPrio(currentHealth, maxHealth):
-	return
 
 #return the enemie which will be attacked
 func calcEnemyKind():
@@ -80,146 +82,53 @@ func calcEnemyKind():
 	return i
 
 #returns a move
-func getMoveDescription(myPosition : Vector2, targetPositions):
-	return AStar(myPosition, targetPositions)
-
-
-func getCost(field):
-	return 0
+func getMoveDescription(myPosition : Vector2, targetPositions : Vector2):
+	grid.path_start_position = myPosition
+	grid.path_end_position = targetPositions
+	grid.recalculate_path()
+	if(grid._point_path.size()<=1):
+		return [NOTHING, [0,0]]
 	
-#return an heurestic of distance
-# curr - current position
-# targ - a target position
-func h_fn(curr, target):
-	return sqrt(pow(target[0]-curr[0],2)+pow(target[0]-curr[0],2))		
-	
-# currCost - currentCost
-# target - position of the field to move to
-func g_fn(currCost, target):
-	return currCost + getCost(target)
+	var move = STEP
+	return [move, grid._point_path[1]]
 
-# Returns the list of adjacent nodes	
-func adjacent(currentPosition, can_roll = false):
-	var adj := []
-	#adj.append([STEP, Vector2(0,0)])
-	var p = currentPosition
-	var pot_adj_step =	[[p[0]-1, p[1]-1],	[p[0]-1, p[1]-0],	[p[0]-1, p[1]+1],
-						 [p[0]+0, p[1]-1],						[p[0]+0, p[1]+1],
-						 [p[0]+1, p[1]-1],	[p[0]+1, p[1]+0],	[p[0]+1, p[1]+1]]
-		
-					
-	for i in range(pot_adj_step.size()):
-		var next = pot_adj_step[i]
-		if(next[0]<0):
-			continue
-		if(next[0]>13):
-			continue
-		if(next[1]<0):
-			continue
-		if(next[1]>6):
-			continue
-		if(grid.used_grid[next[0]][next[1]]):
-			continue
-		if(grid.object_grid[next[0]][next[1]][0]!=Grid.Kind.WALL):
-			if(i==0):
-				if(grid.object_grid[pot_adj_step[1][0]][pot_adj_step[1][1]][0]!=Grid.Kind.WALL &&
-				   grid.object_grid[pot_adj_step[3][0]][pot_adj_step[3][1]][0]!=Grid.Kind.WALL):
-					adj.append([STEP, Vector2(next[0],next[1]),1.1])
-				continue
-			if(i==2):
-				if(grid.object_grid[pot_adj_step[1][0]][pot_adj_step[1][1]][0]!=Grid.Kind.WALL &&
-				   grid.object_grid[pot_adj_step[4][0]][pot_adj_step[4][1]][0]!=Grid.Kind.WALL):
-					adj.append([STEP, Vector2(next[0],next[1]),1.1])
-				continue
-			if(i==5):
-				if(grid.object_grid[pot_adj_step[3][0]][pot_adj_step[3][1]][0]!=Grid.Kind.WALL &&
-				   grid.object_grid[pot_adj_step[6][0]][pot_adj_step[6][1]][0]!=Grid.Kind.WALL):
-					adj.append([STEP, Vector2(next[0],next[1]),1.1])
-				continue
-			if(i==7):
-				if(grid.object_grid[pot_adj_step[4][0]][pot_adj_step[4][1]][0]!=Grid.Kind.WALL &&
-				   grid.object_grid[pot_adj_step[6][0]][pot_adj_step[6][1]][0]!=Grid.Kind.WALL):
-					adj.append([STEP, Vector2(next[0],next[1]),1.1])
-				continue
-			
-			adj.append([STEP, Vector2(next[0],next[1]),1.0])
-			
-	return adj
-
-
-func AStar(source, target):
-	#swap rtarget and source, when target source istr reached, do inversxse step
-	# node layout [g+h(x), g(x), current, from, kind]
-	var tmp = source
-	source = target
-	target = tmp
-
-	var Q = PrioQueue.new()
-	Q.insert([0,0, [source[0], source[1]], [source[0], source[1]], NOTHING] )
-	while !Q.empty():
-		var node = Q.delMin()
-		
-		# Check if reached
-		if(node[2][0] == target[0] and node[2][1] == target[1]):
-			return  [node[4], node[3]] # 4 is kind | 3 is from
-			
-		# Set flag
-		grid.used_grid[node[2][0]][node[2][1]] = true
-		var adj_list = adjacent(node[2])
-		for i in adj_list:
-			var move_cost = i[2]
-			
-			var g_val = g_fn(node[1]+move_cost, i[1])
-			var h_val = h_fn(i[1], target)
-		
-			#[g+h(x), g(x), current, from, kind]
-			var new_node = [g_val+h_val, g_val,i[1], node[2], i[0]]
-			Q.insert(new_node)
-			
-	return [NOTHING, [0,0]]
 
 
 func movement_calulcaotr():
 	var currentPosition = grid._pixel_to_grid_coords(global_position)
-		
 	var enemyKind
-	if(actionFieldUsed==false):
+	
+	numbers = grid.countTargets(numbers)
+	if(actionKind == grid.Kind.TERMINAL_SYMBOL || numbers[actionKind]==0 || actionFieldUsed==false):
 		enemyKind = calcEnemyKind()
 		actionKind = enemyKind
 		actionFieldUsed = true
+		if(enemyKind==Grid.Kind.TERMINAL_SYMBOL):
+			return
 	else:
 		enemyKind = actionKind
 		
-	if(enemyKind==Grid.Kind.TERMINAL_SYMBOL):
-		return
-		
 	var targetField = grid.get_nearest(currentPosition, enemyKind)
 	if(targetField==[-1,-1]):
-		return
+		return	
 		
-		
-	var MoveAdvice = getMoveDescription(currentPosition, targetField)
-	grid.reset_history()
-	
-	return MoveAdvice
-
+	return getMoveDescription(currentPosition, Vector2(targetField[0], targetField[1]))
 
 func movement_decider_ai(target, kindOfStep, delta):
 	var currentPosition = grid._pixel_to_grid_coords(global_position)
-	var field_of_movement = target
-	var currentPixel = global_position
-
-	if(kindOfStep==STEP):
-		run(Vector2(target[0]-currentPosition[0], target[1]-currentPosition[1]), delta*4)
-		targetFieldCur = target
-		targetFieldUsed = true
-		ai_movement_state = STEP
-		
+	
+	run(Vector2(target[0]-currentPosition[0], target[1]-currentPosition[1]), delta*4)
+	targetFieldCur = target
+	ai_movement_state = STEP
+			
+	targetFieldCur = target 	
+	targetFieldUsed = true
+			
 	ExecutionState = EXECUTING
 
 
 
-func movement_execution(delta):
+func movement_execution(delta):	
 	if(targetFieldUsed):
 		var cur = grid._pixel_to_grid_coords(global_position)
 		var distance = sqrt(pow(cur[0]-targetFieldCur[0],2)+ pow(cur[1]-targetFieldCur[1],2))
@@ -243,7 +152,8 @@ func reset_exeution_state(delta):
 
 
 					
-func makeMove(delta):	
+func makeMove(delta):
+	lock.lock()
 	if ExecutionState == AI_MOVE:
 		threadDelta = 0
 		var MoveAdvice = movement_calulcaotr()
@@ -252,10 +162,10 @@ func makeMove(delta):
 		var target = MoveAdvice[1]
 		movement_decider_ai(target, MoveAdvice[0], delta)		
 		
-	elif ExecutionState == EXECUTING:
+	if ExecutionState == EXECUTING:
 		movement_execution(delta)
 		reset_exeution_state(delta)
-		
+	lock.unlock()
 
 # API Interface for ai_hero -> methods are handled in player.gd
 
