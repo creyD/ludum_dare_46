@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Menus/DragNDrop/DragSource.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Banana/mouse_follow.png" type="Texture" id=2]
+[ext_resource path="res://Objects/Card/level2.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Card/level1.png" type="Texture" id=4]
+[ext_resource path="res://Objects/Card/level0.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Banana/icon.png" type="Texture" id=6]
+[ext_resource path="res://Objects/Card/card.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Banana/Banana.tscn" type="PackedScene" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "lvl0",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "lvl1",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "lvl2",
+"speed": 60.0
+} ]
+
+[node name="BananaCard" type="TextureRect"]
+margin_left = 11.9239
+margin_top = 220.793
+margin_right = 43.9239
+margin_bottom = 252.793
+texture = ExtResource( 6 )
+expand = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Item = ExtResource( 8 )
+PreviewIcon = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 15.729, 15.7929 )
+z_index = -1
+texture = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 33.1035, 40.3068 )
+frames = SubResource( 1 )
+animation = "lvl0"

@@ -1,0 +1,92 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://Objects/Traps/Bear/Bear.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0012.png" type="Texture" id=2]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0021.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0006.png" type="Texture" id=4]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0017.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0013.png" type="Texture" id=6]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0029.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0009.png" type="Texture" id=8]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0015.png" type="Texture" id=9]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0019.png" type="Texture" id=10]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0022.png" type="Texture" id=11]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0030.png" type="Texture" id=12]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0002.png" type="Texture" id=13]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0007.png" type="Texture" id=14]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0016.png" type="Texture" id=15]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0018.png" type="Texture" id=16]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0004.png" type="Texture" id=17]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0014.png" type="Texture" id=18]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0008.png" type="Texture" id=19]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0001.png" type="Texture" id=20]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0005.png" type="Texture" id=21]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0025.png" type="Texture" id=22]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0003.png" type="Texture" id=23]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0000.png" type="Texture" id=24]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0010.png" type="Texture" id=25]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0011.png" type="Texture" id=26]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0023.png" type="Texture" id=27]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0020.png" type="Texture" id=28]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0027.png" type="Texture" id=29]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0028.png" type="Texture" id=30]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0026.png" type="Texture" id=31]
+[ext_resource path="res://Objects/Traps/Bear/Animation/0024.png" type="Texture" id=32]
+[ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=35]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 24 ), ExtResource( 20 ), ExtResource( 13 ), ExtResource( 23 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 4 ), ExtResource( 14 ), ExtResource( 19 ), ExtResource( 8 ), ExtResource( 25 ), ExtResource( 26 ) ],
+"loop": false,
+"name": "place",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "still",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 18 ), ExtResource( 9 ), ExtResource( 15 ), ExtResource( 5 ), ExtResource( 16 ), ExtResource( 10 ), ExtResource( 28 ), ExtResource( 3 ), ExtResource( 11 ), ExtResource( 27 ), ExtResource( 32 ), ExtResource( 22 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 7 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "clap",
+"speed": 90.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 9.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+height = 9.0
+
+[node name="Bear_trap" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Kind" parent="." instance=ExtResource( 34 )]
+kind = 10
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -7.62939e-06, 0 )
+frames = SubResource( 1 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 33 )]
+collision_layer = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 35 )]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+rotation = 1.5708
+shape = SubResource( 3 )
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+
+[editable path="Hurtbox"]

@@ -15,13 +15,14 @@
 script = ExtResource( 2 )
 
 [node name="WallSprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 360, 176 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 48
+frame = 51
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 position = Vector2( 16, 16 )
