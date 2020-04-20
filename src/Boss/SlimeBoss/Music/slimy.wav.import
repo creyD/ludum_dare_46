@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/slimy.wav-2f26e413d39d2e92be768830f3f5770a.sample"
+
+[deps]
+
+source_file="res://Boss/SlimeBoss/Music/slimy.wav"
+dest_files=[ "res://.import/slimy.wav-2f26e413d39d2e92be768830f3f5770a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
