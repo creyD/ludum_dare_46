@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -8,7 +8,9 @@
 [ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Maps/Background/Background.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Boss/SlimeBoss/SlimeBoss.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Debug/BossStateDisplay.gd" type="Script" id=9]
 [ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
 
 [node name="World" type="Node2D"]
@@ -21,10 +23,10 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 24
+frame = 49
 
 [node name="FloorTileMap" type="TileMap" parent="."]
-modulate = Color( 1, 1, 1, 0.454902 )
+visible = false
 position = Vector2( 16, 16 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
@@ -38,17 +40,19 @@ __meta__ = {
 }
 
 [node name="YSort" type="YSort" parent="."]
-position = Vector2( 152, 120 )
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 265.543, -16 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 168, -12.7226 )
+position = Vector2( 344, 125.768 )
 scale = Vector2( 2, 2 )
 debug = true
 ROLL_SPEED = 140
 FRICTION = 200
+
+[node name="SlimeBoss" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 104, 80 )
 
 [node name="Grid" parent="." instance=ExtResource( 18 )]
 
@@ -60,5 +64,46 @@ visible = false
 [node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
 ObjectParent = NodePath("../..")
 
-[node name="SlimeBoss" parent="." instance=ExtResource( 8 )]
-position = Vector2( 88, 75.8131 )
+[node name="DebugInterface" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BossStateDisplay" type="Panel" parent="CanvasLayer/DebugInterface"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_bottom = 60.0
+script = ExtResource( 9 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugInterface/BossStateDisplay"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="CanvasLayer/DebugInterface/BossStateDisplay/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 11 )
+text = "Boss"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Phase" type="Label" parent="CanvasLayer/DebugInterface/BossStateDisplay/VBoxContainer"]
+margin_top = 16.0
+margin_right = 40.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 11 )
+
+[node name="State" type="Label" parent="CanvasLayer/DebugInterface/BossStateDisplay/VBoxContainer"]
+margin_top = 32.0
+margin_right = 40.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 11 )
+[connection signal="phase_changed" from="YSort/SlimeBoss" to="CanvasLayer/DebugInterface/BossStateDisplay" method="_on_SlimeBoss_phase_changed"]
+[connection signal="state_changed" from="YSort/SlimeBoss" to="CanvasLayer/DebugInterface/BossStateDisplay" method="_on_SlimeBoss_state_changed"]

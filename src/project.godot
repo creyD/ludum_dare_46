@@ -57,6 +57,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SoundControler="*res://Autoloads/SoundControler.gd"
+Steering="*res://Autoloads/Steering.gd"
 
 [display]
 
