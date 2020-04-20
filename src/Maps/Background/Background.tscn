@@ -72,5 +72,4 @@ animations = [ {
 [node name="Background" type="AnimatedSprite"]
 frames = SubResource( 1 )
 frame = 42
-playing = true
 centered = false
