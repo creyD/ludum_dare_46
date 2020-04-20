@@ -198,7 +198,8 @@ func _on_Hurtbox_area_exited(area):
 
 func _on_Stats_no_health():
 	queue_free()
-	get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
+	get_tree().get_root().get_node("World").hero_has_died()
+	#get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
 	
 
 func _on_Hitbox_area_entered(area):
