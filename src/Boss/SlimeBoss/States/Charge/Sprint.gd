@@ -1,6 +1,6 @@
 extends "res://Boss/SlimeBoss/States/BossState.gd"
 
-export(float) var SPEED = 800.0
+export(float) var SPEED = 300.0
 
 var direction = Vector2()
 

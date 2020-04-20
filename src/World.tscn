@@ -23,7 +23,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
-frame = 40
+frame = 14
 
 [node name="FloorTileMap" type="TileMap" parent="."]
 visible = false
@@ -60,8 +60,6 @@ position = Vector2( 240, 120 )
 
 [node name="DialogueBox" parent="CanvasLayer" instance=ExtResource( 6 )]
 visible = false
-
-[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
 
 [node name="DebugLabel" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -104,5 +102,7 @@ margin_top = 32.0
 margin_right = 40.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 9 )
+
+[node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
 [connection signal="phase_changed" from="YSort/SlimeBoss" to="CanvasLayer/DebugLabel/BossStateDisplay" method="_on_SlimeBoss_phase_changed"]
 [connection signal="state_changed" from="YSort/SlimeBoss" to="CanvasLayer/DebugLabel/BossStateDisplay" method="_on_SlimeBoss_state_changed"]

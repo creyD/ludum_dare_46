@@ -6,7 +6,6 @@ export(float) var MAX_SPEED = 300.0
 export(float) var ARRIVE_DISTANCE = 6.0
 
 var velocity = Vector2.ZERO
-var center = Vector2.ZERO
 
 func update(delta):
 	velocity = Steering.arrive_to(velocity, 

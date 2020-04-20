@@ -4,7 +4,7 @@ export(float) var ARRIVE_DISTANCE = 6.0
 export(float) var SLOW_RADIUS = 200.0
 export(float) var MASS = 5.0
 export(float) var MAX_SPEED = 300.0
-export(float) var ROAM_RADIUS = 200.0
+export(float) var ROAM_RADIUS = 100.0
 
 var time_since_start = 0
 

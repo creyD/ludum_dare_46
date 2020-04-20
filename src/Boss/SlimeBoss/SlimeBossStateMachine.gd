@@ -145,7 +145,7 @@ func _decide_on_next_state():
 				return $States/Stomp
 	
 	if _phase == PHASES.PHASE_THREE:
-		if angry_phases_done < 2:
+		if angry_phases_done < 3:
 			set_invincible(true)
 			if sequence_cycles < 6:
 				if state_active == $States/ChargeSequence:
@@ -154,7 +154,7 @@ func _decide_on_next_state():
 					sequence_cycles += 1
 					return $States/ChargeSequence
 			else:
-				angry_phases_done = 2
+				angry_phases_done = 3
 				sequence_cycles = 0
 				return $States/ReturnToCenter
 		else:
@@ -167,7 +167,7 @@ func _decide_on_next_state():
 				return $States/ChargeSequence
 			if state_active == $States/ChargeSequence:
 				return $States/Stomp
-	
+
 #	# Death
 #	if state_active == $States/Die:
 #		queue_free()
