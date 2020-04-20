@@ -62,7 +62,9 @@ position = Vector2( 104, 80 )
 visible = false
 
 [node name="DragNDropUI" parent="CanvasLayer" instance=ExtResource( 5 )]
-ObjectParent = NodePath("../..")
+margin_top = -0.735092
+margin_bottom = -0.735107
+ObjectParent = NodePath("../../YSort")
 
 [node name="DebugInterface" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
