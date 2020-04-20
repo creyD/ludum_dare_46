@@ -22,6 +22,6 @@ func _physics_process(delta):
 
 func _on_Hurtbox_area_entered(area):
 	lifePoints -= area.damage
-	if(lifePoints<0):
+	if(lifePoints<=0):
 		queue_free()
 	pass

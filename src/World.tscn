@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Menus/DragNDrop/DragNDropUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Menus/DialogueBox/DialogueBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Torch/Torch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Barrel/Barrel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/Bonfire/Bonfire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Boss/Boss_template.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
@@ -15,7 +16,7 @@
 script = ExtResource( 2 )
 
 [node name="WallSprite" type="Sprite" parent="."]
-position = Vector2( 355.382, 175.62 )
+position = Vector2( 360, 176 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
@@ -37,18 +38,21 @@ position = Vector2( 152, 120 )
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 200, 8 )
 scale = Vector2( 2, 2 )
-debug = true
 ROLL_SPEED = 140
 FRICTION = 200
 
 [node name="Boss_template" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( -56, 8 )
+debug = true
 
 [node name="Bonfire" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 288, 104 )
 
 [node name="Torch" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 264, -40 )
+position = Vector2( 264, -24 )
+
+[node name="Barrel" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 40, 8 )
 
 [node name="Grid" parent="." instance=ExtResource( 18 )]
 

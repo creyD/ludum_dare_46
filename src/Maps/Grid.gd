@@ -64,6 +64,9 @@ func reset_history():
 
 
 func countTargets(table):
+	for i in range(table.size()):
+		table[i]=0
+	
 	for x in range(14):
 		for y in range(7):
 			for i in prio_grid[x][y]:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/player.png" type="Texture" id=2]
@@ -619,7 +619,10 @@ height = 0.2
 radius = 4.03497
 height = 6.99104
 
-[sub_resource type="DynamicFont" id=49]
+[sub_resource type="CircleShape2D" id=51]
+radius = 14.7132
+
+[sub_resource type="DynamicFont" id=50]
 size = 12
 font_data = ExtResource( 6 )
 
@@ -691,7 +694,7 @@ position = Vector2( 1.90735e-06, 0.000833988 )
 shape = SubResource( 47 )
 
 [node name="Pivot" type="Position2D" parent="."]
-position = Vector2( 0, -4.16248 )
+position = Vector2( 0, -4 )
 rotation = 3.14159
 __meta__ = {
 "_gizmo_extents_": 20.0
@@ -706,12 +709,24 @@ position = Vector2( 8.43416, 0.0698299 )
 shape = SubResource( 48 )
 disabled = true
 
+[node name="SwordRange" parent="Pivot" instance=ExtResource( 4 )]
+position = Vector2( 1.15451e-05, -4.16248 )
+rotation = -3.14159
+scale = Vector2( 0.909091, 0.909091 )
+collision_layer = 128
+collision_mask = 0
+damage = 0.0
+
+[node name="CollisionShape2D" parent="Pivot/SwordRange" index="0"]
+position = Vector2( 0, -4.56405 )
+shape = SubResource( 51 )
+
 [node name="DebugLabel" type="Label" parent="."]
-margin_left = -8.01196
-margin_top = -21.2223
-margin_right = 8.98804
-margin_bottom = -9.22228
-custom_fonts/font = SubResource( 49 )
+margin_left = -8.12021
+margin_top = -21.9801
+margin_right = 12.8798
+margin_bottom = -9.98004
+custom_fonts/font = SubResource( 50 )
 text = "Held"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -744,6 +759,8 @@ script = ExtResource( 16 )
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
+[connection signal="area_entered" from="Pivot/SwordRange" to="." method="_on_SwordRange_area_entered"]
+[connection signal="area_exited" from="Pivot/SwordRange" to="." method="_on_SwordRange_area_exited"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hitbox"]
@@ -751,3 +768,5 @@ script = ExtResource( 16 )
 [editable path="Hurtbox"]
 
 [editable path="Pivot/SwordHitbox"]
+
+[editable path="Pivot/SwordRange"]

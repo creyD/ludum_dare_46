@@ -38,8 +38,10 @@ var abortProb = 0.01
 var targetFieldCur = [0,0]
 var targetFieldUsed = false
 
-var actionField = [0,0]
+var actionKind = Grid.Kind.TERMINAL_SYMBOL
 var actionFieldUsed = false
+
+var areaRefList = []
 
 var threadTime = 0.4
 var threadDelta = 0.0
@@ -263,61 +265,48 @@ func AStar(source, target):
 
 func movement_calulcaotr():
 	var currentPosition = grid._pixel_to_grid_coords(global_position)
-	var calcNew = false
-	var MoveAdvice
 		
+	var enemyKind
 	if(actionFieldUsed==false):
-		calcNew = true	
-		
-	if(calcNew==true):
-		var enemyKind = calcEnemyKind()
-		if(enemyKind==Grid.Kind.TERMINAL_SYMBOL):
-			return
-		actionField = grid.get_nearest(currentPosition, enemyKind)
-		if(actionField==[-1,-1]):
-			return
+		enemyKind = calcEnemyKind()
+		actionKind = enemyKind
 		actionFieldUsed = true
+	else:
+		enemyKind = actionKind
 		
-	MoveAdvice = getMoveDescription(currentPosition, actionField)
+	if(enemyKind==Grid.Kind.TERMINAL_SYMBOL):
+		return
+		
+	var targetField = grid.get_nearest(currentPosition, enemyKind)
+	if(targetField==[-1,-1]):
+		return
+		
+		
+	var MoveAdvice = getMoveDescription(currentPosition, targetField)
 	grid.reset_history()
 	
 	return MoveAdvice
 
-func is_hittable(target):
-	for element in grid.prio_grid[target[0]][target[1]]:
-		if(element == grid.Kind.BOSS || element == grid.Kind.TORCH || element == grid.Kind.MINION):
-			return true
-	return false
+func is_hittable():
+	var length = areaRefList.size()
+	if length == 0:
+		return null
+	var randomNumber = randi()%length
+	return instance_from_id(areaRefList[randomNumber]).global_position
 
-func hit_or_miss(target, current, hitable, delta):
-	run(Vector2(target[0]-current[0], target[1]-current[1]), delta*8)
+func hit_or_miss(target, current, delta):
 	attac(Vector2(target[0]-current[0], target[1]-current[1]), delta*4)
-	return hitable
 
 func movement_decider_ai(target, kindOfStep, delta):
 	var currentPosition = grid._pixel_to_grid_coords(global_position)
 	var field_of_movement = target
+	var currentPixel = global_position
+	var hitPixelTarget = is_hittable()
 	
-	var top =   [currentPosition[0]+0, currentPosition[1]-1]
-	var left =  [currentPosition[0]-1, currentPosition[1]-0]
-	var right = [currentPosition[0]+1, currentPosition[1]-0]
-	var down =  [currentPosition[0]+0, currentPosition[1]+1]
-	var field = [currentPosition[0]+0, currentPosition[1]+0]
-	
-			
-	if(grid._is_in_grid(Vector2(field[0], field[1])) && hit_or_miss(field, currentPosition, is_hittable(field), delta)):
-		pass
-	elif(grid._is_in_grid(Vector2(target[0], target[1])) && hit_or_miss(target, currentPosition, is_hittable(target), delta)):
-		pass
-	elif(grid._is_in_grid(Vector2(left[0], left[1])) && hit_or_miss(left, currentPosition, is_hittable(left), delta)):
-		pass
-	elif(grid._is_in_grid(Vector2(down[0], down[1])) && hit_or_miss(down, currentPosition, is_hittable(down), delta)):
-		pass
-	elif(grid._is_in_grid(Vector2(top[0], top[1])) && hit_or_miss(top, currentPosition, is_hittable(top), delta)):
-		pass
-	elif(grid._is_in_grid(Vector2(down[0], down[1])) && hit_or_miss(down, currentPosition, is_hittable(down), delta)):
-		pass
-	else:	
+	if hitPixelTarget!=null:
+		hit_or_miss(hitPixelTarget, currentPixel, delta*4)
+		actionFieldUsed = false
+	else:
 		if(kindOfStep==STEP):
 			run(Vector2(target[0]-currentPosition[0], target[1]-currentPosition[1]), delta*4)
 			targetFieldCur = target
@@ -333,19 +322,20 @@ func movement_decider_ai(target, kindOfStep, delta):
 
 func movement_execution(delta):
 	if(targetFieldUsed):
-			var cur = grid._pixel_to_grid_coords(global_position)
-			var distance = sqrt(pow(cur[0]-targetFieldCur[0],2)+ pow(cur[1]-targetFieldCur[1],2))
-			if(distance<0.01):
-				targetFieldUsed = false
-				ExecutionState = AI_MOVE
-				if(targetFieldCur[0]==actionField[0]&&targetFieldCur[1]==actionField[1]):
-					actionFieldUsed = false
-			else:
-				var currentPosition = grid._pixel_to_grid_coords(global_position)
-				if(ai_movement_state==STEP):
-					run(Vector2(targetFieldCur[0]-currentPosition[0], targetFieldCur[1]-currentPosition[1]), delta*4)
-				elif(ai_movement_state==ROLL):
-					run(Vector2(targetFieldCur[0]-currentPosition[0], targetFieldCur[1]-currentPosition[1]), delta*4)
+		var cur = grid._pixel_to_grid_coords(global_position)
+		var distance = sqrt(pow(cur[0]-targetFieldCur[0],2)+ pow(cur[1]-targetFieldCur[1],2))
+		if(distance<0.1):
+			targetFieldUsed = false
+			ExecutionState = AI_MOVE
+			var actionField = grid.get_nearest(cur, actionKind)
+			if(targetFieldCur[0]==actionField[0]&&targetFieldCur[1]==actionField[1]):
+				actionFieldUsed = false
+		else:
+			var currentPosition = grid._pixel_to_grid_coords(global_position)
+			if(ai_movement_state==STEP):
+				run(Vector2(targetFieldCur[0]-currentPosition[0], targetFieldCur[1]-currentPosition[1]), delta*4)
+			elif(ai_movement_state==ROLL):
+				run(Vector2(targetFieldCur[0]-currentPosition[0], targetFieldCur[1]-currentPosition[1]), delta*4)
 					
 					
 func reset_exeution_state(delta):					

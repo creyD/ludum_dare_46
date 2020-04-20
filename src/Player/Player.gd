@@ -209,3 +209,13 @@ func movement_idle():
 	movementState = moveState.IDLE
 	velocity = Vector2.ZERO
 	animation_state.change_state("idle")
+
+
+func _on_SwordRange_area_entered(area):
+	if(area.is_in_group("HittableByPlayer")):
+		areaRefList.push_back(area.get_instance_id())
+
+
+func _on_SwordRange_area_exited(area):
+	if(area.is_in_group("HittableByPlayer")):
+		areaRefList.erase(area.get_instance_id())

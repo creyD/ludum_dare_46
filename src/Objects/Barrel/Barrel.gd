@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+export(int,1,10) var health = 1
 var GreenDrop = 0.5
 var BlueDrop = 0.4
 var RedDrop = 0.2
@@ -10,6 +11,9 @@ func offset_vec():
 	return Vector2((randf()-0.5)*offset, (randf()-0.5)*offset)
 
 func _on_Hurtbox_area_entered(area):
+	health -= area.damage
+	if(health>0):
+		return
 	queue_free()
 	var GreenRubies = load("res://Objects/Rubies/Green.tscn")
 	var BlueRubies = load("res://Objects/Rubies/Blue.tscn")
