@@ -150,7 +150,7 @@ func movement_decider_ai(target, kindOfStep, delta):
 	var currentPixel = global_position
 	var hitPixelTarget = is_hittable()
 	
-	if hitPixelTarget!=null && randf()<0.5:
+	if hitPixelTarget!=null && randf()<1:
 		hit_or_miss(hitPixelTarget, currentPixel, delta*4)
 	else:
 		if(kindOfStep==STEP):

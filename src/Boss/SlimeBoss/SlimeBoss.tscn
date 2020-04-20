@@ -31,7 +31,6 @@ height = 50.0
 radius = 13.0
 height = 30.0
 
-
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 20.0
 height = 30.0
@@ -420,7 +419,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=10]
 resource_name = "Die"
 length = 0.6
 step = 0.025
@@ -509,7 +508,7 @@ tracks/6/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 1.9
 step = 0.025
 tracks/0/type = "value"
@@ -585,7 +584,7 @@ tracks/5/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 2.66666
 step = 0.0111111
 tracks/0/type = "value"
@@ -661,7 +660,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 1.28333
 step = 0.0166667
 tracks/0/type = "value"
@@ -737,7 +736,7 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 1.28333
 step = 0.0166667
 tracks/0/type = "value"
@@ -813,7 +812,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 1.28333
 step = 0.0166667
 tracks/0/type = "value"
@@ -1047,12 +1046,12 @@ anims/ChargeLeft = SubResource( 6 )
 anims/ChargeRight = SubResource( 7 )
 anims/ChargeUp = SubResource( 8 )
 anims/Charging = SubResource( 9 )
-anims/Die = SubResource( 15 )
-anims/FightStart = SubResource( 10 )
-anims/MoveDown = SubResource( 11 )
-anims/MoveLeft = SubResource( 12 )
-anims/MoveRight = SubResource( 13 )
-anims/MoveUp = SubResource( 14 )
+anims/Die = SubResource( 10 )
+anims/FightStart = SubResource( 11 )
+anims/MoveDown = SubResource( 12 )
+anims/MoveLeft = SubResource( 13 )
+anims/MoveRight = SubResource( 14 )
+anims/MoveUp = SubResource( 15 )
 anims/__INIT__ = SubResource( 16 )
 [connection signal="animation_finished" from="Effects/StompEffect" to="States/Stomp" method="_on_StompEffect_animation_finished"]
 [connection signal="health_changed" from="Stats" to="." method="_on_Stats_health_changed"]

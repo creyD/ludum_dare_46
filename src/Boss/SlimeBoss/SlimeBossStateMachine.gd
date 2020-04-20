@@ -66,10 +66,10 @@ func go_to_next_state(state_override=null):
 		state_active = state_override
 	else:
 		state_active = _decide_on_next_state()
+	if state_active != null:
+		emit_signal("state_changed", state_active.name)
 
-	emit_signal("state_changed", state_active.name)
-
-	state_active.enter()
+		state_active.enter()
 
 func _change_phase(new_phase):
 	set_invincible(true)
@@ -101,7 +101,7 @@ func _decide_on_next_state():
 	# Death
 	if state_active == $States/Die:
 		queue_free()
-		# return $States/Dead
+		return $States/Dead
 	
 	if _phase == PHASES.PHASE_ONE:
 		if angry_phases_done < 1:

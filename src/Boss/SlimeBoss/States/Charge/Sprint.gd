@@ -1,11 +1,12 @@
 extends "res://Boss/SlimeBoss/States/BossState.gd"
 
+
 export(float) var SPEED = 300.0
 
 var direction = Vector2()
 
 func enter():
-	var player_pos = owner.get_parent().get_node("Player").global_position
+	var player_pos = Globals.player_node.global_position
 	direction = (player_pos - owner.global_position).normalized()
 
 func exit():

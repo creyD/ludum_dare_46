@@ -40,6 +40,7 @@ func hero_has_died():
 func spawn_new_hero(x:float,y:float):
 	var hero = HeroTemplate.instance()
 	hero.position=Vector2(x,y)
+	hero.name = "Player"
 	$YSort.add_child(hero)
 
 

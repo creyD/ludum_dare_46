@@ -46,6 +46,7 @@ func _debug_update():
 
 func _ready():
 	grid = get_tree().current_scene.get_node("Grid")
+	Globals.player_node = self
 
 
 func _physics_process(delta):
