@@ -25,4 +25,6 @@ text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Cards" type="Node" parent="."]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

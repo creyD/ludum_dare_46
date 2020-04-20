@@ -18,7 +18,7 @@ func starting():
 		 DrNDr.usedCards[2]!=randcards[0] &&\
 		 DrNDr.usedCards[3]!=randcards[0] &&\
 		 DrNDr.usedCards[4]!=randcards[0]):
-		randcards[1] = randi() % DrNDrPre.cards.EMPTY
+		randcards[0] = randi() % DrNDrPre.cards.EMPTY
 	while(randcards[0] == randcards[1] &&\
 		 DrNDr.usedCards[0]!=randcards[1] &&\
 		 DrNDr.usedCards[1]!=randcards[1] &&\
@@ -35,7 +35,7 @@ func starting():
 		 DrNDr.usedCards[4]!=randcards[2]):
 		randcards[2] = randi() % DrNDrPre.cards.EMPTY
 	var shownCards = []
-	for i in range(2):
+	for i in range(3):
 		match randcards[i]:
 			DrNDrPre.cards.BANANA:
 				shownCards.append(load("res://Objects/Banana/BananaCard.tscn").instance())
@@ -49,15 +49,15 @@ func starting():
 				shownCards.append(load("res://Objects/Traps/Bear/BearCard.tscn").instance())
 			DrNDrPre.cards.FLAME:
 				shownCards.append(load("res://Objects/Traps/Flame/FlameCard.tscn").instance())
-			DrNDrPre.cards.SPIKE:
-				shownCards.append(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
+			#DrNDrPre.cards.SPIKE:
+				#shownCards.append(load("res://Objects/Traps/Spike/SpikeCard.tscn").instance())
 			DrNDrPre.cards.SLIME:
 				shownCards.append(load("res://Objects/Slime/SlimeCard.tscn").instance())
-	for i in range(2):
+	for i in range(3):
 		$Cards.add_child(shownCards[i])
-	shownCards[0].global_position = Vector2(100,150)
-	shownCards[1].global_position = Vector2(200,150)
-	shownCards[2].global_position = Vector2(300,150)
+	shownCards[0].set_begin ( Vector2(100,150))
+	shownCards[1].set_begin (  Vector2(200,150))
+	shownCards[2].set_begin ( Vector2(300,150))
 	
 	
 func _on_Button_pressed():
