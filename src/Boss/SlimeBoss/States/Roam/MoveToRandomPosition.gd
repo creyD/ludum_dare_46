@@ -14,22 +14,23 @@ var velocity = Vector2()
 var last_vel = Vector2()
 
 func enter():
-	# Set animation
-	set_animation_type(ANIMATION_TYPE.TREE)
-	animation_playback.start("move")
-	
-	time_since_start = 0
 	start_position = get_parent().start_position
 	target_position = calculate_new_target_position()
+	$Timer.start()
+
+func exit():
+	owner.last_look = last_vel
+	$Timer.stop()
 
 
 func update(delta):
+	# Set animation
 	velocity = Steering.arrive_to(velocity, owner.global_position, target_position, MASS, SLOW_RADIUS, MAX_SPEED)
-	time_since_start += delta
 	last_vel = owner.move_and_slide(velocity)
-	animation_tree.set("parameters/move/blend_position", last_vel)
 	
-	if owner.global_position.distance_to(target_position) < ARRIVE_DISTANCE or time_since_start > 2.0:
+	play_directional_animation("Move", last_vel)
+
+	if owner.global_position.distance_to(target_position) < ARRIVE_DISTANCE or $Timer.time_left <= 0.0:
 		emit_signal('finished')
 
 

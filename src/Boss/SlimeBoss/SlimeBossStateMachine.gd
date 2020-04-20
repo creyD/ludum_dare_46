@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-onready var animation_playback = $AnimationTree.get("parameters/playback")
 signal target_position_changed
 signal state_changed(new_state_name)
 signal phase_changed(new_phase_name)
@@ -8,7 +7,7 @@ signal phase_changed(new_phase_name)
 export(float) var MASS = 8.0
 onready var start_global_position = global_position
 
-var target_position = Vector2()
+var last_look = Vector2()
 
 var state_active = null
 var sequence_cycles = 0
@@ -26,7 +25,7 @@ func _ready():
 	if get_parent().has_node('Player'):
 		var player_node = get_parent().get_node('Player')
 		player_node.connect('position_changed', self, '_on_target_position_changed')
-		target_position = player_node.global_position
+		# target_position = player_node.global_position
 
 	for state_node in $States.get_children():
 		state_node.connect('finished', self, '_on_active_state_finished')
@@ -51,6 +50,15 @@ func _on_Stats_no_health():
 	set_invincible(true)
 	go_to_next_state($States/Die)
 
+func _on_Stats_health_changed(new_health):
+	assert(new_health > -1)
+	assert(new_health < $Stats.max_health)
+	
+	if _phase == PHASES.PHASE_ONE and new_health == 2:
+		_change_phase(PHASES.PHASE_TWO)
+	if _phase == PHASES.PHASE_TWO and new_health == 1:
+		_change_phase(PHASES.PHASE_THREE)
+
 
 func go_to_next_state(state_override=null):
 	if state_active:
@@ -62,18 +70,6 @@ func go_to_next_state(state_override=null):
 		state_active = _decide_on_next_state()
 	emit_signal("state_changed", state_active.name)
 	state_active.enter()
-
-
-func _on_Health_health_changed(new_health):
-	$Tween.interpolate_property($Pivot, 'scale', Vector2(0.92, 1.12), Vector2(1.0, 1.0), 0.3, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($Pivot/Body, 'modulate', Color('#ff48de'), Color('#ffffff'), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
-	$Tween.start()
-	
-	if _phase == PHASES.PHASE_ONE and new_health < 100:
-		_change_phase(PHASES.PHASE_TWO)
-	if _phase == PHASES.PHASE_TWO and new_health < 50:
-		_change_phase(PHASES.PHASE_THREE)
-
 
 func _change_phase(new_phase):
 	var phase_name = ""
@@ -92,20 +88,35 @@ func _change_phase(new_phase):
 	_phase = new_phase
 
 
-# The AI's brain. This function defines the flow of states
-# That's a big advantage of the state pattern
-# If it grows too big you can swap it with a node
-# Or move the flow of states to a data file, like JSON or a text file
+var angry_phases_done = 0
+
 func _decide_on_next_state():
 	# Battle start
 	if state_active == null:
 		set_invincible(true)
 		return $States/FightStart
 	if state_active == $States/FightStart:
-		set_invincible(false)
-		return $States/RoamSequence
-	if state_active == $States/RoamSequence:
-		return $States/FightStart
+		# set_invincible(false)
+		return $States/ChargeSequence
+	
+	if _phase == PHASES.PHASE_ONE:
+		if angry_phases_done < 1:
+			set_invincible(true)
+			sequence_cycles += 1
+			if sequence_cycles < 4:
+				return $States/ChargeSequence
+			else:
+				angry_phases_done = 1
+				sequence_cycles = 0
+				return $States/ReturnToCenter
+		else:
+			if state_active == $States/ReturnToCenter:
+				return $States/Stomp # TODO: Maybe Stomp.
+			if state_active == $States/Stomp:
+				set_invincible(false)
+				return $States/RoamSequence
+			if state_active == $States/RoamSequence:
+				return $States/RoamSequence
 	
 #	# Death
 #	if state_active == $States/Die:
@@ -159,22 +170,10 @@ func _decide_on_next_state():
 #				return $States/Stomp
 
 
-# Using a public method makes it so we can change the entire particle setup anytime
-func set_particles_active(value):
-	$DustPuffsLarge.emitting = value
-
-
-# Same thing here, we will likely need more collision shapes in the final version
-# So using a function we can group these disabled toggles together
 func set_invincible(value):
-	$CollisionShape2D.disabled = value
-	$Hitbox/CollisionShape2D.disabled = value
+	# $CollisionShape2D.disabled = value
+	# $Hitbox/CollisionShape2D.disabled = value
 	$Hurtbox/CollisionShape2D.disabled = value
-
-
-func _on_target_position_changed(new_position):
-	target_position = new_position
-
 
 func _on_Hurtbox_area_entered(area):
 	$Stats.health -= area.damage

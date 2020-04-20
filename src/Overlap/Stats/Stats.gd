@@ -7,6 +7,7 @@ export(float) var max_speed := 125.0
 onready var speed := max_speed setget set_speed
 
 signal no_health
+signal health_changed
 
 func set_health(value):
 	if value > max_health:
@@ -15,6 +16,8 @@ func set_health(value):
 		health = value
 	if health < 1:
 		emit_signal("no_health")
+	
+	emit_signal("health_changed", health)
 		
 func set_speed(value):
 	if value > max_speed:
