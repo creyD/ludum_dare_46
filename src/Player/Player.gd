@@ -177,15 +177,15 @@ func roll_finished():
 
 
 func _on_Hurtbox_area_entered(area):
-	player_stats.health -= area.damage
+	if("damage" in area):
+		player_stats.health -= area.damage
 	
-	if area.damage > 0:
-		damage_per_second += area.damage
-		pass
-	else:
-		heal_per_second += abs(area.damage)
-		pass
-
+		if area.damage > 0:
+			damage_per_second += area.damage
+			pass
+		else:
+			heal_per_second += abs(area.damage)
+			pass
 
 func _on_Hurtbox_area_exited(area):
 	if area.damage > 0:

@@ -310,7 +310,8 @@ func movement_execution(delta):
 				run(Vector2(targetFieldCur[0]-currentPosition[0], targetFieldCur[1]-currentPosition[1]), delta*4)
 			elif(ai_movement_state==ROLL):
 				run(Vector2(targetFieldCur[0]-currentPosition[0], targetFieldCur[1]-currentPosition[1]), delta*4)
-					
+	else:
+		ExecutionState = AI_MOVE				
 					
 func reset_exeution_state(delta):					
 	threadDelta = threadDelta + delta

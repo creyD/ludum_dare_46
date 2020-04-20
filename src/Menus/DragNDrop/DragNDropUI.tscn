@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Menus/DragNDrop/DragSource.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Traps/Spike/SpikeCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/DragNDrop/DragSink.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/Banana/BananaCard.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/Traps/Bear/BearCard.tscn" type="PackedScene" id=4]
@@ -26,15 +26,15 @@ __meta__ = {
 
 [node name="GenericCard4" parent="." instance=ExtResource( 6 )]
 
-[node name="GenericCard5" parent="." instance=ExtResource( 1 )]
-margin_left = 237.404
-margin_top = 221.267
-margin_right = 269.404
-margin_bottom = 253.267
-
 [node name="DragSink" parent="." instance=ExtResource( 2 )]
 anchor_right = 1.002
 anchor_bottom = 0.87
 margin_left = 2.0
 margin_right = 0.0400085
 margin_bottom = -30.9
+
+[node name="SpikeCard" parent="." instance=ExtResource( 1 )]
+margin_left = 236.922
+margin_top = 221.453
+margin_right = 268.922
+margin_bottom = 253.453

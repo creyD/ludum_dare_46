@@ -17,7 +17,6 @@ func get_nearest_grid_pos(position, scale = 1):
 #what is to be done when data is dropped
 func drop_data(_pos, data:PackedScene):
 	var new_pos = get_nearest_grid_pos(_pos)
-	grid._draw_object_grid()
 	if grid.object_grid[new_pos.x - 1][new_pos.y - 1].back() == Grid.Kind.FIELD:
 		var child = data.instance()
 		child.position = get_nearest_grid_pos(_pos, 32)
