@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Chad_Crouch_-_Algorithms.ogg-0b5876f6436c5da97190209f2766cd3c.oggstr"
+
+[deps]
+
+source_file="res://Menus/Credits/Chad_Crouch_-_Algorithms.ogg"
+dest_files=[ "res://.import/Chad_Crouch_-_Algorithms.ogg-0b5876f6436c5da97190209f2766cd3c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
