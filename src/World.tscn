@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -13,12 +13,7 @@
 [ext_resource path="res://Debug/BossStateDisplay.gd" type="Script" id=11]
 [ext_resource path="res://Maps/Tilesets/Edge/tileset_edge.png" type="Texture" id=12]
 [ext_resource path="res://Boss/Minion.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Objects/Traps/Flame/Flame.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Objects/Traps/Bear/Bear.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Objects/Barrel/Barrel.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Objects/Traps/Spike/Spike.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Maps/Grid.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Menus/SelectUpgradeUI/button.png" type="Texture" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -282,12 +277,6 @@ position = Vector2( 240, 120 )
 [node name="Minion" parent="YSort" instance=ExtResource( 13 )]
 position = Vector2( 24, 184 )
 
-[node name="Flame" parent="YSort" instance=ExtResource( 14 )]
-position = Vector2( 168, 120 )
-
-[node name="Flame2" parent="YSort" instance=ExtResource( 14 )]
-position = Vector2( 216, 56 )
-
 [node name="Grid" parent="." instance=ExtResource( 18 )]
 pause_mode = 1
 
@@ -354,62 +343,9 @@ visible = false
 visible = false
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -96.0
-margin_bottom = 25.0
-texture_normal = ExtResource( 19 )
-
-[node name="Label" type="Label" parent="CanvasLayer/Win"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -28.5
-margin_top = -7.0
-margin_right = 28.5
-margin_bottom = 7.0
-text = "Win Now"
-
-[node name="Bonfire" parent="." instance=ExtResource( 10 )]
-position = Vector2( 104, 56 )
-
-[node name="Bear_trap" parent="." instance=ExtResource( 15 )]
-position = Vector2( 128, 120 )
-
-[node name="Bear_trap2" parent="." instance=ExtResource( 15 )]
-position = Vector2( 160, 88 )
-
-[node name="Bear_trap3" parent="." instance=ExtResource( 15 )]
-position = Vector2( 208, 80 )
-
-[node name="Bear_trap4" parent="." instance=ExtResource( 15 )]
-position = Vector2( 184, 160 )
-
-[node name="Bear_trap5" parent="." instance=ExtResource( 15 )]
-position = Vector2( 304, 80 )
-
-[node name="Bear_trap6" parent="." instance=ExtResource( 15 )]
-position = Vector2( 312, 160 )
-
-[node name="Barrel" parent="." instance=ExtResource( 16 )]
-position = Vector2( 64, 112 )
-
-[node name="Barrel2" parent="." instance=ExtResource( 16 )]
-position = Vector2( 88, 144 )
-
-[node name="Barrel3" parent="." instance=ExtResource( 16 )]
-position = Vector2( 120, 160 )
-
-[node name="Spike" parent="." instance=ExtResource( 17 )]
-position = Vector2( 168, 40 )
-
-[node name="Spike2" parent="." instance=ExtResource( 17 )]
-position = Vector2( 288, 48 )
-
-[node name="Spike3" parent="." instance=ExtResource( 17 )]
-position = Vector2( 312, 128 )
-
-[node name="Spike4" parent="." instance=ExtResource( 17 )]
-position = Vector2( 224, 152 )
+margin_left = -42.0
+margin_bottom = 24.0
+text = "Win"
 [connection signal="phase_changed" from="YSort/SlimeBoss" to="CanvasLayer/DebugLabel/BossStateDisplay" method="_on_SlimeBoss_phase_changed"]
 [connection signal="state_changed" from="YSort/SlimeBoss" to="CanvasLayer/DebugLabel/BossStateDisplay" method="_on_SlimeBoss_state_changed"]
 [connection signal="pressed" from="CanvasLayer/Win" to="." method="_on_Win_pressed"]

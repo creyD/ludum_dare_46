@@ -12,7 +12,7 @@ onready var startup= $Startup
 var finished_once := false
 
 func _ready():
-	startup.play("start")
+	startup.start()
 	animation_player.play("__INIT__")
 	SoundControler.pub_play_music("res://Menus/Sounds/menu_theme.ogg", false)
 
