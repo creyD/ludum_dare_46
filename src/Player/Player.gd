@@ -6,6 +6,9 @@ This is an example player controller script created by Paul
 var velocity := Vector2.ZERO
 var rollvector := Vector2(-1,0)
 
+#one sound will be chosen at random
+export var SoundLibary :PoolStringArray=[]
+
 # This is how you export variables with ranges to the editor window
 export(bool) var debug := false
 export(int, 0, 500) var ROLL_SPEED := 150
@@ -172,9 +175,12 @@ func _on_Hurtbox_area_entered(area):
 	
 		if area.damage > 0:
 			damage_per_second += area.damage
+			SoundControler.pub_play_effect("res://Player/Sounds/Hurt.wav",1)
 			pass
 		else:
 			heal_per_second += abs(area.damage)
+			var sound = SoundLibary[rand_range(0,SoundLibary.size())]
+			SoundControler.pub_play_effect(sound,1)
 			pass
 
 func _on_Hurtbox_area_exited(area):
@@ -187,6 +193,7 @@ func _on_Hurtbox_area_exited(area):
 
 
 func _on_Stats_no_health():
+	SoundControler.pub_play_effect("res://Boss/SlimeBoss/Music/Evillaughwithoutslime.wav",1)
 	queue_free()
 	get_tree().get_root().get_node("World").hero_has_died()
 	#get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
