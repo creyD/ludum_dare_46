@@ -7,10 +7,12 @@ var time = Timer.new()
 func _ready():
 	add_child(time)
 	$Sprite.play("out")
+	SoundControler.pub_play_effect("res://Objects/Traps/Spike/Spike6.wav",9)
 	$"Hitbox/CollisionShape2D".disabled = true
 
 func on_timer_timeout():
 	$Sprite.play("out")
+	SoundControler.pub_play_effect("res://Objects/Traps/Spike/Spike6.wav",9)
 	time.stop()
 
 func _on_Sprite_animation_finished():
@@ -29,6 +31,7 @@ func _on_Sprite_animation_finished():
 
 func _on_Hitbox_area_entered(area):
 	if($Sprite.get_animation()=="default"):
+		SoundControler.pub_play_effect("res://Objects/Traps/Spike/Spike6.wav",9)
 		$Sprite.play("in")
 
 

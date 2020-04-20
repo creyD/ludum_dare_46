@@ -4,7 +4,6 @@ onready var animation_player = owner.get_node("AnimationPlayer")
 
 func play_directional_animation(name, vec):
 	var anim_name = name + get_nearest_diretion(vec)
-	
 	if animation_player.current_animation != anim_name:
 		animation_player.play(anim_name)
 
@@ -36,7 +35,5 @@ func get_nearest_diretion(vec):
 			smallest_distance = distance
 	
 	return nearest_direction
-	
-	
 	
 	

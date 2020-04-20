@@ -5,7 +5,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "scroll"
-length = 25.0
+length = 14.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:margin_top")
 tracks/0/interp = 1
@@ -13,10 +13,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 24.9 ),
+"times": PoolRealArray( 0, 14 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 200.0, -600 ]
+"values": [ 200.0, -630 ]
 }
 
 [node name="Credits" type="Node2D"]
@@ -33,7 +33,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="."]
 margin_left = 10.0
-margin_top = -436.145
+margin_top = -630.0
 margin_right = 40.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 1 )
@@ -74,7 +74,11 @@ https://www.heartgamedev.com
 Harmonic by Monkopus
 https://monkopus.itch.io/
 https://twitter.com/monkopus
-https://www.instagram.com/monkopusgames/"
+https://www.instagram.com/monkopusgames/
+
+---- Music ----
+Algorithms by Chad Crouch
+https://freemusicarchive.org/music/Chad_Crouch/Arps/Algorithms"
 __meta__ = {
 "_edit_use_anchors_": false
 }

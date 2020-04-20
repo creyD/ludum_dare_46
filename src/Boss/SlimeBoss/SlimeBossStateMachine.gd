@@ -15,6 +15,9 @@ var sequence_cycles = 0
 enum PHASES {PHASE_ONE, PHASE_TWO, PHASE_THREE}
 export(PHASES) var _phase = PHASES.PHASE_ONE
 
+export(String, FILE, "*.tscn,*.scn") var lose_screen = ""
+export(String, FILE, "*.tscn,*.scn") var win_screen = ""
+
 func _ready():
 	print("Hey.")
 	_change_phase(_phase)
@@ -101,6 +104,7 @@ func _decide_on_next_state():
 	# Death
 	if state_active == $States/Die:
 		queue_free()
+		get_tree().change_scene(lose_screen)
 		return $States/Dead
 	
 	if _phase == PHASES.PHASE_ONE:

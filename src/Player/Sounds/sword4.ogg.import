@@ -11,5 +11,5 @@ dest_files=[ "res://.import/sword4.ogg-e175f4e5f038794fb7d38318b3ba2010.oggstr" 
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

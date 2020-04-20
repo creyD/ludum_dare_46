@@ -14,6 +14,7 @@ func _on_Hurtbox_area_entered(area):
 	health -= area.damage
 	if(health>0):
 		return
+	SoundControler.pub_play_effect("res://Objects/Barrel/Barrel4.wav",3)
 	queue_free()
 	var GreenRubies = load("res://Objects/Rubies/Green.tscn")
 	var BlueRubies = load("res://Objects/Rubies/Blue.tscn")
