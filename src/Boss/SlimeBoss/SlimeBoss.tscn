@@ -923,6 +923,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
+lose_screen = "res://Menus/LoseScreen/LoseScreen.tscn"
 
 [node name="Kind" parent="." instance=ExtResource( 13 )]
 
