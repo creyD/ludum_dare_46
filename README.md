@@ -8,6 +8,10 @@ In this game you have cards to help the angry slime boss to survive. Each time a
 
 Have fun playing ~
 
+## Installation
+
+If you want to play the latest version you can go to the [release tab](https://github.com/creyD/ludum_dare_46/releases) of this repository and download the latest .zip file which contains the .exe and .pck file. Alternatively you can go to the [itch.io](https://deranonymos.itch.io/bosskeeper) site of this project and download it from there.
+
 ## Context
 
 This is a minigame developed by a team of 8 people for the Ludum Dare No. 46 in 04/2020 over the course of 3 days. The team members consisted of @panorb, @Sonaion, @Streamfire, @DerAnonymos, @Mienek, Leo (for all major assets), Markus (for sounds) and @creyD. It is written in the Godot framework and a playable version can be downloaded on the release page of this repo.
