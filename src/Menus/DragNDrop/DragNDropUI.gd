@@ -15,10 +15,12 @@ enum cards {
 	EMPTY
 }
 
+
 func _ready():
 	update_cards()
 
 export var ObjectParent:NodePath
+
 
 func update_cards():
 	var index = 0
@@ -45,10 +47,9 @@ func update_cards():
 				newchild.append(load("res://Objects/Slime/SlimeCard.tscn").instance())
 	for i in range(index):
 		$CardsDisplay.add_child(newchild[i])
-		
+
 	for i in range(index):
 		newchild[i].set_begin(cardPositions[i])
-
 
 	for i in range(index):
 		newchild[i].margin_bottom = newchild[i].margin_top+32

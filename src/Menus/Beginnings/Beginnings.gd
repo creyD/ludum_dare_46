@@ -26,20 +26,22 @@ export(String, FILE, "*.tscn,*.scn") var scene_to_load = ""
 func _ready():
 	next()
 
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("dialogue_advance"):
 		next()
 
+
 func next():
 	finished_indicator.modulate = Color(1, 1, 1, 0)
 	cur_line += 1
-	
+
 	if cur_line >= text.size():
 		get_tree().change_scene(scene_to_load)
 		return
-	
+
 	var line = text[cur_line]
-	
+
 	label.text = line
 	$Tween.interpolate_property(label, "percent_visible",
 	0, 1, 0.05 * len(line))

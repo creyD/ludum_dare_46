@@ -16,5 +16,6 @@ func _ready():
 		"Boss: We'll see about that!"
 	])
 
+
 func get_dialogue(id):
 	return _dialogues[id]

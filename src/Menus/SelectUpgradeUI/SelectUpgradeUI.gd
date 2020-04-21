@@ -1,17 +1,17 @@
 extends Control
 
 const DrNDrPre = preload("res://Menus/DragNDrop/DragNDropUI.gd")
-var DrNDr 
+var DrNDr
 var cardPositions = [Vector2(100,150),Vector2(200,150),Vector2(300,150)]
 var randcards = [0,0,0]
 var showCards = true
 var shownCards = []
 var allowChoosCards = false
 
+
 func _ready():
 	DrNDr = get_tree().current_scene.get_node("CanvasLayer").get_node("DragNDropUI")
-	
-	
+
 
 func starting():
 	shownCards = []
@@ -64,16 +64,17 @@ func starting():
 		shownCards[0].set_begin (cardPositions[0])
 		shownCards[1].set_begin (cardPositions[1])
 		shownCards[2].set_begin (cardPositions[2])
-		
+
 		for i in range(3):
-			shownCards[i].canNotPlace = true 
+			shownCards[i].canNotPlace = true
 			shownCards[i].margin_bottom = shownCards[i].margin_top+32
 			shownCards[i].margin_right = shownCards[i].margin_left+32
 		var i = 0
 		allowChoosCards = true
 	else:
 		pass
-	
+
+
 func _input(event):
 	if((event is InputEventMouseButton) && allowChoosCards):
 		for card in range(3):
@@ -98,5 +99,3 @@ func _input(event):
 func _on_Button_pressed():
 	Engine.time_scale=1
 	self.hide()
-	pass # Replace with function body.
-

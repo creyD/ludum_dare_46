@@ -1,5 +1,6 @@
 extends Node2D
 
+
 func _on_Hurtbox_area_entered(area):
 	$AnimatedSprite.play("clap")
 	SoundControler.pub_play_effect("res://Objects/Traps/Bear/Barenfalle.wav",3)

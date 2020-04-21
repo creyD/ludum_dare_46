@@ -1,9 +1,9 @@
 extends StaticBody2D
 
 # This is the decay script for the barrier
-
 # TODO: please adjust it for actual gameplay
 export (float, 0.5, 10.0) var decay_time = 1.5
+
 
 func on_timer_timeout():
 	queue_free()

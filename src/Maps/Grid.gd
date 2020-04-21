@@ -16,13 +16,14 @@ var time_passed := 0.0
 var offset
 export(float, 0, 42.0) var refresh_rate = 0.4
 
+
 func _point_coors(point : Vector2):
 	return 14*point.y+point.x
+
 
 func _ready():
 	var walls = get_tree().current_scene.get_node("FloorTileMap")
 	offset = walls.global_position
-
 
 	for x in range(14):
 		object_grid.push_back([])
@@ -31,7 +32,6 @@ func _ready():
 			object_grid[x].push_back([Kind.FIELD])
 			prio_grid[x].push_back([Kind.TERMINAL_SYMBOL])
 
-	
 	for tile in walls.get_used_cells():
 		if(is_in_coord(tile)):
 			object_grid[tile.x][tile.y][0] = Kind.WALL
@@ -44,61 +44,62 @@ func _ready():
 				walkableCells.push_back(Vector2(x,y))
 				var Index = _point_coors(Vector2(x,y))
 				aStar_node.add_point(Index, Vector3(x,y,0.0))
-	
-	#add points	straight		
+
+	# add points straight
 	for point in walkableCells:
 		var point_index = _point_coors(point)
-		
+
 		var points_relative_str = PoolVector2Array([
-			Vector2(point.x + 1, point.y),	
-			Vector2(point.x - 1, point.y),	
-			Vector2(point.x , point.y + 1),	
+			Vector2(point.x + 1, point.y),
+			Vector2(point.x - 1, point.y),
+			Vector2(point.x , point.y + 1),
 			Vector2(point.x , point.y - 1)
 		])
 		for point_rel in points_relative_str:
 			var point_relative_index = _point_coors(point_rel)
-			
+
 			if point_rel == point or not is_in_coord(point_rel):
 				continue
 			if not aStar_node.has_point(point_relative_index):
 				continue
 			aStar_node.connect_points(point_index, point_relative_index, true)
-			
-	#diagonal
+
+	# diagonal
 	for point in walkableCells:
 		var point_index = _point_coors(point)
-		
+
 		var points_relative_dia = PoolVector2Array([
 			Vector2(point.x + 1, point.y + 1), Vector2(point.x, point.y + 1), Vector2(point.x + 1, point.y),
 			Vector2(point.x - 1, point.y + 1), Vector2(point.x, point.y + 1), Vector2(point.x - 1, point.y),
 			Vector2(point.x + 1, point.y - 1), Vector2(point.x, point.y - 1), Vector2(point.x + 1, point.y),
 			Vector2(point.x - 1, point.y - 1), Vector2(point.x, point.y - 1), Vector2(point.x - 1, point.y)
 		])
-			
+
 		for i in range(points_relative_dia.size()/3):
 			var p_targ = points_relative_dia[i*3]
 			var p_ch1 = points_relative_dia[i*3+1]
 			var p_ch2 = points_relative_dia[i*3+2]
-			
+
 			var p_targ_c = _point_coors(p_targ)
 			var p_ch1_c = _point_coors(p_targ)
 			var p_ch2_c = _point_coors(p_targ)
-			
+
 			if p_targ == point or not is_in_coord(p_targ) and not aStar_node.has_point(p_targ_c):
 				continue
 			if p_ch1 == point or not is_in_coord(p_ch1) and not aStar_node.has_point(p_ch1_c):
 				continue
 			if p_ch2 == point or not is_in_coord(p_ch2) and not aStar_node.has_point(p_ch2_c):
 				continue
-				
+
 			aStar_node.connect_points(point_index, p_targ_c, true)
-	
-	
+
+
 func recalculate_path():
 	_point_path = []
 	var start_index = _point_coors(path_start_position)
 	var end_index = _point_coors(path_end_position)
 	_point_path = aStar_node.get_point_path(start_index, end_index)
+
 
 func _reset_grids():
 	for x in range(14):
@@ -112,7 +113,7 @@ func _reset_grids():
 func countTargets(table):
 	for i in range(table.size()):
 		table[i]=0
-	
+
 	for x in range(14):
 		for y in range(7):
 			for i in prio_grid[x][y]:
@@ -127,6 +128,7 @@ func _pixel_to_grid_coords(pixel : Vector2) -> Vector2:
 	new_coords.x = floor((pixel.x-offset.x) / 32.0)
 	new_coords.y = floor((pixel.y-offset.y) / 32.0)
 	return new_coords
+
 
 func get_nearest(position, kind):
 	var list = []
@@ -147,23 +149,24 @@ func get_nearest(position, kind):
 			mini = i
 	return list[mini]
 
+
 func get_fields_around(point):
 	var points_relative_str = PoolVector2Array([
 		Vector2(point.x + 1, point.y + 1),
-		Vector2(point.x - 1, point.y + 1), 
+		Vector2(point.x - 1, point.y + 1),
 		Vector2(point.x + 1, point.y - 1),
 		Vector2(point.x - 1, point.y - 1)
 	])
 	var point_list = []
 	for point_rel in points_relative_str:
-		var point_relative_index = _point_coors(point_rel)		
+		var point_relative_index = _point_coors(point_rel)
 		if point_rel == point or not is_in_coord(point_rel):
 			continue
 		if not aStar_node.has_point(point_relative_index):
 			continue
 		point_list.push_back(point_rel)
 	return point_list
-		
+
 
 func _update_grid():
 	_reset_grids()
@@ -175,7 +178,7 @@ func _update_grid():
 			if(node_kind.general != Kind.FIELD): #and node_kind.general != Kind.WALL):
 				object_grid[grid_corrds.x][grid_corrds.y].push_back(node_kind.general)
 			prio_grid[grid_corrds.x][grid_corrds.y].push_back(node_kind.kind)
-	
+
 	for y in range(7):
 		for x in range(14):
 			var index = _point_coors(Vector2(x,y))
@@ -202,6 +205,7 @@ func _update_grid():
 				scale = 0
 			aStar_node.set_point_weight_scale(index, scale)
 
+
 func _physics_process(delta):
 	if(time_passed > refresh_rate):
 		time_passed -= refresh_rate
@@ -221,9 +225,8 @@ func _set_path_start_position(value : Vector2):
 		return
 	if not is_in_coord(value):
 		return
-	
-	path_start_position = value
 
+	path_start_position = value
 
 
 func _set_path_end_position(value : Vector2):
@@ -231,5 +234,5 @@ func _set_path_end_position(value : Vector2):
 		return
 	if not is_in_coord(value):
 		return
-	
+
 	path_end_position = value

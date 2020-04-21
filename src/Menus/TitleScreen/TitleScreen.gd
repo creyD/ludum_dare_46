@@ -11,16 +11,18 @@ onready var startup= $Startup
 
 var finished_once := false
 
+
 func _ready():
 	startup.start()
 	animation_player.play("__INIT__")
 	SoundControler.pub_play_music("res://Menus/Sounds/menu_theme.ogg", false)
 
+
 func _process(_delta):
 	if not finished_once and Input.is_action_just_pressed("skip"):
 		startup.animation = "loop"
 		startup.frame = 0
-	
+
 	if startup.animation == "loop":
 		if not finished_once:
 			emit_signal("startup_finished")
@@ -28,6 +30,7 @@ func _process(_delta):
 			new_game_button.grab_focus()
 			animation_player.play("show_buttons")
 			finished_once = true
+
 
 func _exit_tree():
 	SoundControler.pub_stop_music()

@@ -27,9 +27,10 @@ var movementState = moveState.MOVE
 var damage_per_second := 0.0
 var totaldamage := 0.0
 
+
 func _debug_update():
 	debug_label.text = str(player_stats.health) + "/" + str(player_stats.max_health) + " HP\n"
-	
+
 
 func _physics_process(delta):
 	totaldamage += damage_per_second * delta
@@ -47,13 +48,13 @@ func _physics_process(delta):
 				movement_move(delta)
 			moveState.HIT:
 				movement_hit()
-	
+
 	move()
 
 
 # IMPORTANT: If you are using move_and_slide don't multiply by delta
 # Godots physics system does that internally
-# In move_and_collide(...) you have to multiply by delta.	
+# In move_and_collide(...) you have to multiply by delta.
 func move():
 	move_and_slide(velocity)
 
@@ -68,7 +69,7 @@ func movement_move(delta):
 	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input_vector.y =  Input.get_action_strength("down") - Input.get_action_strength("up")
 	input_vector = input_vector.normalized()
-	
+
 	if input_vector == Vector2.ZERO:
 		#animation_state.travel("idle")
 		velocity = Vector2.ZERO

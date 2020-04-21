@@ -22,14 +22,14 @@ func determine_spawnpoint():
 	while(point.distance_to($YSort/SlimeBoss.position) < MinDistanceToBoss):
 		point = Vector2(rand_range(SpawnBoxRange.position.x,SpawnBoxRange.position.x+SpawnBoxRange.size.x),rand_range(SpawnBoxRange.position.y,SpawnBoxRange.position.y+SpawnBoxRange.size.y))
 	return point
-	
+
 
 func hero_has_died():
 	round_counter += 1
 	if (round_counter >= WinRounds and not passed_final_Round):
 		passed_final_Round = true
 		$CanvasLayer/Win.show()
-	
+
 	Engine.time_scale = 0
 	var point = determine_spawnpoint()
 	spawn_new_hero(point.x, point.y)
