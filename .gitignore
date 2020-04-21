@@ -19,3 +19,8 @@ data_*/
 
 # PyCharm files
 .idea/
+
+# DISTRIBUTION FILES
+dist/
+*.exe
+*.pck

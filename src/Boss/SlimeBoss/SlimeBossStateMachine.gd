@@ -18,7 +18,6 @@ export(PHASES) var _phase = PHASES.PHASE_ONE
 export(String, FILE, "*.tscn,*.scn") var lose_screen = ""
 
 func _ready():
-	print("Hey.")
 	_change_phase(_phase)
 	$AnimationPlayer.play("__INIT__")
 
@@ -86,7 +85,7 @@ func _change_phase(new_phase):
 		PHASES.PHASE_THREE:
 			$AnimationPlayer.playback_speed = 1.8
 			phase_name = "Three"
-	
+
 	emit_signal("phase_changed", phase_name)
 	_phase = new_phase
 
@@ -105,7 +104,7 @@ func _decide_on_next_state():
 		queue_free()
 		get_tree().change_scene(lose_screen)
 		return $States/Dead
-	
+
 	if _phase == PHASES.PHASE_ONE:
 		if angry_phases_done < 1:
 			set_invincible(true)
@@ -126,7 +125,7 @@ func _decide_on_next_state():
 				return $States/ChargeSequence
 			if state_active == $States/ChargeSequence:
 				return $States/Stomp
-	
+
 	if _phase == PHASES.PHASE_TWO:
 		if angry_phases_done < 2:
 			set_invincible(true)
@@ -151,7 +150,7 @@ func _decide_on_next_state():
 				return $States/ChargeSequence
 			if state_active == $States/ChargeSequence:
 				return $States/Stomp
-	
+
 	if _phase == PHASES.PHASE_THREE:
 		if angry_phases_done < 3:
 			set_invincible(true)
@@ -177,7 +176,7 @@ func _decide_on_next_state():
 			if state_active == $States/ChargeSequence:
 				return $States/Stomp
 
-	
+
 
 
 
@@ -188,4 +187,3 @@ func set_invincible(value):
 
 func _on_Hurtbox_area_entered(area):
 	$Stats.health -= area.damage
-

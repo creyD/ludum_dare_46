@@ -4,8 +4,9 @@
 [ext_resource path="res://Overlap/HurtHit_Box/Hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Overlap/Stats/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Boss/Boss_template.gd" type="Script" id=4]
-[ext_resource path="res://testSprites/white_boss_dog.png" type="Texture" id=5]
+[ext_resource path="res://Boss/white_boss_dog.png" type="Texture" id=5]
 [ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=6]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.0

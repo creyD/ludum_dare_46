@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://testSprites/fackel.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Torch/fakel/fakel_000.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Card/card.png" type="Texture" id=2]
 [ext_resource path="res://Menus/DragNDrop/DragSource.gd" type="Script" id=3]
 [ext_resource path="res://Objects/Card/level0.png" type="Texture" id=4]

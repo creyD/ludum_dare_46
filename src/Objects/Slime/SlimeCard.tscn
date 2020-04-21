@@ -6,14 +6,14 @@
 [ext_resource path="res://Objects/Card/level0.png" type="Texture" id=4]
 [ext_resource path="res://Objects/Card/card.png" type="Texture" id=5]
 [ext_resource path="res://Objects/Slime/Slime.tscn" type="PackedScene" id=6]
-[ext_resource path="res://testSprites/slime.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Slime/slime.png" type="Texture" id=7]
 [ext_resource path="res://Objects/Slime/slime_icon.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": false,
-"name": "lvl0",
+"name": "lvl1",
 "speed": 60.0
 }, {
 "frames": [ ExtResource( 2 ) ],
@@ -21,9 +21,9 @@ animations = [ {
 "name": "lvl2",
 "speed": 60.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": false,
-"name": "lvl1",
+"name": "lvl0",
 "speed": 60.0
 } ]
 

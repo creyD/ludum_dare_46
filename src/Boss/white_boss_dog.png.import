@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime.png-a6522e01afef029b95bf429fc9a16878.stex"
+path="res://.import/white_boss_dog.png-2051b871cadef126ef3ce9d25140cd41.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://testSprites/slime.png"
-dest_files=[ "res://.import/slime.png-a6522e01afef029b95bf429fc9a16878.stex" ]
+source_file="res://Boss/white_boss_dog.png"
+dest_files=[ "res://.import/white_boss_dog.png-2051b871cadef126ef3ce9d25140cd41.stex" ]
 
 [params]
 
