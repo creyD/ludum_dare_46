@@ -241,10 +241,11 @@ __meta__ = {
 }
 WinRounds = 5
 HeroTemplate = ExtResource( 1 )
+SpawnBoxRange = Rect2( 32, 32, 448, 160 )
 
 [node name="Background" parent="." instance=ExtResource( 7 )]
 pause_mode = 1
-frame = 35
+frame = 46
 playing = true
 
 [node name="FloorTileMap" type="TileMap" parent="."]
