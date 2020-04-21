@@ -16,7 +16,6 @@ enum PHASES {PHASE_ONE, PHASE_TWO, PHASE_THREE}
 export(PHASES) var _phase = PHASES.PHASE_ONE
 
 export(String, FILE, "*.tscn,*.scn") var lose_screen = ""
-export(String, FILE, "*.tscn,*.scn") var win_screen = ""
 
 func _ready():
 	print("Hey.")

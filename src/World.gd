@@ -47,6 +47,6 @@ func spawn_new_hero(x:float,y:float):
 
 func _on_Win_pressed():
 	if passed_final_Round:
-		# TODO CHANGE SCENE TO WINSCREEN
-		pass
+		Engine.time_scale = 1
+		get_tree().change_scene("res://Menus/WinScreen/WinScreen.tscn")
 	pass # Replace with function body.
