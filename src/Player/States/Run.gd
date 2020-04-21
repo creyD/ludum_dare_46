@@ -30,7 +30,7 @@ func _play_random_sound():
 	if delay_passed and is_playing_sound==false:
 		var sound = SoundLibary[rand_range(0,SoundLibary.size())]
 		SoundControler.pub_play_effect(sound,CHANNEL)
-		
+
 		is_playing_sound = true
 		delay_passed=false
 		#timer.start(Delay)

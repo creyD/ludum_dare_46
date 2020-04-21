@@ -37,8 +37,5 @@ func go_to_next_state_in_sequence():
 		emit_signal('finished')
 		return
 	state_active = get_child(new_state_index)
-	
+
 	state_active.enter()
-
-
-

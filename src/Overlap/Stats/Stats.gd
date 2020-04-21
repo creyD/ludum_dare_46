@@ -16,9 +16,9 @@ func set_health(value):
 		health = value
 	if health < 1:
 		emit_signal("no_health")
-	
+
 	emit_signal("health_changed", health)
-		
+
 func set_speed(value):
 	if value > max_speed:
 		speed = max_speed
@@ -26,5 +26,3 @@ func set_speed(value):
 		speed = 0.0
 	else:
 		speed = value
-
- 

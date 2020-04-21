@@ -2,12 +2,13 @@ extends TextureRect
 # CardDeck
 var canNotPlace = false
 export var Item:PackedScene
-export var PreviewIcon:Texture 
+export var PreviewIcon:Texture
 export var DeleteOnGrab:bool = false
 
 var card_level = 0
 
-#if a drag is initiated here 
+
+# if a drag is initiated here 
 func get_drag_data(_pos):
 	if (canNotPlace):
 		return null
@@ -18,7 +19,7 @@ func get_drag_data(_pos):
 	TR.set_position(_pos * -1, false)
 	ctrl.add_child(TR)
 	set_drag_preview(ctrl)
-	
+
 	if DeleteOnGrab:
 		self.queue_free()
 	return Item

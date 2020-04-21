@@ -6,9 +6,11 @@ var Minion = load("res://Boss/Minion.tscn")
 
 var elapsedTime = 0.0
 
+
 func offset_vec():
 	var offset = 16
 	return Vector2((randf()-0.5)*offset, (randf()-0.5)*offset)
+
 
 func _physics_process(delta):
 	elapsedTime += delta
@@ -29,6 +31,7 @@ func _on_Hurtbox_area_entered(area):
 
 func _sound_finished():
 	SoundControler.pub_play_effect("res://Objects/Torch/Torch.wav",4)
+
 
 func _ready():
 	SoundControler.pub_play_effect("res://Objects/Torch/Torch.wav",4)

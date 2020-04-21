@@ -89,7 +89,7 @@ func _physics_process(delta):
 
 # IMPORTANT: If you are using move_and_slide don't multiply by delta
 # Godots physics system does that internally
-# In move_and_collide(...) you have to multiply by delta.	
+# In move_and_collide(...) you have to multiply by delta.
 func move():
 	move_and_slide(velocity)
 
@@ -114,7 +114,7 @@ func run(direction, delta):
 	rollvector = direction
 	movementState = moveState.MOVE
 	velocity = velocity.move_toward(player_stats.speed * rollvector, ACCELERATION * delta)
-	
+
 	if direction == Vector2.ZERO:
 		animation_state.change_state("idle")
 	else:
@@ -122,7 +122,7 @@ func run(direction, delta):
 
 
 func movement_move(delta):
-	
+
 	var input_vector = Vector2.ZERO
 	# This is a clever way to handle directional input
 	# Input.get_action_strength(...) returns a value between 0 and 1 depending
@@ -132,13 +132,13 @@ func movement_move(delta):
 	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input_vector.y =  Input.get_action_strength("down") - Input.get_action_strength("up")
 	input_vector = input_vector.normalized()
-	
+
 	if input_vector == Vector2.ZERO:
 		animation_state.change_state("idle")
 		velocity = Vector2.ZERO
 	else:
 		rollvector = input_vector
-		animation_state.change_state("run")	
+		animation_state.change_state("run")
 		velocity = velocity.move_toward(player_stats.speed * input_vector, ACCELERATION * delta)
 	if Input.is_action_just_pressed("roll"):
 		movementState = moveState.ROLL
@@ -172,7 +172,7 @@ func roll_finished():
 func _on_Hurtbox_area_entered(area):
 	if("damage" in area):
 		player_stats.health -= area.damage
-	
+
 		if area.damage > 0:
 			damage_per_second += area.damage
 			SoundControler.pub_play_effect("res://Player/Sounds/Hurt.wav",1)
@@ -197,7 +197,7 @@ func _on_Stats_no_health():
 	queue_free()
 	get_tree().get_root().get_node("World").hero_has_died()
 	#get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
-	
+
 
 func _on_Hitbox_area_entered(area):
 	currency += area.currency_value

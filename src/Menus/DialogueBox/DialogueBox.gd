@@ -14,6 +14,7 @@ onready var animation_player = $AnimationPlayer
 
 var first_action = true
 
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("skip"):
 		if(first_action):
@@ -21,6 +22,7 @@ func _physics_process(delta):
 			update_text()
 			first_action != first_action
 		next()
+
 
 func set_dialogue_identifier(val):
 	dialogue_identifier = val
