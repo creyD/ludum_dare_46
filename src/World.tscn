@@ -336,6 +336,12 @@ margin_top = 0.463304
 margin_right = 0.0
 margin_bottom = 0.463318
 
+[node name="DragSink" parent="CanvasLayer/DragNDropUI" index="0"]
+margin_left = 15.0
+margin_top = 7.0
+margin_right = -15.96
+margin_bottom = -49.9
+
 [node name="SelectUpgradeUI" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
 

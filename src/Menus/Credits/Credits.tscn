@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 20 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 200.0, -630 ]
+"values": [ 200.0, -720 ]
 }
 
 [node name="Credits" type="Node2D"]
@@ -37,7 +37,12 @@ margin_top = 200.0
 margin_right = 40.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 1 )
-text = "---- Team ----
+text = "Boss Keeper
+A Time Wasted Production
+
+Game made for LD 46
+
+---- Team ----
 DerAnonymos
 https://www.youtube.com/c/DerAnonymosLP
 https://twitch.tv/deranonymos

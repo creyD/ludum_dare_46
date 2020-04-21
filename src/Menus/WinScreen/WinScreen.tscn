@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Fonts/Harmonic/Harmonic24.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Menus/WinScreen/WinScreen.gd" type="Script" id=3]
 
@@ -57,7 +56,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="LoseScreen" type="Node2D"]
+[node name="WinScreen" type="Node2D"]
 script = ExtResource( 3 )
 restart_scene = "res://World.tscn"
 title_screen = "res://Menus/TitleScreen/TitleScreen.tscn"
@@ -73,9 +72,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
 margin_left = 68.0
-margin_top = 98.0
+margin_top = 104.0
 margin_right = 412.0
-margin_bottom = 172.0
+margin_bottom = 166.0
 custom_constants/separation = 10
 alignment = 1
 
@@ -101,24 +100,26 @@ percent_visible = 0.0
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
 margin_top = 44.0
 margin_right = 344.0
-margin_bottom = 74.0
+margin_bottom = 62.0
 alignment = 1
 
 [node name="Restart" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 56.0
-margin_right = 146.0
-margin_bottom = 30.0
-custom_fonts/font = ExtResource( 1 )
+margin_left = 110.0
+margin_right = 158.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.121569, 0.45098, 0.780392, 1 )
 text = "Restart"
 flat = true
 
 [node name="TitleScreen" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 150.0
-margin_right = 288.0
-margin_bottom = 30.0
-custom_fonts/font = ExtResource( 1 )
+margin_left = 162.0
+margin_right = 234.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.682353, 0.141176, 0.333333, 1 )
 text = "Title screen"
 flat = true
 
