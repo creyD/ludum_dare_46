@@ -6,6 +6,9 @@ This is an example player controller script created by Paul
 var velocity := Vector2.ZERO
 var rollvector := Vector2(-1,0)
 
+#one sound will be chosen at random
+export var SoundLibary :PoolStringArray=[]
+
 # This is how you export variables with ranges to the editor window
 export(bool) var debug := false
 export(int, 0, 500) var ROLL_SPEED := 150
@@ -46,6 +49,7 @@ func _debug_update():
 
 func _ready():
 	grid = get_tree().current_scene.get_node("Grid")
+	Globals.player_node = self
 
 
 func _physics_process(delta):
@@ -150,24 +154,13 @@ func movement_hit():
 func hit_finished():
 	grid._update_grid()
 	movementState = moveState.IDLE
-	ai_movement_state = STEP
-	ExecutionState = EXECUTING
+	ExecutionState = AI_MOVE
 	actionFieldUsed = false
 
 
 func movement_roll():
 	velocity = rollvector * ROLL_SPEED
 	animation_state.change_state("roll")
-	
-	"""
-	# Roll.gd
-	func enter():
-		owner.animation_state.travel("roll")
-	
-	func update():
-		owner.velocity = rollvector * ROLL_SPEED
-	"""
-	ExecutionState = EXECUTING
 
 
 func roll_finished():
@@ -177,15 +170,18 @@ func roll_finished():
 
 
 func _on_Hurtbox_area_entered(area):
-	player_stats.health -= area.damage
+	if("damage" in area):
+		player_stats.health -= area.damage
 	
-	if area.damage > 0:
-		damage_per_second += area.damage
-		pass
-	else:
-		heal_per_second += abs(area.damage)
-		pass
-
+		if area.damage > 0:
+			damage_per_second += area.damage
+			SoundControler.pub_play_effect("res://Player/Sounds/Hurt.wav",1)
+			pass
+		else:
+			heal_per_second += abs(area.damage)
+			var sound = SoundLibary[rand_range(0,SoundLibary.size())]
+			SoundControler.pub_play_effect(sound,1)
+			pass
 
 func _on_Hurtbox_area_exited(area):
 	if area.damage > 0:
@@ -197,8 +193,10 @@ func _on_Hurtbox_area_exited(area):
 
 
 func _on_Stats_no_health():
+	SoundControler.pub_play_effect("res://Boss/SlimeBoss/Music/Evillaughwithoutslime.wav",1)
 	queue_free()
-	get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
+	get_tree().get_root().get_node("World").hero_has_died()
+	#get_tree().change_scene("res://Menus/TitleScreen/TitleScreen.tscn")
 	
 
 func _on_Hitbox_area_entered(area):

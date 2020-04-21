@@ -25,6 +25,7 @@ func _ready():
 # In move_and_collide(...) you have to multiply by delta.	
 func move():
 	move_and_slide(velocity)
+	_animate(velocity)
 
 func _physics_process(delta):
 	totaldamage += damage_per_second * delta
@@ -64,3 +65,42 @@ func run(direction, delta):
 		pass
 	else:
 		pass
+
+func _animate(vec):
+	match get_nearest_diretion(vec):
+		"up":
+			$Sprite.flip_h=false
+			$Sprite.play("up")
+		"down":
+			$Sprite.flip_h=false
+			$Sprite.play("down")
+		"right":
+			$Sprite.flip_h=false
+			$Sprite.play("right")
+		"left":
+			$Sprite.flip_h=true
+			$Sprite.play("right")
+	
+
+
+
+func get_nearest_diretion(vec):
+	var directions = {
+		"up": Vector2(0, -1.1),
+		"down": Vector2(0, 1.1),
+		"left": Vector2(-1.0, 0),
+		"right": Vector2(1.0, 0)
+	}
+
+	var nearest_direction = "left"
+	var smallest_distance = 999999999
+
+	for direction in directions.keys():
+		var vector = directions.get(direction)
+		var distance = vec.distance_to(vector)
+
+		if distance < smallest_distance:
+			nearest_direction = direction
+			smallest_distance = distance
+
+	return nearest_direction

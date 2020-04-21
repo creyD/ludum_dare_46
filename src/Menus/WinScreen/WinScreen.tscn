@@ -1,0 +1,130 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Menus/WinScreen/WinScreen.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "create"
+length = 7.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/CenterContainer/VBoxContainer/Label2:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/CenterContainer/VBoxContainer/Label:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/Restart:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/TitleScreen:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 6, 7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="WinScreen" type="Node2D"]
+script = ExtResource( 3 )
+restart_scene = "res://World.tscn"
+title_screen = "res://Menus/TitleScreen/TitleScreen.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+margin_left = 68.0
+margin_top = 104.0
+margin_right = 412.0
+margin_bottom = 166.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+margin_right = 344.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+text = "Your friend, the slime, lives."
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 344.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 2 )
+text = "Together you're able to leave the dungeon and live happily ever after."
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 344.0
+margin_bottom = 62.0
+alignment = 1
+
+[node name="Restart" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 110.0
+margin_right = 158.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.121569, 0.45098, 0.780392, 1 )
+text = "Restart"
+flat = true
+
+[node name="TitleScreen" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 162.0
+margin_right = 234.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.682353, 0.141176, 0.333333, 1 )
+text = "Title screen"
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "create"
+anims/create = SubResource( 1 )
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/TitleScreen" to="." method="_on_TitleScreen_pressed"]

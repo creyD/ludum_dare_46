@@ -2,12 +2,12 @@
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Barrel/Barrel.gd" type="Script" id=2]
-[ext_resource path="res://testSprites/Fass.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Barrel/fass.png" type="Texture" id=3]
 [ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 10.7634
-height = 5.12255
+radius = 12.72
+height = 2.50714
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 6.37219

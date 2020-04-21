@@ -5,4 +5,5 @@ func _ready():
 
 
 func _on_Hurtbox_area_entered(area):
+	SoundControler.pub_play_effect("res://Objects/Banana/Banane3.wav",3)
 	queue_free()

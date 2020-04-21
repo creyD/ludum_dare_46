@@ -4,6 +4,7 @@ var state_active = null
 
 
 func _ready():
+	SoundControler.pub_play_effect("res://Boss/SlimeBoss/Music/SchleimSplit3.wav",10)
 	for child in get_children():
 		child.connect('finished', self, '_on_state_active_finished')
 
@@ -31,7 +32,6 @@ func _on_state_active_finished():
 
 func go_to_next_state_in_sequence():
 	state_active.exit()
-	
 	var new_state_index = (state_active.get_index() + 1) % get_child_count()
 	if new_state_index == 0:
 		emit_signal('finished')
@@ -39,3 +39,6 @@ func go_to_next_state_in_sequence():
 	state_active = get_child(new_state_index)
 	
 	state_active.enter()
+
+
+

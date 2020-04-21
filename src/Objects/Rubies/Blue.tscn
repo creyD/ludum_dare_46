@@ -2,12 +2,12 @@
 
 [ext_resource path="res://Overlap/HurtHit_Box/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Rubies/Rubies.gd" type="Script" id=2]
-[ext_resource path="res://testSprites/blue_Rubi.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Rubies/rubin_blue.png" type="Texture" id=3]
 [ext_resource path="res://Overlap/Kind.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 7.43707
-height = 2.89399
+radius = 9.5
+height = 1.0
 
 [node name="Blue" type="Node2D"]
 script = ExtResource( 2 )
@@ -21,14 +21,11 @@ position = Vector2( 0.22036, -4.18694 )
 texture = ExtResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1.54256, -4.73786 )
 collision_layer = 32
 collision_mask = 0
 currency_value = 5
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( -1.54256, 4.73785 )
-rotation = 1.5708
 shape = SubResource( 1 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
