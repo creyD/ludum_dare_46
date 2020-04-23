@@ -16,14 +16,14 @@ animations = [ {
 "name": "lvl0",
 "speed": 60.0
 }, {
-"frames": [ ExtResource( 6 ) ],
-"loop": false,
-"name": "lvl1",
-"speed": 60.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": false,
 "name": "lvl2",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "lvl1",
 "speed": 60.0
 } ]
 
@@ -57,6 +57,6 @@ margin_top = -10.0295
 margin_right = 36.7647
 margin_bottom = 3.97046
 custom_fonts/font = ExtResource( 8 )
-text = "Torch"
+text = "Spawner"
 align = 1
 valign = 1
