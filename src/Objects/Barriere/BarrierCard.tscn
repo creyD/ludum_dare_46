@@ -12,9 +12,9 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": false,
-"name": "lvl0",
+"name": "lvl2",
 "speed": 60.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -22,13 +22,13 @@ animations = [ {
 "name": "lvl1",
 "speed": 60.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": false,
-"name": "lvl2",
+"name": "lvl0",
 "speed": 60.0
 } ]
 
-[node name="GenericCard3" type="TextureRect"]
+[node name="BarrierCard" type="TextureRect"]
 margin_left = 124.812
 margin_top = 220.859
 margin_right = 156.812

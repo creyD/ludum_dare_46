@@ -28,7 +28,7 @@ animations = [ {
 "speed": 60.0
 } ]
 
-[node name="GenericCard2" type="TextureRect"]
+[node name="BearTrapCard" type="TextureRect"]
 margin_left = 69.0145
 margin_top = 221.191
 margin_right = 101.014
