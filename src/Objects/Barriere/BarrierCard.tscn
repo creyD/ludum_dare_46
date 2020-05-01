@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Menus/DragNDrop/DragSource.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Card/level2.png" type="Texture" id=2]
@@ -8,14 +8,10 @@
 [ext_resource path="res://Objects/Barriere/Barriere.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Barriere/wall_icon.png" type="Texture" id=7]
 [ext_resource path="res://Objects/Barriere/wall_set.png" type="Texture" id=8]
+[ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": false,
-"name": "lvl0",
-"speed": 60.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "lvl2",
@@ -25,9 +21,14 @@ animations = [ {
 "loop": false,
 "name": "lvl1",
 "speed": 60.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "lvl0",
+"speed": 60.0
 } ]
 
-[node name="GenericCard3" type="TextureRect"]
+[node name="BarrierCard" type="TextureRect"]
 margin_left = 124.812
 margin_top = 220.859
 margin_right = 156.812
@@ -50,3 +51,13 @@ texture = ExtResource( 5 )
 position = Vector2( 33.1035, 40.3068 )
 frames = SubResource( 1 )
 animation = "lvl0"
+
+[node name="Label" type="Label" parent="."]
+margin_left = -3.75516
+margin_top = -12.0165
+margin_right = 36.2448
+margin_bottom = 1.98349
+custom_fonts/font = ExtResource( 9 )
+text = "Wall"
+align = 1
+valign = 1

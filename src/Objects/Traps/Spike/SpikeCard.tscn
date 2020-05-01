@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Objects/Traps/Spike/Animation/spikes_015.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Card/card.png" type="Texture" id=2]
@@ -8,14 +8,10 @@
 [ext_resource path="res://Objects/Card/level1.png" type="Texture" id=6]
 [ext_resource path="res://Objects/Traps/Spike/Spike.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/Traps/Spike/spikes_icon.png" type="Texture" id=8]
+[ext_resource path="res://Fonts/Harmonic/Harmonic12.tres" type="DynamicFont" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ) ],
-"loop": false,
-"name": "lvl2",
-"speed": 60.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": false,
 "name": "lvl0",
@@ -24,6 +20,11 @@ animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": false,
 "name": "lvl1",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "lvl2",
 "speed": 60.0
 } ]
 
@@ -50,3 +51,13 @@ texture = ExtResource( 2 )
 position = Vector2( 33.1035, 40.3068 )
 frames = SubResource( 1 )
 animation = "lvl0"
+
+[node name="Label" type="Label" parent="."]
+margin_left = -3.68052
+margin_top = -10.6735
+margin_right = 36.3195
+margin_bottom = 3.32649
+custom_fonts/font = ExtResource( 9 )
+text = "Spikes"
+align = 1
+valign = 1
